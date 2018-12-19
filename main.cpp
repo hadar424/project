@@ -6,14 +6,19 @@
 #include "CalculateExpression.h"
 #include "Lexer.h"
 #include "Parser.h"
+#include "SymbolTable.h"
+
+
 int main() {
-    MyLexer* lex = new MyLexer("test2.txt");
-    MYParser* pars = new MYParser(lex->lexer());
+
+    MyLexer* lex = new MyLexer("test.txt");
+    vector<string> v = lex->lexer();
+    MYParser* pars = new MYParser(v);
     pars->parser();
-/*
-    string s = "1+(-5)";
-    CalculateExpression* cal = new CalculateExpression();
-    double num = cal->evaluatePostfix(s);
-    cout<<num<<endl;*/
+
+ /*   string s = "+-5";
+    CalculateExpression* c;
+    double n = c->evaluatePostfix(s)->calculate();
+    cout<< n<< endl;*/
     return 0;
 }

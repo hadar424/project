@@ -24,7 +24,7 @@ public:
     vector<string> shuntingYard(string myInfix);
 
     // Function to evaluate Postfix expression and return output
-    double evaluatePostfix(string expression);
+    Expression* evaluatePostfix(string expression);
 
 // Function to perform an operation and return output.
     double createExpression(char operation, Expression* operand1, Expression* operand2);
@@ -35,6 +35,8 @@ public:
     bool IsOperator(char);
 
     bool IsNeg(stack<double> s,vector<string> vec);
+
+    string allCharsIsValid(string s);
 
 // Function to verify whether a character is numeric digit.
     bool IsDigit(char);

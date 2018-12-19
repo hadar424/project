@@ -9,8 +9,9 @@ int ConnectCommand::doCommand(vector<string> array) {
     if (IsIpValid(*it)) {
         ip = *it;
     }
-    if (IsNumberValid(*(it + 1))) {
-        port = stoi(*(it + 1));
+    it++;
+    if (IsNumberValid(*it)) {
+        port = stoi(*it);
     }
     if ((port != -1) && (ip.length() > 0)) {
 
@@ -44,7 +45,7 @@ int ConnectCommand::doCommand(vector<string> array) {
         cout << buffer << endl;
         return 0;
     }
-    return parametersNum + 1;
+    return parametersNum;
 }
 
 

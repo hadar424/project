@@ -6,17 +6,22 @@ vector<string> CalculateExpression::shuntingYard(string myInfix){
     vector<string>* myQueue = new vector<string>;
     vector<string>* myStack = new vector<string>;
     int minusFirst = 0;
+    int IsDot = 0;
     string number;
     for (int i = 0; i < myInfix.length(); i++) {
         number = "";
-        while (IsDigit(myInfix[i])) {
+        IsDot = 0;
+        while (IsDigit(myInfix[i]) || (myInfix[i] == '.')) {
+            if((IsDot == 0) && (myInfix[i] == '.')) {
+                IsDot = 1;
+            }
             number+=myInfix[i];
             i++;
         }
         if(number.length() != 0) {
             myQueue->push_back(number);
         }
-        if (myQueue->size() > 0 || (myInfix[i] == '(')) {
+        if ((myQueue->size() > 0) || (myInfix[i] == '(')) {
             if (myInfix[i] == '+' || myInfix[i] == '-') {
                 if (myStack->size() > 0) {
                     if ((myStack->back().compare("*") == 0) || (myStack->back().compare("/") == 0)) {
@@ -67,12 +72,13 @@ vector<string> CalculateExpression::shuntingYard(string myInfix){
 
 
 // Function to evaluate Postfix expression and return output
-double CalculateExpression::evaluatePostfix(string exp) {
+Expression* CalculateExpression::evaluatePostfix(string exp) {
+    exp = allCharsIsValid(exp);
     int minusFirst = 0;
-    if(exp[0] == '-') {
+    vector<string> vec = shuntingYard(exp);
+    if(vec.front().compare("-") == 0) {
         minusFirst = 1;
     }
-    vector<string> vec = shuntingYard(exp);
     stack<double> s;
     for(vector<string>::iterator it = vec.begin(); it < vec.end(); it++) {
         if(IsOperator((*it)[0])) {
@@ -102,8 +108,11 @@ double CalculateExpression::evaluatePostfix(string exp) {
         vec.erase(it);
         it--;
     }
+    if(s.size() == 0) {
+        return NULL;
+    }
     // If expression is in correct format, Stack will finally have one element. This will be the output.
-    return s.top();
+    return new Number(s.top());
 }
 
 // Function to verify whether a character is numeric digit.
@@ -115,12 +124,69 @@ bool CalculateExpression::IsDigit(char c) {
 }
 
 bool CalculateExpression::IsNumber(string s) {
+    int dotCounter =0;
     for(int i=0;i < s.length(); i++) {
-        if(s[i] < '0' || s[i] > '9') {
+        if(s[i] == '.') {
+            dotCounter++;
+            if(!IsDigit(s[i-1])) {
+                return false;
+            }
+        } else if(s[i] < '0' || s[i] > '9') {
             return false;
         }
     }
+    if(dotCounter >1) {
+        return false;
+    }
     return true;
+}
+
+string CalculateExpression::allCharsIsValid(string s) {
+    int IsValid = 0;
+    bool IsDelete;
+    bool IsInsert;
+    while(IsValid != 1) {
+        IsDelete = false;
+        IsInsert = false;
+        for(int i=0;i < s.length(); i++) {
+            if(((s[i] == '*') ||(s[i] == '/')) && (i == 0)) {
+                throw invalid_argument("invalid expression");
+            }
+            if((s[i] == '-') && (s[i+1] == '-')) {
+                s.erase(i,2);
+                IsDelete = true;
+                break;
+            }
+            if(!(IsDigit(s[i]) || IsOperator(s[i])|| s[i] == '.' || s[i] == '(' || s[i] == ')')) {
+                throw invalid_argument("invalid expression");
+            }
+            if((IsOperator(s[i]) || s[i] == '(') && (s[i+1] == '/')) {
+                throw invalid_argument("invalid expression");
+            }
+            if((IsOperator(s[i]) || s[i] == '(') && (s[i+1] == '*')) {
+                throw invalid_argument("invalid expression");
+            }
+            if((IsOperator(s[i])) && (s[i+1] == '+')) {
+                s.erase(i+1,1);
+                IsDelete = true;
+                break;
+            }
+            if(((IsOperator(s[i])) && (IsInsert) && (s[i] != '-')) ||
+            ((IsInsert) && (i == s.length() -1))) {
+                s.insert(i+1,")");
+                IsInsert = true;
+                break;
+            }
+            if(((s[i-1] == '/') || (s[i-1] == '*')) && (s[i] == '-')) {
+                s.insert(i,"(");
+                IsInsert = true;
+            }
+        }
+        if(!(IsDelete)||(IsInsert)) {
+            IsValid = 1;
+        }
+    }
+    return s;
 }
 
 // Function to verify whether a character is operator symbol or not.

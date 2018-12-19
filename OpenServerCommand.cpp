@@ -5,10 +5,12 @@ int OpenServerCommand::doCommand(vector<string> array) {
     if(Isnumber(*it)) {
         port = stoi(*it);
     }
-    if(Isnumber(*(it+1))) {
-        hertz = stoi(*(it+1));
+    it++;
+    if(Isnumber(*it)) {
+        hertz = stoi(*it);
     }
     if((port != -1) && (hertz != -1)) {
+        /*
         int server_fd, new_socket, valread;
         struct sockaddr_in address;
         int opt = 1;
@@ -51,7 +53,7 @@ int OpenServerCommand::doCommand(vector<string> array) {
             cout << buffer << endl;
             send(new_socket ,hello.c_str(),hello.length() , 0 );
             cout << "Hello message sent\n";
-        }
+       */ }
     return parametersNum + 1;
 }
 

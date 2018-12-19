@@ -24,6 +24,7 @@ vector<string> MyLexer::lexer() {
     if (file.is_open()) {
         while (getline(file, line)) {
             lineToArray(line);
+            vec.push_back("\\n");
         }
     }
     file.close();
