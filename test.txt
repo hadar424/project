@@ -1,3 +1,1 @@
-openDataServer 5400 10
-var name = 2
-var age = name
+connect 192.168.1.14 5004

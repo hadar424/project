@@ -15,7 +15,6 @@ int main() {
     vector<string> v = lex->lexer();
     MYParser* pars = new MYParser(v);
     pars->parser();
-
  /*   string s = "+-5";
     CalculateExpression* c;
     double n = c->evaluatePostfix(s)->calculate();

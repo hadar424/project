@@ -9,6 +9,7 @@ int ConnectCommand::doCommand(vector<string> array) {
     if (IsIpValid(*it)) {
         ip = *it;
     }
+    //ip = "192.168.1.14";
     it++;
     if (IsNumberValid(*it)) {
         port = stoi(*it);
@@ -18,12 +19,13 @@ int ConnectCommand::doCommand(vector<string> array) {
         struct sockaddr_in address;
         int sock = 0, valread;
         struct sockaddr_in serv_addr;
-        string hello = "Hello from client";
+        string hello = "ls\x0D\x0A";
         char buffer[1024] = {0};
         if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
             throw runtime_error("Socket creation error");
         }
 
+        cout << "open socket ok\n";
         memset(&serv_addr, '0', sizeof(serv_addr));
 
         serv_addr.sin_family = AF_INET;
@@ -39,9 +41,11 @@ int ConnectCommand::doCommand(vector<string> array) {
             0) {
             throw runtime_error("Connection Failed");
         }
+        cout << "connected\n";
         send(sock, hello.c_str(), hello.length(), 0);
-        cout << "Hello message sent\n";
+        cout << "ls message sent\n";
         valread = read(sock, buffer, 1024);
+        cout << "receieved bytes: " + valread << endl;
         cout << buffer << endl;
         return 0;
     }
@@ -62,8 +66,7 @@ bool ConnectCommand::IsIpValid(string s) {
     int counter = 0;
     string temp;
     for (int i = 0; i < s.length(); i++) {
-        if (s[i] == '.') {
-            counter++;
+        if (s.find('.') != -1) {
             temp = s.substr(0, s.find('.'));
             s.erase(0, s.find('.') + 1);
             if (IsNumberValid(temp)) {
@@ -72,6 +75,7 @@ bool ConnectCommand::IsIpValid(string s) {
                     return false;
                 }
             }
+            counter++;
         }
     }
     if (counter != 3) {
