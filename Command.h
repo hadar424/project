@@ -2,9 +2,6 @@
 #ifndef PROJECT_COMMAND_H
 #define PROJECT_COMMAND_H
 
-#include <string>
-#include <vector>
-#include <iostream>
 #include <array>
 #include <sys/socket.h>
 #include <unistd.h>
@@ -13,6 +10,7 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <string.h>
+#include <vector>
 
 using namespace std;
 

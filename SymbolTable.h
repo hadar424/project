@@ -19,6 +19,7 @@ public:
     SymbolTable() = default;
     Expression* getValue(string);
     void setValue(string,double);
+    void updateValue(string,double);
 };
 
 

@@ -5,7 +5,7 @@
 #include "SymbolTable.h"
 
 Expression* SymbolTable::getValue(string s) {
-    if((valueIt = valueMap.find(s)) != valueMap.end()) {
+    if((valueMap.find(s)) != valueMap.end()) {
         Expression* exp = new Number(valueMap.find(s)->second);
         return exp;
     } else {
@@ -14,6 +14,11 @@ Expression* SymbolTable::getValue(string s) {
 }
 void SymbolTable::setValue(string s,double num) {
     valueMap.insert(pair<string,double >(s,num));
+    cout<<s +to_string(num) <<endl;
+}
+
+void SymbolTable::updateValue(string s,double num) {
+    valueMap.find(s)->second = num;
     cout<<s +to_string(num) <<endl;
 }
 

@@ -1,3 +1,7 @@
 openDataServer 5400 10
 var age = 22
-var size = app
+while age < 26 {
+    var age = age+4
+    var li = 3
+}
+var size = age+1

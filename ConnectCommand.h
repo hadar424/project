@@ -6,6 +6,7 @@
 #define UNTITLED_CONNECTCOMMAND_H
 
 #include "Command.h"
+#include <iostream>
 
 
 using namespace std;

@@ -7,14 +7,14 @@
 #include "OpenServerCommand.h"
 #include <vector>
 #include "DefineVarCommand.h"
+#include "LoopCondition.h"
 
 using namespace std;
 
 class MyParser {
-    //int arraySize;
     vector<string> commandArray;
     unordered_map<string,Command*> commandMap;
-    unordered_map<string,Command*>::iterator mapIt;
+    SymbolTable* myTable = new SymbolTable;
 public:
     MyParser(vector<string>);
     void parser();
