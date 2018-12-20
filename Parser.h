@@ -2,7 +2,6 @@
 #define PROJECT_PARSER_H
 
 #include <string>
-#include <unordered_map>
 #include <iostream>
 #include "ConnectCommand.h"
 #include "OpenServerCommand.h"
@@ -11,12 +10,13 @@
 
 using namespace std;
 
-class MYParser {
+class MyParser {
     //int arraySize;
     vector<string> commandArray;
     unordered_map<string,Command*> commandMap;
+    unordered_map<string,Command*>::iterator mapIt;
 public:
-    MYParser(vector<string>);
+    MyParser(vector<string>);
     void parser();
 };
 

@@ -12,10 +12,13 @@ using namespace std;
 
 
 class ConnectCommand : public Command {
+
     string ip = "";
     double port = -1;
     int parametersNum = 2;
 public:
+    ConnectCommand() = default;
+    
     int doCommand(vector<string>);
 
     bool IsIpValid(string);

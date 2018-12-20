@@ -5,10 +5,15 @@
 #include "SymbolTable.h"
 
 Expression* SymbolTable::getValue(string s) {
-    Expression* exp = new Number(valueMap.find(s)->second);
-    return exp;
+    if((valueIt = valueMap.find(s)) != valueMap.end()) {
+        Expression* exp = new Number(valueMap.find(s)->second);
+        return exp;
+    } else {
+        return NULL;
+    }
 }
 void SymbolTable::setValue(string s,double num) {
-    valueMap.insert(pair<string,double>(s,num));
-    cout<< s + ":" + to_string(num)<< endl;
+    valueMap.insert(pair<string,double >(s,num));
+    cout<<s +to_string(num) <<endl;
 }
+

@@ -7,13 +7,16 @@
 #include <string>
 #include <unordered_map>
 #include <iostream>
+#include <map>
 #include "Number.h"
 
 using namespace std;
 
 class SymbolTable {
     unordered_map<string,double> valueMap;
+    unordered_map<string,double>::iterator valueIt;
 public:
+    SymbolTable() = default;
     Expression* getValue(string);
     void setValue(string,double);
 };

@@ -21,6 +21,9 @@ using namespace std;
 
 class CalculateExpression {
 public:
+
+    CalculateExpression() = default;
+
     vector<string> shuntingYard(string myInfix);
 
     // Function to evaluate Postfix expression and return output

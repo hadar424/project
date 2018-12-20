@@ -49,7 +49,7 @@ int ConnectCommand::doCommand(vector<string> array) {
         cout << buffer << endl;
         return 0;
     }
-    return parametersNum;
+    return parametersNum +1;
 }
 
 

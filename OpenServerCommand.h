@@ -11,6 +11,7 @@ class OpenServerCommand : public Command {
     double hertz = -1;
 
 public:
+    OpenServerCommand() = default;
     int doCommand(vector<string>);
     bool Isnumber(string);
 };

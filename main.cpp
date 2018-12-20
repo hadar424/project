@@ -11,9 +11,9 @@
 
 int main() {
 
-    MyLexer* lex = new MyLexer("test.txt");
+    MyLexer* lex = new MyLexer("test2.txt");
     vector<string> v = lex->lexer();
-    MYParser* pars = new MYParser(v);
+    MyParser* pars = new MyParser(v);
     pars->parser();
  /*   string s = "+-5";
     CalculateExpression* c;

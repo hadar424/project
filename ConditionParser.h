@@ -14,6 +14,7 @@ class ConditionParser : public Command {
     double right;
     string boolOperator;
 public:
+    ConditionParser() = default;
     int doCommand(vector<string>);
     double setCondition(string s);
     int checkCondition(string s);

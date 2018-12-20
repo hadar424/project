@@ -18,12 +18,14 @@ int ConditionParser::doCommand(vector<string> array) {
 double ConditionParser::setCondition(string s) {
     CalculateExpression* exp;
     SymbolTable* table;
-    if(exp->evaluatePostfix(s) != NULL) {
+    try {
         return exp->evaluatePostfix(s)->calculate();
-    } else if(table->getValue(s) != NULL) {
-        return table->getValue(s)->calculate();
+    } catch (exception e) {
+        if(table->getValue(s) != NULL) {
+            return table->getValue(s)->calculate();
+        }
+        throw invalid_argument("invalid condition");
     }
-    throw invalid_argument("invalid condition");
 }
 
 int ConditionParser::checkCondition(string s) {

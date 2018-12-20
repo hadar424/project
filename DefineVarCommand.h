@@ -13,7 +13,9 @@ class DefineVarCommand : public Command {
     int parametersNum = 3;
     string var;
     double value;
+    SymbolTable* myTable = new SymbolTable();
 public:
+    DefineVarCommand() = default;
     int doCommand(vector<string>);
 };
 
