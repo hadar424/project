@@ -19,5 +19,6 @@ int main() {
     CalculateExpression* c;
     double n = c->evaluatePostfix(s)->calculate();
     cout<< n<< endl;*/
+    while (1);
     return 0;
 }

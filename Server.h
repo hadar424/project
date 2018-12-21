@@ -12,16 +12,20 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include "SymbolTable.h"
+#include <string.h>
+
+#define airspeed-indicator_indicated-speed-kt
 
 using namespace std;
 
 class Server {
+    int listenSocket;
+    int clientSocket;
     SymbolTable *myTable = new SymbolTable;
 public:
-    Server(double, double);
+    Server(double);
 
-    int WaitForConnection(int, struct MyParams *);
-
+    int getClientSocket();
     void ParserOfVars(string);
 };
 
