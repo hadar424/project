@@ -3,12 +3,9 @@
 #define PROJECT_COMMAND_H
 
 #include <array>
-#include <sys/socket.h>
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
 #include <string.h>
 #include <vector>
 

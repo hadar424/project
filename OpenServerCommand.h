@@ -2,6 +2,7 @@
 #define PROJECT_OPENSERVERCOMMAND_H
 
 #include "Command.h"
+#include "Server.h"
 
 using namespace std;
 
