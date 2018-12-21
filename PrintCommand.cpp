@@ -20,15 +20,17 @@ int PrintCommand::doCommand(vector<string> array) {
             value = myTable->getValue(*it)->calculate();
             printVar = to_string(value);
         } else {
-            value = calculateValue(*it);
-            printVar = to_string(value);
+            try {
+                value = calculateValue(*it);
+                printVar = to_string(value);
+            } catch (exception e) {
+                if (checkIfString(*it)) {
+                    printVar = (*it).substr(1, (*it).length() - 2);
+                }
+            }
         }
     }
-    if (myTable->getValue(*it) == NULL) {
-        if (checkIfString(*it))
-            printVar = *it;
-    }
-    cout << printVar;
+    cout << printVar << endl;
     return 1;
 }
 

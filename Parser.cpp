@@ -8,13 +8,16 @@ MyParser::MyParser(vector<string> v) {
     ConditionParser *condition = new ConditionParser();
     LoopCondition* loop = new LoopCondition(condition);
     IfCondition* ifCondition = new IfCondition(condition);
+    PrintCommand *printV = new PrintCommand();
     define->setSymbolTable(myTable);
     condition->setSymbolTable(myTable);
+    printV->setSymbolTable(myTable);
     commandMap.insert(pair<string, Command *>("openDataServer", server));
     commandMap.insert(pair<string, Command *>("connect", connect));
     commandMap.insert(pair<string, Command *>("var", define));
     commandMap.insert(pair<string, Command *>("while", loop));
     commandMap.insert(pair<string, Command *>("if", loop));
+    commandMap.insert(pair<string, Command *>("print", printV));
     condition->setCommandMap(commandMap);
 }
 

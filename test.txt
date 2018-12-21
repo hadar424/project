@@ -1,1 +1,4 @@
-openDataServer 5002 10
+print 5002
+print "5002"
+var moshe = 5
+print moshe
