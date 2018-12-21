@@ -6,22 +6,27 @@
 
 Expression* SymbolTable::getValue(string s) {
     if((valueMap.find(s)) != valueMap.end()) {
-        Expression* exp = new Number(valueMap.find(s)->second);
+        Expression *exp = new Number(valueMap.find(s)->second.value);
         return exp;
     } else {
         return NULL;
     }
 }
-void SymbolTable::setValue(string s,double num) {
+
+void SymbolTable::setValue(string s, double num, string path) {
     if(getValue(s) == NULL) {
-        valueMap.insert(pair<string,double >(s,num));
+        struct myParams *params = new myParams();
+        params->value = num;
+        params->path = path;
+        valueMap.insert(make_pair(s, *params));
     } else {
-        updateValue(s,num);
+        updateValueAndPath(s, num, path);
     }
 
 }
 
-void SymbolTable::updateValue(string s,double num) {
-    valueMap.find(s)->second = num;
+void SymbolTable::updateValueAndPath(string s, double num, string path) {
+    valueMap.find(s)->second.value = num;
+    valueMap.find(s)->second.path = path;
 }
 

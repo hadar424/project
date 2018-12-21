@@ -12,14 +12,21 @@
 
 using namespace std;
 
+struct myParams {
+    double value;
+    string path;
+};
+
 class SymbolTable {
-    unordered_map<string,double> valueMap;
-    unordered_map<string,double>::iterator valueIt;
+    unordered_map<string, struct myParams> valueMap;
+    unordered_map<string, struct myParams>::iterator valueIt;
 public:
     SymbolTable() = default;
     Expression* getValue(string);
-    void setValue(string,double);
-    void updateValue(string,double);
+
+    void setValue(string, double, string);
+
+    void updateValueAndPath(string, double, string);
 };
 
 
