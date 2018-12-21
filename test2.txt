@@ -7,3 +7,5 @@ var size = age+1
 if size == 25 {
     size = 0
 }
+var done = 1
+print done+1 age

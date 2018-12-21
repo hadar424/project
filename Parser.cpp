@@ -16,7 +16,7 @@ MyParser::MyParser(vector<string> v) {
     commandMap.insert(pair<string, Command *>("connect", connect));
     commandMap.insert(pair<string, Command *>("var", define));
     commandMap.insert(pair<string, Command *>("while", loop));
-    commandMap.insert(pair<string, Command *>("if", loop));
+    commandMap.insert(pair<string, Command *>("if", ifCondition));
     commandMap.insert(pair<string, Command *>("print", printV));
     condition->setCommandMap(commandMap);
 }

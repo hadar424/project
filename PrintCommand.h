@@ -12,7 +12,7 @@
 
 class PrintCommand : public Command {
     SymbolTable *myTable;
-    string printVar;
+    string printVar = "";
 public:
     int doCommand(vector<string>);
     void setSymbolTable(SymbolTable *);

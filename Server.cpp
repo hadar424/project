@@ -12,6 +12,7 @@ struct MyParams {
 };
 
 void *thread_func(void *arg) {
+    /*
     struct MyParams *params = (struct MyParams *) arg;
     char buffer[1024] = {0};
     int valread;
@@ -21,16 +22,17 @@ void *thread_func(void *arg) {
             cout << buffer << endl;
             arg->myServer->ParserOfVars(buffer);
         }
-    }
+    }*/
 }
-
+/*
 int Server::WaitForConnection(int new_socket, struct MyParams *args) {
     pthread_t trid;
     pthread_create(&trid, nullptr, thread_func, args);
 
-}
+}*/
 
 Server::Server(double port, double hertz) {
+    /*
     struct MyParams *params = new MyParams();
     params->port = port;
     params->hertz = hertz;
@@ -68,7 +70,7 @@ Server::Server(double port, double hertz) {
     send(new_socket, hello.c_str(), hello.length(), 0);
     cout << "Hello message sent\n";
 
-    return nullptr;
+    return nullptr;*/
 }
 
 void Server::ParserOfVars(string buffer) {

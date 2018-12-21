@@ -9,31 +9,37 @@ void PrintCommand::setSymbolTable(SymbolTable *map) {
 }
 
 int PrintCommand::doCommand(vector<string> array) {
-    vector<string>::iterator it = array.begin();
-    double value;
-    CalculateExpression *exp;
-    try {
-        value = exp->evaluatePostfix(*it)->calculate();
-        printVar = to_string(value);
-    } catch (exception e) {
-        if (myTable->getValue(*it) != NULL) {
-            value = myTable->getValue(*it)->calculate();
-            printVar = to_string(value);
-        } else {
-            try {
-                value = calculateValue(*it);
-                printVar = to_string(value);
-            } catch (exception e) {
-                if (checkIfString(*it)) {
-                    printVar = (*it).substr(1, (*it).length() - 2);
+    int counter = 0;
+    for(vector<string>::iterator it = array.begin(); (*it).compare("\\n") != 0;
+    it++) {
+        double value;
+        CalculateExpression *exp;
+        try {
+            value = exp->evaluatePostfix(*it)->calculate();
+            printVar += to_string(value)+" ";
+            counter++;
+        } catch (exception e) {
+            if (myTable->getValue(*it) != NULL) {
+                value = myTable->getValue(*it)->calculate();
+                printVar += to_string(value)+" ";
+                counter++;
+            } else {
+                try {
+                    value = calculateValue(*it);
+                    printVar += to_string(value)+" ";
+                    counter++;
+                } catch (exception e) {
+                    if (checkIfString(*it)) {
+                        printVar += (*it).substr(1, (*it).length() - 2) +" ";
+                        counter++;
+                    }
                 }
             }
         }
     }
     cout << printVar << endl;
-    return 1;
+    return counter + 1;
 }
-
 double PrintCommand::calculateValue(string s) {
     int lastOperator = -1;
     CalculateExpression *exp;

@@ -8,7 +8,7 @@
 #include "ConditionParser.h"
 
 class IfCondition : public ConditionParser{
-    int parametersNum = 3;
+    int parametersNum = 1;
     ConditionParser* conditionParser;
 public:
     IfCondition(ConditionParser* c) {

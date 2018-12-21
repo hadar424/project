@@ -1,6 +1,7 @@
 #include "OpenServerCommand.h"
 
 int OpenServerCommand::doCommand(vector<string> array) {
+    /*
     vector<string>::iterator it = array.begin();
     if(Isnumber(*it)) {
         port = stoi(*it);
@@ -11,7 +12,7 @@ int OpenServerCommand::doCommand(vector<string> array) {
     }
     if((port != -1) && (hertz != -1)) {
         Server *myServer = new Server(port, hertz);
-    }
+    }*/
     return parametersNum + 1;
 }
 

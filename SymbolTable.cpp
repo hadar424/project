@@ -14,11 +14,9 @@ Expression* SymbolTable::getValue(string s) {
 }
 void SymbolTable::setValue(string s,double num) {
     valueMap.insert(pair<string,double >(s,num));
-    cout<<s +to_string(num) <<endl;
 }
 
 void SymbolTable::updateValue(string s,double num) {
     valueMap.find(s)->second = num;
-    cout<<s +to_string(num) <<endl;
 }
 
