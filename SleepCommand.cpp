@@ -26,7 +26,6 @@ int SleepCommand::doCommand(vector<string> array) {
     }
 
     sleep(numOfMilliS);
-    cout << "done sleep" << endl;
     return 1;
 }
 

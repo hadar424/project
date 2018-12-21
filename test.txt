@@ -1,1 +1,1 @@
-sleep 20
+openDataServer 5400 10

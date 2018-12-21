@@ -1,4 +1,5 @@
 openDataServer 5400 10
+connect 192.168.1.14 5004
 var age = 22
 while age < 24 {
     var age = age+1
