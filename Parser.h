@@ -6,6 +6,7 @@
 #include "ConnectCommand.h"
 #include "OpenServerCommand.h"
 #include "PrintCommand.h"
+#include "SleepCommand.h"
 #include <vector>
 #include "DefineVarCommand.h"
 #include "LoopCondition.h"

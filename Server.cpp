@@ -3,7 +3,7 @@
 //
 
 
-#include "Server.h"
+/*#include "Server.h"
 
 struct MyParams {
     double port;
@@ -76,3 +76,5 @@ Server::Server(double port, double hertz) {
 void Server::ParserOfVars(string buffer) {
 
 }
+
+*/
