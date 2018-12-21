@@ -9,6 +9,7 @@
 #include <vector>
 #include "DefineVarCommand.h"
 #include "LoopCondition.h"
+#include "IfCondition.h"
 
 using namespace std;
 

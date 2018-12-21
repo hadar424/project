@@ -7,12 +7,14 @@ MyParser::MyParser(vector<string> v) {
     DefineVarCommand *define = new DefineVarCommand();
     ConditionParser *condition = new ConditionParser();
     LoopCondition* loop = new LoopCondition(condition);
+    IfCondition* ifCondition = new IfCondition(condition);
     define->setSymbolTable(myTable);
     condition->setSymbolTable(myTable);
     commandMap.insert(pair<string, Command *>("openDataServer", server));
     commandMap.insert(pair<string, Command *>("connect", connect));
     commandMap.insert(pair<string, Command *>("var", define));
     commandMap.insert(pair<string, Command *>("while", loop));
+    commandMap.insert(pair<string, Command *>("if", loop));
     condition->setCommandMap(commandMap);
 }
 
