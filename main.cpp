@@ -11,7 +11,7 @@
 
 int main() {
 
-    MyLexer *lex = new MyLexer("test.txt");
+    MyLexer *lex = new MyLexer("test2.txt");
     vector<string> v = lex->lexer();
     MyParser* pars = new MyParser(v);
     pars->parser();

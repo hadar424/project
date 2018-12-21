@@ -13,7 +13,12 @@ Expression* SymbolTable::getValue(string s) {
     }
 }
 void SymbolTable::setValue(string s,double num) {
-    valueMap.insert(pair<string,double >(s,num));
+    if(getValue(s) == NULL) {
+        valueMap.insert(pair<string,double >(s,num));
+    } else {
+        updateValue(s,num);
+    }
+
 }
 
 void SymbolTable::updateValue(string s,double num) {

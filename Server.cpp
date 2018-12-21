@@ -20,6 +20,7 @@ void *thread_func(void *arg) {
 }
 
 Server::Server(double port) {
+    initializeMap();
     struct sockaddr_in address;
     int addrLen = sizeof(address);
 
@@ -47,15 +48,23 @@ Server::Server(double port) {
 }
 
 void Server::ParserOfVars(string buffer) {
+    restString += buffer;
     int i = 0;
-    int counterVar = 0;
-    while (buffer[i] != '\n') {
-        string temp = buffer.substr(0, buffer.find(','));
-        counterVar++;
-        buffer.erase(0, buffer.find(',') + 1);
+    string tempValue = "";
+    double value = 0;
+    unordered_map<string,double>::iterator it = myTable.begin();
+    while ((restString[i] != '\n') && (it!= myTable.end())) {
+        tempValue = restString.substr(0, restString.find(','));
+        value = stoi(tempValue);
+        myTable[(*it).first]=value;
+        restString.erase(0, restString.find(',') + 1);
+        it++;
         i++;
     }
-
+    tempValue = restString.substr(0, restString.find('\n'));
+    value = stoi(tempValue);
+    myTable[(*it).first]=value;
+    restString.erase(0, restString.find('\n') + 1);
 }
 
 int Server::getClientSocket() {
@@ -63,3 +72,28 @@ int Server::getClientSocket() {
 }
 
 
+void Server::initializeMap() {
+    myTable.insert(make_pair(VAR_1, 0));
+    myTable.insert(make_pair(VAR_2, 0));
+    myTable.insert(make_pair(VAR_3, 0));
+    myTable.insert(make_pair(VAR_4, 0));
+    myTable.insert(make_pair(VAR_5, 0));
+    myTable.insert(make_pair(VAR_6, 0));
+    myTable.insert(make_pair(VAR_7, 0));
+    myTable.insert(make_pair(VAR_8, 0));
+    myTable.insert(make_pair(VAR_9, 0));
+    myTable.insert(make_pair(VAR_10, 0));
+    myTable.insert(make_pair(VAR_11, 0));
+    myTable.insert(make_pair(VAR_12, 0));
+    myTable.insert(make_pair(VAR_13, 0));
+    myTable.insert(make_pair(VAR_14, 0));
+    myTable.insert(make_pair(VAR_15, 0));
+    myTable.insert(make_pair(VAR_16, 0));
+    myTable.insert(make_pair(VAR_17, 0));
+    myTable.insert(make_pair(VAR_18, 0));
+    myTable.insert(make_pair(VAR_19, 0));
+    myTable.insert(make_pair(VAR_20, 0));
+    myTable.insert(make_pair(VAR_21, 0));
+    myTable.insert(make_pair(VAR_22, 0));
+    myTable.insert(make_pair(VAR_23, 0));
+}

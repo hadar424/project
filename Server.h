@@ -49,32 +49,7 @@ class Server {
 
 public:
     Server(double);
-
-    void initializeMap() {
-        myTable.insert(make_pair(VAR_1, 0));
-        myTable.insert(make_pair(VAR_2, 0));
-        myTable.insert(make_pair(VAR_3, 0));
-        myTable.insert(make_pair(VAR_4, 0));
-        myTable.insert(make_pair(VAR_5, 0));
-        myTable.insert(make_pair(VAR_6, 0));
-        myTable.insert(make_pair(VAR_7, 0));
-        myTable.insert(make_pair(VAR_8, 0));
-        myTable.insert(make_pair(VAR_9, 0));
-        myTable.insert(make_pair(VAR_10, 0));
-        myTable.insert(make_pair(VAR_11, 0));
-        myTable.insert(make_pair(VAR_12, 0));
-        myTable.insert(make_pair(VAR_13, 0));
-        myTable.insert(make_pair(VAR_14, 0));
-        myTable.insert(make_pair(VAR_15, 0));
-        myTable.insert(make_pair(VAR_16, 0));
-        myTable.insert(make_pair(VAR_17, 0));
-        myTable.insert(make_pair(VAR_18, 0));
-        myTable.insert(make_pair(VAR_19, 0));
-        myTable.insert(make_pair(VAR_20, 0));
-        myTable.insert(make_pair(VAR_21, 0));
-        myTable.insert(make_pair(VAR_22, 0));
-        myTable.insert(make_pair(VAR_23, 0));
-    };
+    void initializeMap();
     int getClientSocket();
     void ParserOfVars(string);
 };
