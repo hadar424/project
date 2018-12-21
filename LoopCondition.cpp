@@ -6,8 +6,8 @@
 
 
 int LoopCondition::doCommand(vector<string> array) {
-    while (ConditionParser::doCommand(array) == 1) {
-        parametersNum = doAllCommands();
+    while (conditionParser->doCommand(array) == 1) {
+        parametersNum += conditionParser->doAllCommands();
     }
     return parametersNum + 1;
 }

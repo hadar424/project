@@ -22,6 +22,7 @@ class ConditionParser : public Command {
     SymbolTable* myTable = new SymbolTable;
     unordered_map<string,Command*> commandMap;
     vector<string> commands;
+    int conditionParameters = 3;
 
 public:
     ConditionParser() = default;

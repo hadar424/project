@@ -9,7 +9,9 @@ void MyLexer::lineToArray(string line) {
         if (line.find(' ') != -1) {
             string temp = line.substr(0,line.find(' '));
             line.erase(0,line.find(' ') + 1);
-            vec.push_back(temp);
+            if(temp.length() > 0) {
+                vec.push_back(temp);
+            }
         } else {
             vec.push_back(line);
             line.erase(0);

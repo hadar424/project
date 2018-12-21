@@ -20,6 +20,7 @@ int ConditionParser::doCommand(vector<string> array) {
     boolOperator = *it;
     it++;
     right = setCondition(*it);
+    it++;
     array.erase(array.begin(),it);
     commands = array;
     int result = checkCondition(boolOperator);
@@ -71,22 +72,26 @@ int ConditionParser::checkCondition(string s) {
 
 int ConditionParser::doAllCommands() {
     int counter =0;
+    int varsInCommend =0;
     vector<string>::iterator it;
     while(*(it = commands.begin()) != "}") {
         if((commandMap.find(*it))!= commandMap.end()) {
             Command *temp = commandMap.find(*it)->second;
             commands.erase(commands.begin());
-            it += temp->doCommand(commands);
-            counter++;
+            varsInCommend = temp->doCommand(commands);
+            it+= varsInCommend;
+            counter+=varsInCommend;
             commands.erase(commands.begin(),it);
         } else if(myTable->getValue(*it) != NULL) {
             Command *temp = commandMap.find("var")->second;
-            it += temp->doCommand(commands);
-            counter++;
+            varsInCommend= temp->doCommand(commands);
+            it+= varsInCommend;
+            counter+=varsInCommend;
             commands.erase(commands.begin(),it);
         } else {
-            it++;
+            counter++;
+            commands.erase(commands.begin(),it+1);
         }
     }
-    return counter;
+    return counter + conditionParameters;
 }

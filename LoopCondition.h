@@ -8,9 +8,12 @@
 #include "ConditionParser.h"
 
 class LoopCondition : public ConditionParser{
-    int parametersNum;
+    int parametersNum = 3;
+    ConditionParser* conditionParser;
 public:
-    LoopCondition() = default;
+    LoopCondition(ConditionParser* c) {
+        conditionParser=c;
+    }
     int doCommand(vector<string>);
 };
 

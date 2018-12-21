@@ -6,7 +6,7 @@ MyParser::MyParser(vector<string> v) {
     ConnectCommand *connect = new ConnectCommand();
     DefineVarCommand *define = new DefineVarCommand();
     ConditionParser *condition = new ConditionParser();
-    LoopCondition* loop = new LoopCondition();
+    LoopCondition* loop = new LoopCondition(condition);
     define->setSymbolTable(myTable);
     condition->setSymbolTable(myTable);
     commandMap.insert(pair<string, Command *>("openDataServer", server));
@@ -29,7 +29,7 @@ void MyParser::parser() {
             it += temp->doCommand(commandArray);
             commandArray.erase(commandArray.begin(),it);
         } else {
-            it++;
+            commandArray.erase(commandArray.begin(),it+1);
         }
     }
 }
