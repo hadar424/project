@@ -9,16 +9,16 @@
 #include "CalculateExpression.h"
 #include "SymbolTable.h"
 #include <string>
+#include "MakeItDouble.h"
 
 class PrintCommand : public Command {
     SymbolTable *myTable;
     string printVar = "";
+    MakeItDouble *myMakeItDouble;
 public:
     int doCommand(vector<string>);
     void setSymbolTable(SymbolTable *);
     bool checkIfString(string);
-    double calculateValue(string);
-    Expression *IsVar(string);
 };
 
 

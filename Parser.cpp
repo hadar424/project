@@ -32,7 +32,7 @@ void MyParser::parser() {
             commandArray.erase(commandArray.begin());
             it += temp->doCommand(commandArray);
             commandArray.erase(commandArray.begin(),it);
-        } else if(myTable->getValue(*it) != NULL) {
+        } else if (myTable->getValue(*it) != nullptr) {
             Command *temp = commandMap.find("var")->second;
             it += temp->doCommand(commandArray);
             commandArray.erase(commandArray.begin(),it);

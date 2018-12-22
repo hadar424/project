@@ -9,19 +9,19 @@
 #include "CalculateExpression.h"
 #include "SymbolTable.h"
 #include <string>
+#include "MakeItDouble.h"
 
 class DefineVarCommand : public Command {
     int parametersNum = 3;
     string var;
     double value;
     SymbolTable* myTable;
+    MakeItDouble *myMakeItDouble;
 public:
     DefineVarCommand() = default;
     int doCommand(vector<string>);
-    void setSymbolTable(SymbolTable* map);
-    double calculateValue(string s);
-    Expression* IsExpression(string s);
-    Expression* IsVar(string s);
+
+    void setSymbolTable(SymbolTable *);
 };
 
 

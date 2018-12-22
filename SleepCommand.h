@@ -10,19 +10,16 @@
 #include "SymbolTable.h"
 #include <string>
 #include <unistd.h>
-
+#include "MakeItDouble.h"
 
 class SleepCommand : public Command {
     SymbolTable *myTable;
-    double numOfMilliS;
+    double numOfSeconds;
+    MakeItDouble *myMakeItDouble;
+    int parametersNum = 1;
 public:
     int doCommand(vector<string>);
-
     void setSymbolTable(SymbolTable *);
-
-    double calculateValue(string);
-
-    Expression *IsVar(string);
 };
 
 

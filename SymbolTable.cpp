@@ -9,12 +9,12 @@ Expression* SymbolTable::getValue(string s) {
         Expression *exp = new Number(valueMap.find(s)->second.value);
         return exp;
     } else {
-        return NULL;
+        return nullptr;
     }
 }
 
 void SymbolTable::setValue(string s, double num, string path) {
-    if(getValue(s) == NULL) {
+    if (getValue(s) == nullptr) {
         struct myParams *params = new myParams();
         params->value = num;
         params->path = path;
