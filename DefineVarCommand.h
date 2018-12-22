@@ -11,7 +11,7 @@
 
 
 class DefineVarCommand : public Command {
-    int parametersNum = 1;
+    int parametersNum = 0;
     string var;
     SymbolTable* myTable;
 

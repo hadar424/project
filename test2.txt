@@ -1,12 +1,4 @@
 openDataServer 5400 10
 connect 192.168.1.25 5402
-var age = 22
-while age < 24 {
-    var age = age+1
-}
-var size = age+1
-if size == 25 {
-    size = 0
-}
-var done = 1
-print done+1 age
+var throttle = 5
+throttle = 1

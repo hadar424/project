@@ -26,7 +26,7 @@ int SleepCommand::doCommand(vector<string> array) {
         }
     }
 
-    sleep(numOfSeconds);
+    sleep(numOfSeconds / 1000);
     cout << "done Sleep" << endl;
     return parametersNum + 1;
 }

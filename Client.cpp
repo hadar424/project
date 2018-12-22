@@ -22,4 +22,6 @@ Client::Client(double port, string ip) {
     if (connect(clientSocket, (struct sockaddr *) &address, sizeof(address)) < 0) {
         throw runtime_error("Connection Failed");
     }
+
+
 }

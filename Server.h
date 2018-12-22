@@ -37,6 +37,7 @@
 #define VAR_21 "/controls/flight/flaps"
 #define VAR_22 "/controls/engines/engine/throttle"
 #define VAR_23 "/engines/engine/rpm"
+#define VAR_24 "/controls/flight/speedbrake"
 
 
 using namespace std;
@@ -48,11 +49,11 @@ class Server {
     string restString = "";
 
 public:
-    Server(double);
     void initializeMap();
     int getClientSocket();
     void ParserOfVars(string);
 
+    void createServer(double);
     Expression *getValueFromMap(string);
 
     void setValueInMap(string, double);

@@ -10,7 +10,7 @@ int OpenServerCommand::doCommand(vector<string> array) {
         hertz = stoi(*it);
     }
     if((port != -1) && (hertz != -1)) {
-        myServer = new Server(port);
+        myServer->createServer(port);
     }
     return parametersNum + 1;
 }

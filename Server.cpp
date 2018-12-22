@@ -19,7 +19,7 @@ void *thread_func(void *arg) {
     }
 }
 
-Server::Server(double port) {
+void Server::createServer(double port) {
     initializeMap();
     struct sockaddr_in address;
     int addrLen = sizeof(address);
@@ -45,6 +45,8 @@ Server::Server(double port) {
     }
     pthread_t waitForClient;
     pthread_create(&waitForClient, nullptr, thread_func, this);
+
+    close(listenSocket);
 }
 
 void Server::ParserOfVars(string buffer) {
@@ -101,6 +103,7 @@ void Server::initializeMap() {
     myTable.insert(make_pair(VAR_21, 0));
     myTable.insert(make_pair(VAR_22, 0));
     myTable.insert(make_pair(VAR_23, 0));
+    myTable.insert(make_pair(VAR_24, 0));
 }
 
 Expression *Server::getValueFromMap(string s) {
@@ -114,4 +117,6 @@ Expression *Server::getValueFromMap(string s) {
 
 void Server::setValueInMap(string serverPath, double value) {
     myTable.find(serverPath)->second = value;
+    string myMessage = "set" + serverPath + to_string(value);
+    send(clientSocket, myMessage.c_str(), strlen(myMessage.c_str()), 0);
 }

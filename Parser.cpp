@@ -21,22 +21,18 @@ MyParser::MyParser(vector<string> v) {
 
 void MyParser::parser() {
     vector<string>::iterator it;
+    Command *temp;
     while( (it = commandArray.begin() )<commandArray.end()) {
         if((commandMap.find(*it))!= commandMap.end()) {
-            Command *temp = commandMap.find(*it)->second;
+            temp = commandMap.find(*it)->second;
             commandArray.erase(commandArray.begin());
             it += temp->doCommand(commandArray);
-            if ((*it).compare("=") == 0) {
-                Command *temp = commandMap.find(*it)->second;
-                it += temp->doCommand(commandArray);
-                commandArray.erase(commandArray.begin(), it);
-            } else {
-                commandArray.erase(commandArray.begin(), it);
-            }
-        } else if (myTable->getValue(*it) != nullptr) {
-            Command *temp = commandMap.find("var")->second;
+            commandArray.erase(commandArray.begin(), it);
+        } else if ((*(it + 1)).compare("=") == 0) {
+            it++;
+            temp = commandMap.find(*it)->second;
             it += temp->doCommand(commandArray);
-            commandArray.erase(commandArray.begin(),it);
+            commandArray.erase(commandArray.begin(), it);
         } else {
             commandArray.erase(commandArray.begin(),it+1);
         }
