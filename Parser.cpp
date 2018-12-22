@@ -22,7 +22,8 @@ MyParser::MyParser(vector<string> v) {
 void MyParser::parser() {
     vector<string>::iterator it;
     Command *temp;
-    while( (it = commandArray.begin() )<commandArray.end()) {
+    cout << *(commandArray.end() - 1) << endl;
+    while ((it = commandArray.begin()) < commandArray.end() - 1) {
         if((commandMap.find(*it))!= commandMap.end()) {
             temp = commandMap.find(*it)->second;
             commandArray.erase(commandArray.begin());

@@ -1,4 +1,4 @@
 openDataServer 5400 10
 connect 192.168.1.25 5402
-var throttle = 5
+var throttle = bind "/controls/engines/engine/throttle"
 throttle = 1

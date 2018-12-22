@@ -23,5 +23,4 @@ Client::Client(double port, string ip) {
         throw runtime_error("Connection Failed");
     }
 
-
 }

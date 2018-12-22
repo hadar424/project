@@ -47,6 +47,7 @@ void Server::createServer(double port) {
     pthread_create(&waitForClient, nullptr, thread_func, this);
 
     close(listenSocket);
+    close(clientSocket);
 }
 
 void Server::ParserOfVars(string buffer) {
