@@ -10,11 +10,14 @@ class OpenServerCommand : public Command {
     int parametersNum = 2;
     double port = -1;
     double hertz = -1;
+    Server *myServer = nullptr;
 
 public:
     OpenServerCommand() = default;
     int doCommand(vector<string>);
     bool Isnumber(string);
+
+    Server *getServer();
 };
 
 

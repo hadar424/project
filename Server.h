@@ -52,6 +52,10 @@ public:
     void initializeMap();
     int getClientSocket();
     void ParserOfVars(string);
+
+    Expression *getValueFromMap(string);
+
+    void setValueInMap(string, double);
 };
 
 

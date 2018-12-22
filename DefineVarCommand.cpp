@@ -11,23 +11,30 @@ void DefineVarCommand::setSymbolTable(SymbolTable *map) {
 int DefineVarCommand::doCommand(vector<string> array) {
     vector<string>::iterator it = array.begin();
     var = *it;
-    it++;
-    if (*it != "=") {
-        throw invalid_argument("invalid define");
-    }
-    it++;
-    CalculateExpression* exp;
-    try {
-        value = exp->evaluatePostfix(*it)->calculate();
-    } catch (exception e){
-        if(myTable->getValue(*it) != NULL) {
-            value = myTable->getValue(*it)->calculate();
-        } else {
-            myMakeItDouble = new MakeItDouble(*it, myTable);
-            value = myMakeItDouble->calculateValue();
-        }
-    }
-    myTable->setValue(var, value, "");
-    return parametersNum +1;
+    myTable->setValue(var, 0, "");
+    return parametersNum;
+
+
+
+    /* vector<string>::iterator it = array.begin();
+     var = *it;
+     it++;
+     if (*it != "=") {
+         throw invalid_argument("invalid define");
+     }
+     it++;
+     CalculateExpression* exp;
+     try {
+         value = exp->evaluatePostfix(*it)->calculate();
+     } catch (exception e){
+         if(myTable->getValue(*it) != nullptr) {
+             value = myTable->getValue(*it)->calculate();
+         } else {
+             myMakeItDouble = new MakeItDouble(*it, myTable);
+             value = myMakeItDouble->calculateValue();
+         }
+     }
+     myTable->setValue(var, value, "");
+     return parametersNum +1; */
 }
 

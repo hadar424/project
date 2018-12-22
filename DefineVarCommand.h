@@ -6,17 +6,15 @@
 #define UNTITLED_VARCOMMAND_H
 
 #include "Command.h"
-#include "CalculateExpression.h"
 #include "SymbolTable.h"
 #include <string>
-#include "MakeItDouble.h"
+
 
 class DefineVarCommand : public Command {
-    int parametersNum = 3;
+    int parametersNum = 1;
     string var;
-    double value;
     SymbolTable* myTable;
-    MakeItDouble *myMakeItDouble;
+
 public:
     DefineVarCommand() = default;
     int doCommand(vector<string>);

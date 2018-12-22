@@ -13,7 +13,7 @@ void *thread_func(void *arg) {
     while (1) {
         readVars = read(myServer->getClientSocket(), buffer, 1024);
         if (readVars > 1) {
-            //cout << "start\n" << buffer << "\nend"<< endl;
+            cout << "start\n" << buffer << "\nend" << endl;
             myServer->ParserOfVars(buffer);
         }
     }
@@ -48,18 +48,23 @@ Server::Server(double port) {
 }
 
 void Server::ParserOfVars(string buffer) {
+    cout << "check" << endl;
     restString += buffer;
     int i = 0;
     string tempValue = "";
     double value = 0;
     unordered_map<string,double>::iterator it = myTable.begin();
-    while ((restString[i] != '\n') && (it!= myTable.end())) {
-        tempValue = restString.substr(0, restString.find(','));
-        value = stoi(tempValue);
-        myTable[(*it).first]=value;
-        restString.erase(0, restString.find(',') + 1);
-        it++;
-        i++;
+    while (restString[i] != '\n' && (it != myTable.end())) {
+        if (restString.find(',') < restString.find('\n')) {
+            tempValue = restString.substr(0, restString.find(','));
+            value = stod(tempValue);
+            myTable[(*it).first] = value;
+            restString.erase(0, restString.find(',') + 1);
+            it++;
+            i = 0;
+        } else {
+            i++;
+        }
     }
     tempValue = restString.substr(0, restString.find('\n'));
     value = stoi(tempValue);
@@ -96,4 +101,17 @@ void Server::initializeMap() {
     myTable.insert(make_pair(VAR_21, 0));
     myTable.insert(make_pair(VAR_22, 0));
     myTable.insert(make_pair(VAR_23, 0));
+}
+
+Expression *Server::getValueFromMap(string s) {
+    if ((myTable.find(s)) != myTable.end()) {
+        Expression *exp = new Number(myTable.find(s)->second);
+        return exp;
+    } else {
+        return nullptr;
+    }
+}
+
+void Server::setValueInMap(string serverPath, double value) {
+    myTable.find(serverPath)->second = value;
 }

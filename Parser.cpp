@@ -2,18 +2,12 @@
 
 MyParser::MyParser(vector<string> v) {
     commandArray = v;
-    OpenServerCommand *server = new OpenServerCommand();
-    ConnectCommand *connect = new ConnectCommand();
-    DefineVarCommand *define = new DefineVarCommand();
-    ConditionParser *condition = new ConditionParser();
-    LoopCondition* loop = new LoopCondition(condition);
-    IfCondition* ifCondition = new IfCondition(condition);
-    PrintCommand *printV = new PrintCommand();
-    SleepCommand *sleepV = new SleepCommand();
     define->setSymbolTable(myTable);
     condition->setSymbolTable(myTable);
     printV->setSymbolTable(myTable);
     sleepV->setSymbolTable(myTable);
+    assignC->setSymbolTable(myTable);
+    assignC->setServer(server->getServer());
     commandMap.insert(pair<string, Command *>("openDataServer", server));
     commandMap.insert(pair<string, Command *>("connect", connect));
     commandMap.insert(pair<string, Command *>("var", define));
@@ -21,6 +15,7 @@ MyParser::MyParser(vector<string> v) {
     commandMap.insert(pair<string, Command *>("if", ifCondition));
     commandMap.insert(pair<string, Command *>("print", printV));
     commandMap.insert(pair<string, Command *>("sleep", sleepV));
+    commandMap.insert(pair<string, Command *>("=", assignC));
     condition->setCommandMap(commandMap);
 }
 
@@ -31,7 +26,13 @@ void MyParser::parser() {
             Command *temp = commandMap.find(*it)->second;
             commandArray.erase(commandArray.begin());
             it += temp->doCommand(commandArray);
-            commandArray.erase(commandArray.begin(),it);
+            if ((*it).compare("=") == 0) {
+                Command *temp = commandMap.find(*it)->second;
+                it += temp->doCommand(commandArray);
+                commandArray.erase(commandArray.begin(), it);
+            } else {
+                commandArray.erase(commandArray.begin(), it);
+            }
         } else if (myTable->getValue(*it) != nullptr) {
             Command *temp = commandMap.find("var")->second;
             it += temp->doCommand(commandArray);

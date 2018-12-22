@@ -14,7 +14,7 @@ using namespace std;
 
 struct myParams {
     double value;
-    string path;
+    string path = "";
 };
 
 class SymbolTable {
@@ -26,6 +26,7 @@ public:
 
     void setValue(string, double, string);
 
+    string getPath(string s);
     void updateValueAndPath(string, double, string);
 };
 

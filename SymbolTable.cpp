@@ -13,6 +13,13 @@ Expression* SymbolTable::getValue(string s) {
     }
 }
 
+string SymbolTable::getPath(string s) {
+    if ((valueMap.find(s)) != valueMap.end()) {
+        string path = valueMap.find(s)->second.path;
+        return path;
+    }
+}
+
 void SymbolTable::setValue(string s, double num, string path) {
     if (getValue(s) == nullptr) {
         struct myParams *params = new myParams();
