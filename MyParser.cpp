@@ -8,7 +8,6 @@ MyParser::MyParser(string file) {
 void MyParser::parser() {
     vector<string>::iterator it;
     while ((it = commandArray.begin()) < commandArray.end() - 1) {
-        cout<< *it << endl;
         if((commandMap.find(*it))!= commandMap.end()) {
             CommandExpression *temp = commandMap.find(*it)->second;
             commandArray.erase(commandArray.begin());
