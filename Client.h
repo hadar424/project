@@ -17,8 +17,13 @@
 using namespace std;
 
 class Client {
+    int clientSocket;
 public:
-    Client(double, string);
+    void createClient(double, string);
+
+    void setValueInMap(string, double);
+
+    ~Client();
 };
 
 

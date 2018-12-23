@@ -8,6 +8,7 @@ MyParser::MyParser(vector<string> v) {
     sleepV->setSymbolTable(myTable);
     assignC->setSymbolTable(myTable);
     assignC->setServer(server->getServer());
+    assignC->setClient(connect->getClient());
     commandMap.insert(pair<string, Command *>("openDataServer", server));
     commandMap.insert(pair<string, Command *>("connect", connect));
     commandMap.insert(pair<string, Command *>("var", define));
@@ -22,7 +23,6 @@ MyParser::MyParser(vector<string> v) {
 void MyParser::parser() {
     vector<string>::iterator it;
     Command *temp;
-    cout << *(commandArray.end() - 1) << endl;
     while ((it = commandArray.begin()) < commandArray.end() - 1) {
         if((commandMap.find(*it))!= commandMap.end()) {
             temp = commandMap.find(*it)->second;
@@ -38,4 +38,17 @@ void MyParser::parser() {
             commandArray.erase(commandArray.begin(),it+1);
         }
     }
+}
+
+MyParser::~MyParser() {
+    delete myTable;
+    delete server;
+    delete connect;
+    delete define;
+    delete condition;
+    delete loop;
+    delete ifCondition;
+    delete printV;
+    delete sleepV;
+    delete assignC;
 }

@@ -12,16 +12,20 @@ void AssignCommand::setServer(Server *server) {
     myServer = server;
 }
 
+void AssignCommand::setClient(Client *client) {
+    myClient = client;
+}
+
 int AssignCommand::doCommand(vector<string> array) {
     vector<string>::iterator it = array.begin();
     var = *it;
     string serverPath;
-    bool needChangeServer = false;
+    bool needChangeClient = false;
     if (myTable->getValue(var) != nullptr) {
         if (myTable->getPath(var).compare("") != 0) {
             serverPath = myTable->getPath(var);
-            if (myServer->getValueFromMap(*it) != nullptr) {
-                needChangeServer = true;
+            if (myServer->getValueFromMap(serverPath) != nullptr) {
+                needChangeClient = true;
             }
         }
     }
@@ -36,9 +40,10 @@ int AssignCommand::doCommand(vector<string> array) {
             path = myTable->getPath(*it);
             value = myTable->getValue(*it)->calculate();
         } else {
-            if (myServer->getValueFromMap(*it) != nullptr) {
-                path = *it;
-                value = myServer->getValueFromMap(*it)->calculate();
+            string newPath = cleanPath(*it);
+            if (myServer->getValueFromMap(newPath) != nullptr) {
+                path = newPath;
+                value = myServer->getValueFromMap(newPath)->calculate();
             } else {
                 throw invalid_argument("invalid path");
             }
@@ -56,13 +61,21 @@ int AssignCommand::doCommand(vector<string> array) {
             }
         }
     }
+    cout << "assigned value to var " + var + "=" + to_string(value) << endl;
     myTable->setValue(var, value, path);
-    if (needChangeServer) {
-        myServer->setValueInMap(serverPath, value);
+    if (needChangeClient) {
+        cout << "updating the simulator " + serverPath + "=" + to_string(value) << endl;
+        myClient->setValueInMap(serverPath, value);
     }
 
     if (isBind) {
         parametersNum++;
     }
     return parametersNum + 1;
+}
+
+string AssignCommand::cleanPath(string s) {
+    s.erase(0, 1);
+    s.erase(s.length() - 1, s.length());
+    return s;
 }

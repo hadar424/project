@@ -11,21 +11,27 @@
 #include "MakeItDouble.h"
 #include "CalculateExpression.h"
 #include <string>
+#include "Client.h"
 
 class AssignCommand : public Command {
     Server *myServer;
+    Client *myClient;
     SymbolTable *myTable;
     string var;
     double value;
     string path;
     int parametersNum = 1;
     MakeItDouble *myMakeItDouble;
+
 public:
     int doCommand(vector<string>);
 
     void setSymbolTable(SymbolTable *);
 
+    string cleanPath(string s);
     void setServer(Server *);
+
+    void setClient(Client *);
 };
 
 

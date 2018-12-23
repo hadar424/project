@@ -27,3 +27,7 @@ bool OpenServerCommand::Isnumber(string s) {
 Server *OpenServerCommand::getServer() {
     return myServer;
 }
+
+OpenServerCommand::~OpenServerCommand() {
+    delete myServer;
+}

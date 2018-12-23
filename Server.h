@@ -48,7 +48,11 @@ class Server {
     unordered_map<string, double> myTable;
     string restString = "";
 
+
 public:
+    Server();
+
+    bool continueThread = true;
     void initializeMap();
     int getClientSocket();
     void ParserOfVars(string);
@@ -56,7 +60,7 @@ public:
     void createServer(double);
     Expression *getValueFromMap(string);
 
-    void setValueInMap(string, double);
+    ~Server();
 };
 
 

@@ -10,17 +10,20 @@ void *thread_func(void *arg) {
     Server *myServer = (Server *) arg;
     char buffer[1024] = {0};
     int readVars;
-    while (1) {
+    while (myServer->continueThread) {
         readVars = read(myServer->getClientSocket(), buffer, 1024);
         if (readVars > 1) {
-            cout << "start\n" << buffer << "\nend" << endl;
             myServer->ParserOfVars(buffer);
         }
     }
 }
 
-void Server::createServer(double port) {
+Server::Server() {
     initializeMap();
+}
+
+
+void Server::createServer(double port) {
     struct sockaddr_in address;
     int addrLen = sizeof(address);
 
@@ -47,11 +50,10 @@ void Server::createServer(double port) {
     pthread_create(&waitForClient, nullptr, thread_func, this);
 
     close(listenSocket);
-    close(clientSocket);
 }
 
 void Server::ParserOfVars(string buffer) {
-    cout << "check" << endl;
+    cout << "start " << buffer << " end" << endl;
     restString += buffer;
     int i = 0;
     string tempValue = "";
@@ -60,6 +62,7 @@ void Server::ParserOfVars(string buffer) {
     while (restString[i] != '\n' && (it != myTable.end())) {
         if (restString.find(',') < restString.find('\n')) {
             tempValue = restString.substr(0, restString.find(','));
+            cout << tempValue << endl;
             value = stod(tempValue);
             myTable[(*it).first] = value;
             restString.erase(0, restString.find(',') + 1);
@@ -70,9 +73,14 @@ void Server::ParserOfVars(string buffer) {
         }
     }
     tempValue = restString.substr(0, restString.find('\n'));
-    value = stoi(tempValue);
-    myTable[(*it).first]=value;
-    restString.erase(0, restString.find('\n') + 1);
+    cout << tempValue << endl;
+    if (tempValue.compare("") != 0) {
+        value = stod(tempValue);
+        myTable[(*it).first] = value;
+        restString.erase(0, restString.find('\n') + 1);
+    } else if (restString[0] == '\n') {
+        restString.erase(0, restString.find('\n') + 1);
+    }
 }
 
 int Server::getClientSocket() {
@@ -108,6 +116,10 @@ void Server::initializeMap() {
 }
 
 Expression *Server::getValueFromMap(string s) {
+    char temp[1000];
+    strcpy(temp, s.c_str());
+
+
     if ((myTable.find(s)) != myTable.end()) {
         Expression *exp = new Number(myTable.find(s)->second);
         return exp;
@@ -116,8 +128,7 @@ Expression *Server::getValueFromMap(string s) {
     }
 }
 
-void Server::setValueInMap(string serverPath, double value) {
-    myTable.find(serverPath)->second = value;
-    string myMessage = "set" + serverPath + to_string(value);
-    send(clientSocket, myMessage.c_str(), strlen(myMessage.c_str()), 0);
+Server::~Server() {
+    continueThread = false;
+    close(clientSocket);
 }

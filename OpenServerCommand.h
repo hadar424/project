@@ -16,6 +16,8 @@ public:
     int doCommand(vector<string>);
     bool Isnumber(string);
     Server *getServer();
+
+    ~OpenServerCommand();
 };
 
 

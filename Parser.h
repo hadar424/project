@@ -31,6 +31,8 @@ class MyParser {
 public:
     MyParser(vector<string>);
     void parser();
+
+    ~MyParser();
 };
 
 

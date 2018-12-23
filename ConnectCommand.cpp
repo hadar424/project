@@ -14,7 +14,7 @@ int ConnectCommand::doCommand(vector<string> array) {
         port = stoi(*it);
     }
     if ((port != -1) && (ip.length() > 0)) {
-        Client *myClient = new Client(port, ip);
+        myClient->createClient(port, ip);
     }
     return parametersNum +1;
 }
@@ -49,4 +49,12 @@ bool ConnectCommand::IsIpValid(string s) {
         return false;
     }
     return true;
+}
+
+Client *ConnectCommand::getClient() {
+    return myClient;
+}
+
+ConnectCommand::~ConnectCommand() {
+    delete myClient;
 }

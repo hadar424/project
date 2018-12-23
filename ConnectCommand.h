@@ -24,6 +24,7 @@ class ConnectCommand : public Command {
     string ip = "";
     double port = -1;
     int parametersNum = 2;
+    Client *myClient = new Client();
 public:
     ConnectCommand() = default;
     
@@ -32,6 +33,10 @@ public:
     bool IsIpValid(string);
 
     bool IsNumberValid(string);
+
+    Client *getClient();
+
+    ~ConnectCommand();
 };
 
 
