@@ -18,12 +18,14 @@ void AssignCommand::setClient(Client *client) {
 
 int AssignCommand::doCommand(vector<string> array) {
     vector<string>::iterator it = array.begin();
+    path = "";
     var = *it;
     string serverPath;
     bool needChangeClient = false;
     if (myTable->getValue(var) != nullptr) {
         if (myTable->getPath(var).compare("") != 0) {
             serverPath = myTable->getPath(var);
+            path = serverPath;
             if (myServer->getValueFromMap(serverPath) != nullptr) {
                 needChangeClient = true;
             }
@@ -49,7 +51,6 @@ int AssignCommand::doCommand(vector<string> array) {
             }
         }
     } else {
-        path = "";
         try {
             value = exp->evaluatePostfix(*it)->calculate();
         } catch (exception &e) {

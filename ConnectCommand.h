@@ -20,7 +20,6 @@ using namespace std;
 
 
 class ConnectCommand : public Command {
-
     string ip = "";
     double port = -1;
     int parametersNum = 2;

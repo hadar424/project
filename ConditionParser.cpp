@@ -8,7 +8,7 @@ void ConditionParser::setSymbolTable(SymbolTable* s) {
     myTable =s;
 }
 
-void ConditionParser::setCommandMap(unordered_map<string,Command*> map) {
+void ConditionParser::setCommandMap(unordered_map<string,CommandExpression*> map) {
     commandMap = map;
 }
 
@@ -76,15 +76,17 @@ int ConditionParser::doAllCommands() {
     vector<string>::iterator it;
     while(*(it = commands.begin()) != "}") {
         if((commandMap.find(*it))!= commandMap.end()) {
-            Command *temp = commandMap.find(*it)->second;
+            CommandExpression* temp = commandMap.find(*it)->second;
             commands.erase(commands.begin());
-            varsInCommend = temp->doCommand(commands);
+            temp->setCommandArray(commands);
+            varsInCommend = temp->calculate();
             it+= varsInCommend;
             counter+=varsInCommend;
             commands.erase(commands.begin(),it);
         } else if(myTable->getValue(*it) != NULL) {
-            Command *temp = commandMap.find("var")->second;
-            varsInCommend= temp->doCommand(commands);
+            CommandExpression *temp = commandMap.find("var")->second;
+            temp->setCommandArray(commands);
+            varsInCommend = temp->calculate();
             it+= varsInCommend;
             counter+=varsInCommend;
             commands.erase(commands.begin(),it);

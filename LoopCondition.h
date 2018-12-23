@@ -9,11 +9,7 @@
 
 class LoopCondition : public ConditionParser{
     int parametersNum = 1;
-    ConditionParser* conditionParser;
 public:
-    LoopCondition(ConditionParser* c) {
-        conditionParser=c;
-    }
     int doCommand(vector<string>);
 };
 

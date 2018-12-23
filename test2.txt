@@ -1,5 +1,2 @@
-openDataServer 5400 10
-connect 192.168.1.25 5402
-var rudder = bind "/controls/flight/rudder"
-rudder = 1
-
+var rudder = (1 + 5)
+rudder = 4-1

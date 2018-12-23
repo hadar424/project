@@ -13,14 +13,15 @@
 #include "OpenServerCommand.h"
 #include "ConnectCommand.h"
 #include "DefineVarCommand.h"
+#include "CommandExpression.h"
 
 
 class ConditionParser : public Command {
     double left;
     double right;
     string boolOperator;
-    SymbolTable* myTable = new SymbolTable;
-    unordered_map<string,Command*> commandMap;
+    SymbolTable* myTable;
+    unordered_map<string,CommandExpression*> commandMap;
     vector<string> commands;
     int conditionParameters = 3;
 
@@ -31,7 +32,7 @@ public:
     int checkCondition(string s);
     int doAllCommands();
     void setSymbolTable(SymbolTable*);
-    void setCommandMap(unordered_map<string,Command*>);
+    void setCommandMap(unordered_map<string,CommandExpression*>);
 
 };
 

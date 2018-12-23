@@ -6,15 +6,13 @@
 #define UNTITLED_IFCONDITION_H
 
 #include "ConditionParser.h"
+#include "CommandExpression.h"
 
 class IfCondition : public ConditionParser{
     int parametersNum = 1;
-    ConditionParser* conditionParser;
 public:
-    IfCondition(ConditionParser* c) {
-        conditionParser=c;
-    }
     int doCommand(vector<string>);
+
 };
 
 #endif //UNTITLED_IFCONDITION_H

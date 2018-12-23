@@ -7,12 +7,12 @@
 
 int LoopCondition::doCommand(vector<string> array) {
     int firstLoop = 1;
-    while (conditionParser->doCommand(array) == 1) {
+    while (ConditionParser::doCommand(array) == 1) {
         if (firstLoop == 1) {
             firstLoop = 0;
-            parametersNum += conditionParser->doAllCommands();
+            parametersNum += doAllCommands();
         } else {
-            conditionParser->doAllCommands();
+            doAllCommands();
         }
     }
     return parametersNum + 1;

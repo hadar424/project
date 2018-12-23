@@ -5,17 +5,19 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
 class MyLexer {
-   string fileName;
    vector<string> vec;
-
 public:
-    MyLexer(string);
-    vector<string> lexer();
+    vector<string> lexer(string);
     void lineToArray(string);
+    string removeSpaces(string);
+    bool IsOperator(char);
+    string backwardLoop(string, int);
+    string forwardLoop(string, int);
 };
 
 
