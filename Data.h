@@ -1,6 +1,3 @@
-//
-// Created by hadar on 12/23/18.
-//
 
 #ifndef UNTITLED_DATA_H
 #define UNTITLED_DATA_H

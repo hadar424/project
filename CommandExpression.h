@@ -7,12 +7,6 @@
 
 #include "Expression.h"
 #include "Command.h"
-#include <string>
-#include <vector>
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-
 
 class CommandExpression : public Expression {
     Command* myCommand;

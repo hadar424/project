@@ -5,13 +5,11 @@
 #ifndef UNTITLED_ASSIGNCOMMAND_H
 #define UNTITLED_ASSIGNCOMMAND_H
 
-#include "Command.h"
-#include "SymbolTable.h"
 #include "Server.h"
 #include "MakeItDouble.h"
-#include "CalculateExpression.h"
 #include <string>
 #include "Client.h"
+#include "Command.h"
 
 class AssignCommand : public Command {
     Server *myServer;
