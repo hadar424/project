@@ -5,6 +5,7 @@
 #ifndef UNTITLED_MAKEITDOUBLE_H
 #define UNTITLED_MAKEITDOUBLE_H
 
+#include "Command.h"
 #include "CalculateExpression.h"
 #include "SymbolTable.h"
 

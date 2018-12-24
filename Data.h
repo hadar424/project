@@ -1,3 +1,6 @@
+//
+// Created by hadar on 12/23/18.
+//
 
 #ifndef UNTITLED_DATA_H
 #define UNTITLED_DATA_H
@@ -35,7 +38,9 @@ class Data {
     unordered_map<string,CommandExpression*> commandMap;
 public:
     Data(SymbolTable*);
+
     unordered_map<string,CommandExpression*> getMap();
+
     ~Data();
 };
 

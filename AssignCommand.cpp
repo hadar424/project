@@ -23,13 +23,9 @@ int AssignCommand::doCommand(vector<string> array) {
     string serverPath;
     bool needChangeClient = false;
     if (myTable->getValue(var) != nullptr) {
-        if (myTable->getPath(var).compare("") != 0) {
-            serverPath = myTable->getPath(var);
-            path = serverPath;
-            if (myServer->getValueFromMap(serverPath) != nullptr) {
-                needChangeClient = true;
-            }
-        }
+        path = myTable->getPath(var);
+        value = myTable->getValue(var)->calculate();
+        needChangeClient = true;
     }
 
     it += 2;
@@ -43,11 +39,11 @@ int AssignCommand::doCommand(vector<string> array) {
             value = myTable->getValue(*it)->calculate();
         } else {
             string newPath = cleanPath(*it);
+            path = newPath;
             if (myServer->getValueFromMap(newPath) != nullptr) {
-                path = newPath;
                 value = myServer->getValueFromMap(newPath)->calculate();
             } else {
-                throw invalid_argument("invalid path");
+                value = 0;
             }
         }
     } else {

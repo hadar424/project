@@ -22,7 +22,6 @@ public:
     void createClient(double, string);
 
     void setValueInMap(string, double);
-
     ~Client();
 };
 
