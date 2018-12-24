@@ -1,4 +1,6 @@
-openDataServer 5400 10
 connect 192.168.1.26 5402
+var throttle =  bind "/controls/engines/current-engine/throttle"
+var breaks = bind "/controls/flight/speedbrake"
 var rudder = bind "/controls/flight/rudder"
-rudder = 0.2
+throttle = 1
+breaks = 0

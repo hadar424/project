@@ -1,2 +1,2 @@
-var rudder = (1 + 5)
-rudder = 4-1
+var rudder = -5
+var rudder2 = -rudder
