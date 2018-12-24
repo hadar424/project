@@ -17,6 +17,7 @@ void AssignCommand::setClient(Client *client) {
 }
 
 int AssignCommand::doCommand(vector<string> array) {
+    parametersNum = 1;
     vector<string>::iterator it = array.begin();
     path = "";
     var = *it;
@@ -62,7 +63,7 @@ int AssignCommand::doCommand(vector<string> array) {
     myTable->setValue(var, value, path);
     if (needChangeClient) {
         cout << "updating the simulator " + serverPath + "=" + to_string(value) << endl;
-        myClient->setValueInMap(serverPath, value);
+        myClient->setValueInMap(path, value);
     }
 
     if (isBind) {
