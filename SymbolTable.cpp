@@ -5,12 +5,19 @@
 #include "SymbolTable.h"
 
 Expression* SymbolTable::getValue(string s) {
+    Expression *exp = nullptr;
     if((valueMap.find(s)) != valueMap.end()) {
-        Expression *exp = new Number(valueMap.find(s)->second.value);
-        return exp;
-    } else {
-        return nullptr;
+        if (myServer->getValueFromMap(valueMap.find(s)->second.path) != nullptr) {
+            exp = myServer->getValueFromMap(valueMap.find(s)->second.path);
+        } else {
+            exp = new Number(valueMap.find(s)->second.value);
+        }
     }
+    return exp;
+}
+
+void SymbolTable::setServer(Server *server) {
+    myServer = server;
 }
 
 string SymbolTable::getPath(string s) {

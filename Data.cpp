@@ -10,6 +10,7 @@ Data::Data(SymbolTable* table) {
     commandMap.insert(pair<string, CommandExpression *>("print", print));
     commandMap.insert(pair<string, CommandExpression *>("sleep", sleep));
     commandMap.insert(pair<string, CommandExpression *>("=", assign));
+    myTable->setServer(serverC->getServer());
     defineC->setSymbolTable(myTable);
     conditionC->setSymbolTable(myTable);
     conditionC->setCommandMap(commandMap);

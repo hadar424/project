@@ -11,8 +11,9 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <unistd.h>
-#include "SymbolTable.h"
 #include <string.h>
+#include <unordered_map>
+#include "Number.h"
 
 #define VAR_1 "/instrumentation/airspeed-indicator/indicated-speed-kt"
 #define VAR_2 "/instrumentation/altimeter/indicated-altitude-ft"
@@ -26,7 +27,7 @@
 #define VAR_10 "/instrumentation/gps/indicated-altitude-ft"
 #define VAR_11 "/instrumentation/gps/indicated-ground-speed-kt"
 #define VAR_12 "/instrumentation/gps/indicated-vertical-speed"
-#define VAR_13 "/instrumentation/heading-indicator/indicated-heading-deg"
+#define VAR_13 "/instrumentation/heading-indicator/offset-deg"
 #define VAR_14 "/instrumentation/magnetic-compass/indicated-heading-deg"
 #define VAR_15 "/instrumentation/slip-skid-ball/indicated-slip-skid"
 #define VAR_16 "/instrumentation/turn-indicator/indicated-turn-rate"
@@ -37,7 +38,7 @@
 #define VAR_21 "/controls/flight/flaps"
 #define VAR_22 "/controls/engines/engine/throttle"
 #define VAR_23 "/engines/engine/rpm"
-#define VAR_24 "/controls/flight/speedbrake"
+#define MAX_BIND_ENTRIES 23
 
 
 using namespace std;
@@ -54,7 +55,7 @@ class Server {
 
     bool bReceivedDataFromServer = false;
     int numOfMessagesFromServer = 0;
-
+    string ArrBindAddresses[MAX_BIND_ENTRIES];
 
 public:
     Server();

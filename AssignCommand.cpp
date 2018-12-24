@@ -24,9 +24,11 @@ int AssignCommand::doCommand(vector<string> array) {
     string serverPath;
     bool needChangeClient = false;
     if (myTable->getValue(var) != nullptr) {
-        path = myTable->getPath(var);
-        value = myTable->getValue(var)->calculate();
-        needChangeClient = true;
+        if (myTable->getPath(var).compare("") != 0) {
+            path = myTable->getPath(var);
+            value = myTable->getValue(var)->calculate();
+            needChangeClient = true;
+        }
     }
 
     it += 2;

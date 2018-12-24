@@ -9,7 +9,7 @@
 #include <iostream>
 #include <map>
 #include "Number.h"
-
+#include "Server.h"
 using namespace std;
 
 struct myParams {
@@ -20,6 +20,7 @@ struct myParams {
 class SymbolTable {
     unordered_map<string, struct myParams> valueMap;
     unordered_map<string, struct myParams>::iterator valueIt;
+    Server *myServer;
 public:
     SymbolTable() = default;
     Expression* getValue(string);
@@ -28,6 +29,8 @@ public:
 
     string getPath(string s);
     void updateValueAndPath(string, double, string);
+
+    void setServer(Server *);
 };
 
 

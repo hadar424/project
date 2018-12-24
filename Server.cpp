@@ -20,9 +20,31 @@ void *thread_func(void *arg) {
 }
 
 Server::Server() {
-    initializeMap();
-}
+    ArrBindAddresses[0] = VAR_1;
+    ArrBindAddresses[1] = VAR_2;
+    ArrBindAddresses[2] = VAR_3;
+    ArrBindAddresses[3] = VAR_4;
+    ArrBindAddresses[4] = VAR_5;
+    ArrBindAddresses[5] = VAR_6;
+    ArrBindAddresses[6] = VAR_7;
+    ArrBindAddresses[7] = VAR_8;
+    ArrBindAddresses[8] = VAR_9;
+    ArrBindAddresses[9] = VAR_10;
+    ArrBindAddresses[10] = VAR_11;
+    ArrBindAddresses[11] = VAR_12;
+    ArrBindAddresses[12] = VAR_13;
+    ArrBindAddresses[13] = VAR_14;
+    ArrBindAddresses[14] = VAR_15;
+    ArrBindAddresses[15] = VAR_16;
+    ArrBindAddresses[16] = VAR_17;
+    ArrBindAddresses[17] = VAR_18;
+    ArrBindAddresses[18] = VAR_19;
+    ArrBindAddresses[19] = VAR_20;
+    ArrBindAddresses[20] = VAR_21;
+    ArrBindAddresses[21] = VAR_22;
+    ArrBindAddresses[22] = VAR_23;
 
+}
 
 void Server::createServer(double port) {
     struct sockaddr_in address;
@@ -54,6 +76,7 @@ void Server::createServer(double port) {
 
     cout << "waiting for data from server\n";
     while (bReceivedDataFromServer == false);
+    cout << "data ready" << endl;
 }
 
 
@@ -88,7 +111,6 @@ string Server::GetParam(string &Message) {
 
 
 void Server::ParserOfVars(string buffer) {
-    cout << "start " << buffer << " end" << endl;
     StringToParse += buffer;
     string CompleteMessage;
     int i = 0;
@@ -104,13 +126,18 @@ void Server::ParserOfVars(string buffer) {
                 bReceivedDataFromServer = true;//this will allow createserver to continue
         }
 
-        unordered_map<string, double>::iterator it = myTable.begin();
+
         string Param = GetParam(CompleteMessage);
-        while (Param.length() > 0 && (it != myTable.end())) {
-            cout << Param << endl;
+        int i = 0;
+        while (Param.length() > 0) {
             value = stod(Param);
-            myTable[(*it).first] = value;
-            it++;
+            if (myTable.find(ArrBindAddresses[i]) != myTable.end())
+                myTable[ArrBindAddresses[i]] = value;
+            else {
+                myTable.insert(make_pair(ArrBindAddresses[i], value));
+            }
+            //cout << ArrBindAddresses[i] << "=" + Param << endl;
+            i++;
             Param = GetParam(CompleteMessage);
         }
 
@@ -148,7 +175,6 @@ void Server::initializeMap() {
     myTable.insert(make_pair(VAR_21, 0));
     myTable.insert(make_pair(VAR_22, 0));
     myTable.insert(make_pair(VAR_23, 0));
-    myTable.insert(make_pair(VAR_24, 0));
 }
 
 Expression *Server::getValueFromMap(string s) {
