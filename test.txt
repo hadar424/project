@@ -1,3 +1,4 @@
 openDataServer 5400 10
-connect 192.168.1.25 5402
-var age = 22
+connect 192.168.1.26 5402
+var rudder = bind "/controls/flight/rudder"
+rudder = 0.2

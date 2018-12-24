@@ -7,10 +7,7 @@
 
 
 int main() {
-
-    cout << "yyy" << endl;
-    MyParser* pars = new MyParser("test2.txt");
+    MyParser *pars = new MyParser("test.txt");
     pars->parser();
     while (1);
-    return 0;
 }

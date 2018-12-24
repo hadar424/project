@@ -46,7 +46,14 @@ class Server {
     int listenSocket;
     int clientSocket;
     unordered_map<string, double> myTable;
-    string restString = "";
+    string StringToParse = "";
+
+    string getCompleteMessage();
+
+    string GetParam(string &);
+
+    bool bReceivedDataFromServer = false;
+    int numOfMessagesFromServer = 0;
 
 
 public:

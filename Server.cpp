@@ -8,11 +8,12 @@
 void *thread_func(void *arg) {
     cout << "yay! thread_func" << endl;
     Server *myServer = (Server *) arg;
-    char buffer[1024] = {0};
+    char buffer[1025] = {0};
     int readVars;
     while (myServer->continueThread) {
         readVars = read(myServer->getClientSocket(), buffer, 1024);
-        if (readVars > 1) {
+        if (readVars > 0) {
+            buffer[readVars] = 0;// make sure nul terminated string
             myServer->ParserOfVars(buffer);
         }
     }
@@ -50,37 +51,72 @@ void Server::createServer(double port) {
     pthread_create(&waitForClient, nullptr, thread_func, this);
 
     close(listenSocket);
+
+    cout << "waiting for data from server\n";
+    while (bReceivedDataFromServer == false);
 }
+
+
+string Server::getCompleteMessage() {
+    int rc = StringToParse.find('\n');
+    if (rc < 0)
+        return "";
+
+    //we have a message
+    string temp = StringToParse.substr(0, rc + 1);
+    StringToParse = StringToParse.substr(rc + 1, StringToParse.length());
+
+    return temp;
+
+}
+
+
+string Server::GetParam(string &Message) {
+    string temp;
+    int rc = Message.find(',');
+    if (rc > 0) {
+        temp = Message.substr(0, rc);
+        Message = Message.substr(rc + 1, Message.length());
+    } else {
+        temp = Message.substr(0, Message.find('\n'));
+        Message = "";
+    }
+
+    return temp;
+}
+
+
 
 void Server::ParserOfVars(string buffer) {
     cout << "start " << buffer << " end" << endl;
-    restString += buffer;
+    StringToParse += buffer;
+    string CompleteMessage;
     int i = 0;
-    string tempValue = "";
     double value = 0;
-    unordered_map<string,double>::iterator it = myTable.begin();
-    while (restString[i] != '\n' && (it != myTable.end())) {
-        if (restString.find(',') < restString.find('\n')) {
-            tempValue = restString.substr(0, restString.find(','));
-            cout << tempValue << endl;
-            value = stod(tempValue);
-            myTable[(*it).first] = value;
-            restString.erase(0, restString.find(',') + 1);
-            it++;
-            i = 0;
-        } else {
-            i++;
+
+    // check if receive buffer has a complete message
+    CompleteMessage = getCompleteMessage();
+    while (CompleteMessage.length() > 0) {
+        numOfMessagesFromServer++;
+        if (bReceivedDataFromServer == false) {
+            cout << "received " << numOfMessagesFromServer << " messages from server\n";
+            if (numOfMessagesFromServer == 2)
+                bReceivedDataFromServer = true;//this will allow createserver to continue
         }
-    }
-    tempValue = restString.substr(0, restString.find('\n'));
-    cout << tempValue << endl;
-    if (tempValue.compare("") != 0) {
-        value = stod(tempValue);
-        myTable[(*it).first] = value;
-        restString.erase(0, restString.find('\n') + 1);
-    } else if (restString[0] == '\n') {
-        restString.erase(0, restString.find('\n') + 1);
-    }
+
+        unordered_map<string, double>::iterator it = myTable.begin();
+        string Param = GetParam(CompleteMessage);
+        while (Param.length() > 0 && (it != myTable.end())) {
+            cout << Param << endl;
+            value = stod(Param);
+            myTable[(*it).first] = value;
+            it++;
+            Param = GetParam(CompleteMessage);
+        }
+
+        // check if more complete messages in buffer
+        CompleteMessage = getCompleteMessage();
+    }//end while complete message
 }
 
 int Server::getClientSocket() {
