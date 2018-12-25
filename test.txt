@@ -1,14 +1,7 @@
-openDataServer 5400 10
-connect 192.168.1.26 5402
-var rpm= bind "/engines/engine/rpm"
-var breaks = bind "/controls/flight/speedbrake"
-var throttle = bind "/controls/engines/engine/throttle"
-var heading = bind "/instrumentation/heading-indicator/offset-deg"
-var alt = bind "/instrumentation/altimeter/indicated-altitude-ft"
-
-
-while rpm == 0{
+var x = 4
+while (x) != (0) {
+    x = x - 2
 }
-
-breaks=0
-throttle=1
+if x == 0 {
+x = 5
+}

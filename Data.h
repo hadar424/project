@@ -18,7 +18,6 @@
 
 class Data {
     AssignCommand* assignC = new AssignCommand();
-    ConditionParser* conditionC = new ConditionParser();
     DefineVarCommand* defineC = new DefineVarCommand();
     PrintCommand* printC = new PrintCommand();
     SleepCommand* sleepC = new SleepCommand();

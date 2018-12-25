@@ -25,8 +25,8 @@ int PrintCommand::doCommand(vector<string> array) {
                 counter++;
             } else {
                 try {
-                    myMakeItDouble = new MakeItDouble(*it, myTable);
-                    value = myMakeItDouble->calculateValue();
+                    myMakeItDouble = new MakeItDouble(myTable);
+                    value = myMakeItDouble->calculateValue(*it);
                     printVar += to_string(value)+" ";
                     counter++;
                 } catch (exception &e) {

@@ -12,8 +12,10 @@ Data::Data(SymbolTable* table) {
     commandMap.insert(pair<string, CommandExpression *>("=", assign));
     myTable->setServer(serverC->getServer());
     defineC->setSymbolTable(myTable);
-    conditionC->setSymbolTable(myTable);
-    conditionC->setCommandMap(commandMap);
+    loopC->setSymbolTable(myTable);
+    loopC->setCommandMap(commandMap);
+    ifConditionC->setSymbolTable(myTable);
+    ifConditionC->setCommandMap(commandMap);
     printC->setSymbolTable(myTable);
     sleepC->setSymbolTable(myTable);
     assignC->setSymbolTable(myTable);
@@ -30,7 +32,6 @@ Data::~Data() {
     delete server;
     delete connect;
     delete define;
-    delete conditionC;
     delete loop;
     delete ifCondition;
     delete print;

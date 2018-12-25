@@ -31,6 +31,11 @@ vector<string> MyLexer::lexer(string fileName) {
 }
 
 string MyLexer::removeSpaces(string s) {
+    string command = "";
+    if (s.find(' ') != -1) {
+        command = s.substr(0, s.find(' ') + 1);
+        s.erase(0, s.find(' '));
+    }
     for(int i=0; i <s.length(); i++) {
         if(IsOperator(s[i])) {
             if (i != 0) {
@@ -41,7 +46,8 @@ string MyLexer::removeSpaces(string s) {
             }
         }
     }
-    return s;
+    command += s;
+    return command;
 }
 
 bool MyLexer::IsOperator(char c)
@@ -52,11 +58,18 @@ bool MyLexer::IsOperator(char c)
     return false;
 }
 
+bool MyLexer::IsBoolOperator(char c) {
+    if (c == '=' || c == '!' || c == '<' || c == '>' || c == '{') {
+        return true;
+    }
+    return false;
+}
+
 string MyLexer::backwardLoop(string s, int i) {
     i--;
     while((IsOperator(s[i]) == false) && (i != 0)) {
         if(s[i] == ' ') {
-            if(s[i-1] == '=') {
+            if (IsBoolOperator(s[i - 1])) {
                 break;
             }
             s.erase(i,1);
@@ -75,6 +88,9 @@ string MyLexer::forwardLoop(string s, int i) {
     i++;
     while((IsOperator(s[i]) == false) && (i < s.length())) {
         if(s[i] == ' ') {
+            if (IsBoolOperator(s[i + 1])) {
+                break;
+            }
             s.erase(i,1);
         } else {
             break;

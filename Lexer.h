@@ -16,6 +16,8 @@ public:
     void lineToArray(string);
     string removeSpaces(string);
     bool IsOperator(char);
+
+    bool IsBoolOperator(char);
     string backwardLoop(string, int);
     string forwardLoop(string, int);
 };

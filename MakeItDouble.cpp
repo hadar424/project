@@ -4,21 +4,28 @@
 
 #include "MakeItDouble.h"
 
-MakeItDouble::MakeItDouble(string myString, SymbolTable *map) {
+MakeItDouble::MakeItDouble(SymbolTable *map) {
     myTable = map;
-    var = myString;
 }
 
 double MakeItDouble::getValue() {
     return value;
 }
 
-double MakeItDouble::calculateValue() {
+bool MakeItDouble::IsOperator(char c) {
+    if (c == '+' || c == '-' || c == '*' || c == '/' || c == '(' || c == ')') {
+        return true;
+    }
+    return false;
+}
+
+double MakeItDouble::calculateValue(string myString) {
+    var = myString;
     int lastOperator = -1;
     CalculateExpression *exp;
     string copy = var;
     for (int i = 0; i < (var = copy).length(); i++) {
-        if (exp->IsOperator(copy[i])) {
+        if (IsOperator(copy[i])) {
             string left = copy.substr(lastOperator + 1, i - lastOperator - 1);
             int length = left.length();
             if (IsVar(left)) {

@@ -12,17 +12,18 @@ void ConditionParser::setCommandMap(unordered_map<string,CommandExpression*> map
     commandMap = map;
 }
 
-
 int ConditionParser::doCommand(vector<string> array) {
+    MakeItDouble *makeItDouble = new MakeItDouble(myTable);
     vector<string>::iterator it = array.begin();
-    left = setCondition(*it);
+    //left = setCondition(*it);
+    left = makeItDouble->calculateValue(*it);
     it++;
     boolOperator = *it;
     it++;
-    right = setCondition(*it);
+    right = makeItDouble->calculateValue(*it);
+    //right = setCondition(*it);
     it++;
     array.erase(array.begin(),it);
-    commands = array;
     int result = checkCondition(boolOperator);
     return result;
 }
@@ -32,7 +33,7 @@ double ConditionParser::setCondition(string s) {
     try {
         return exp->evaluatePostfix(s)->calculate();
     } catch (exception e) {
-        if(myTable->getValue(s) != NULL) {
+        if (myTable->getValue(s) != nullptr) {
             return myTable->getValue(s)->calculate();
         }
         throw invalid_argument("invalid condition");
@@ -70,29 +71,32 @@ int ConditionParser::checkCondition(string s) {
     return 0;
 }
 
-int ConditionParser::doAllCommands() {
+int ConditionParser::doAllCommands(vector<string> array) {
+    vector<string>::iterator iter = array.begin();
+    iter += 3;
+    array.erase(array.begin(), iter);
     int counter =0;
     int varsInCommend =0;
     vector<string>::iterator it;
-    while(*(it = commands.begin()) != "}") {
+    while (*(it = array.begin()) != "}") {
         if((commandMap.find(*it))!= commandMap.end()) {
             CommandExpression* temp = commandMap.find(*it)->second;
-            commands.erase(commands.begin());
-            temp->setCommandArray(commands);
+            array.erase(array.begin());
+            temp->setCommandArray(array);
             varsInCommend = temp->calculate();
             it+= varsInCommend;
             counter+=varsInCommend;
-            commands.erase(commands.begin(),it);
+            array.erase(array.begin(), it);
         } else if(myTable->getValue(*it) != NULL) {
-            CommandExpression *temp = commandMap.find("var")->second;
-            temp->setCommandArray(commands);
+            CommandExpression *temp = commandMap.find("=")->second;
+            temp->setCommandArray(array);
             varsInCommend = temp->calculate();
             it+= varsInCommend;
             counter+=varsInCommend;
-            commands.erase(commands.begin(),it);
+            array.erase(array.begin(), it);
         } else {
             counter++;
-            commands.erase(commands.begin(),it+1);
+            array.erase(array.begin(), it + 1);
         }
     }
     return counter + conditionParameters;

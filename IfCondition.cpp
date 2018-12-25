@@ -5,8 +5,9 @@
 #include "IfCondition.h"
 
 int IfCondition::doCommand(vector<string> array) {
+    parametersNum = 1;
     if (ConditionParser::doCommand(array) == 1) {
-        parametersNum += doAllCommands();
+        parametersNum += doAllCommands(array);
     }
     return parametersNum + 1;
 }

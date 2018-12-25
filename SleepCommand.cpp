@@ -18,8 +18,8 @@ int SleepCommand::doCommand(vector<string> array) {
             numOfSeconds = myTable->getValue(*it)->calculate();
         } else {
             try {
-                myMakeItDouble = new MakeItDouble(*it, myTable);
-                numOfSeconds = myMakeItDouble->calculateValue();
+                myMakeItDouble = new MakeItDouble(myTable);
+                numOfSeconds = myMakeItDouble->calculateValue(*it);
             } catch (exception e) {
                 throw invalid_argument("invalid define");
             }

@@ -14,6 +14,7 @@
 #include "ConnectCommand.h"
 #include "DefineVarCommand.h"
 #include "CommandExpression.h"
+#include "MakeItDouble.h"
 
 
 class ConditionParser : public Command {
@@ -22,7 +23,6 @@ class ConditionParser : public Command {
     string boolOperator;
     SymbolTable* myTable;
     unordered_map<string,CommandExpression*> commandMap;
-    vector<string> commands;
     int conditionParameters = 3;
 
 public:
@@ -30,7 +30,8 @@ public:
     int doCommand(vector<string>);
     double setCondition(string s);
     int checkCondition(string s);
-    int doAllCommands();
+
+    int doAllCommands(vector<string>);
     void setSymbolTable(SymbolTable*);
     void setCommandMap(unordered_map<string,CommandExpression*>);
 

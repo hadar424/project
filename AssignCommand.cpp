@@ -56,8 +56,8 @@ int AssignCommand::doCommand(vector<string> array) {
             if (myTable->getValue(*it) != nullptr) {
                 value = myTable->getValue(*it)->calculate();
             } else {
-                myMakeItDouble = new MakeItDouble(*it, myTable);
-                value = myMakeItDouble->calculateValue();
+                myMakeItDouble = new MakeItDouble(myTable);
+                value = myMakeItDouble->calculateValue(*it);
             }
         }
     }
