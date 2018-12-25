@@ -6,8 +6,12 @@
 #include "MyParser.h"
 
 
-int main() {
-    MyParser *pars = new MyParser("test.txt");
+int main(int argc, char *argv[]) {
+    string fileName;
+    if (argc > 0) {
+        fileName = argv[1];
+    }
+    MyParser *pars = new MyParser(fileName);
     pars->parser();
     while (1);
 }
