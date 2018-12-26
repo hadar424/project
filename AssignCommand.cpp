@@ -4,6 +4,10 @@
 
 #include "AssignCommand.h"
 
+AssignCommand::AssignCommand() {
+    parametersNum = 1;
+}
+
 void AssignCommand::setSymbolTable(SymbolTable *map) {
     myTable = map;
 }
@@ -21,6 +25,7 @@ int AssignCommand::doCommand(vector<string> array) {
     vector<string>::iterator it = array.begin();
     path = "";
     var = *it;
+    value = 0;
     string serverPath;
     bool needChangeClient = false;
     if (myTable->getValue(var) != nullptr) {

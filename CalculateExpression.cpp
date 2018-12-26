@@ -88,6 +88,7 @@ Expression* CalculateExpression::evaluatePostfix(string exp) {
                 num2 = atof((*(it+1)).c_str());
                 result = createExpression((*it)[0],new Number(num2));
                 it++;
+                minusFirst = 0;
             } else {
                 num2 = s.top();
                 s.pop();
@@ -112,7 +113,8 @@ Expression* CalculateExpression::evaluatePostfix(string exp) {
         return NULL;
     }
     // If expression is in correct format, Stack will finally have one element. This will be the output.
-    return new Number(s.top());
+    Expression *v = new Number(s.top());
+    return v;
 }
 
 // Function to verify whether a character is numeric digit.

@@ -4,6 +4,9 @@
 
 #include "LoopCondition.h"
 
+LoopCondition::LoopCondition() {
+    parametersNum = 1;
+}
 
 int LoopCondition::doCommand(vector<string> array) {
     int firstLoop = 1;

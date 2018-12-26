@@ -4,6 +4,13 @@
 
 #include "ConnectCommand.h"
 
+ConnectCommand::ConnectCommand() {
+    ip = "";
+    port = -1;
+    parametersNum = 2;
+    myClient = new Client();
+}
+
 int ConnectCommand::doCommand(vector<string> array) {
     vector<string>::iterator it = array.begin();
     if (IsIpValid(*it)) {

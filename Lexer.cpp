@@ -2,10 +2,16 @@
 
 void MyLexer::lineToArray(string line) {
     line = removeSpaces(line);
+    string temp = "";
     while(line.length() != 0) {
         if (line.find(' ') != -1) {
-            string temp = line.substr(0,line.find(' '));
-            line.erase(0,line.find(' ') + 1);
+            if (line[0] == '"') {
+                temp = line.substr(0, line.find('"', 1) + 1);
+                line.erase(0, line.find('"', 1) + 1);
+            } else {
+                temp = line.substr(0, line.find(' '));
+                line.erase(0, line.find(' ') + 1);
+            }
             if(temp.length() > 0) {
                 vec.push_back(temp);
             }
@@ -34,9 +40,12 @@ string MyLexer::removeSpaces(string s) {
     string command = "";
     if (s.find(' ') != -1) {
         command = s.substr(0, s.find(' ') + 1);
-        s.erase(0, s.find(' '));
+        s.erase(0, s.find(' ') + 1);
     }
-    for(int i=0; i <s.length(); i++) {
+    for (int i = 0; i < s.length(); i++) {
+        if (s[i] == '"') {
+            i = s.find('"', i + 1);
+        }
         if(IsOperator(s[i])) {
             if (i != 0) {
                 s = forwardLoop(s, i);

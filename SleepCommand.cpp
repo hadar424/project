@@ -4,6 +4,10 @@
 
 #include "SleepCommand.h"
 
+SleepCommand::SleepCommand() {
+    parametersNum = 1;
+}
+
 void SleepCommand::setSymbolTable(SymbolTable *map) {
     myTable = map;
 }
@@ -26,7 +30,9 @@ int SleepCommand::doCommand(vector<string> array) {
         }
     }
 
-    sleep(numOfSeconds / 1000);
+
+    cout << "going to sleep for " << numOfSeconds << " mili seconds" << endl;
+    usleep(numOfSeconds * 1000);
     cout << "done Sleep" << endl;
     return parametersNum + 1;
 }

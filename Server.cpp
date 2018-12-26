@@ -6,7 +6,7 @@
 #include "Server.h"
 
 void *thread_func(void *arg) {
-    cout << "yay! thread_func" << endl;
+    cout << "yay! thread_func started" << endl;
     Server *myServer = (Server *) arg;
     char buffer[1025] = {0};
     int readVars;
@@ -20,6 +20,9 @@ void *thread_func(void *arg) {
 }
 
 Server::Server() {
+    StringToParse = "";
+    bReceivedDataFromServer = false;
+    numOfMessagesFromServer = 0;
     ArrBindAddresses[0] = VAR_1;
     ArrBindAddresses[1] = VAR_2;
     ArrBindAddresses[2] = VAR_3;
@@ -131,11 +134,13 @@ void Server::ParserOfVars(string buffer) {
         int i = 0;
         while (Param.length() > 0) {
             value = stod(Param);
+            mtxForMyTable.lock();
             if (myTable.find(ArrBindAddresses[i]) != myTable.end())
                 myTable[ArrBindAddresses[i]] = value;
             else {
                 myTable.insert(make_pair(ArrBindAddresses[i], value));
             }
+            mtxForMyTable.unlock();
             //cout << ArrBindAddresses[i] << "=" + Param << endl;
             i++;
             Param = GetParam(CompleteMessage);
@@ -180,14 +185,15 @@ void Server::initializeMap() {
 Expression *Server::getValueFromMap(string s) {
     char temp[1000];
     strcpy(temp, s.c_str());
+    Expression *exp = nullptr;
 
+    mtxForMyTable.lock();
 
     if ((myTable.find(s)) != myTable.end()) {
-        Expression *exp = new Number(myTable.find(s)->second);
-        return exp;
-    } else {
-        return nullptr;
+        exp = new Number(myTable.find(s)->second);
     }
+    mtxForMyTable.unlock();
+    return exp;
 }
 
 Server::~Server() {

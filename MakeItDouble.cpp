@@ -21,8 +21,9 @@ bool MakeItDouble::IsOperator(char c) {
 
 double MakeItDouble::calculateValue(string myString) {
     var = myString;
+    value = 0;
     int lastOperator = -1;
-    CalculateExpression *exp;
+    CalculateExpression exp;
     string copy = var;
     for (int i = 0; i < (var = copy).length(); i++) {
         if (IsOperator(copy[i])) {
@@ -46,10 +47,20 @@ double MakeItDouble::calculateValue(string myString) {
             }
         }
     }
+
+    Expression *pExp = nullptr;
     try {
-        return exp->evaluatePostfix(var)->calculate();
-    } catch (exception e) {
-        throw invalid_argument("invalid define");
+        pExp = exp.evaluatePostfix(var);
+    }
+    catch (exception e) {
+        throw invalid_argument("invalid expression string");
+    }
+    try {
+        value = pExp->calculate();
+        return value;
+    }
+    catch (exception e) {
+        throw invalid_argument("invalid expression string");
     }
 }
 

@@ -9,11 +9,11 @@
 using namespace std;
 
 class MyParser {
-    MyLexer* myLexer = new MyLexer();
+    MyLexer *myLexer;
     vector<string> commandArray;
     unordered_map<string,CommandExpression*> commandMap;
-    SymbolTable* myTable = new SymbolTable();
-    Data* myData = new Data(myTable);
+    SymbolTable *myTable;
+    Data *myData;
 
 public:
     MyParser(string);

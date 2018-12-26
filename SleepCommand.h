@@ -16,8 +16,9 @@ class SleepCommand : public Command {
     SymbolTable *myTable;
     double numOfSeconds;
     MakeItDouble *myMakeItDouble;
-    int parametersNum = 1;
+    int parametersNum;
 public:
+    SleepCommand();
     int doCommand(vector<string>);
     void setSymbolTable(SymbolTable *);
 };

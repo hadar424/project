@@ -1,5 +1,12 @@
 #include "OpenServerCommand.h"
 
+OpenServerCommand::OpenServerCommand() {
+    parametersNum = 2;
+    port = -1;
+    hertz = -1;
+    myServer = new Server();
+}
+
 int OpenServerCommand::doCommand(vector<string> array) {
     vector<string>::iterator it = array.begin();
     if(Isnumber(*it)) {

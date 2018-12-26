@@ -23,10 +23,10 @@ class ConditionParser : public Command {
     string boolOperator;
     SymbolTable* myTable;
     unordered_map<string,CommandExpression*> commandMap;
-    int conditionParameters = 3;
+    int conditionParameters;
 
 public:
-    ConditionParser() = default;
+    ConditionParser();
     int doCommand(vector<string>);
     double setCondition(string s);
     int checkCondition(string s);

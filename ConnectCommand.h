@@ -20,12 +20,12 @@ using namespace std;
 
 
 class ConnectCommand : public Command {
-    string ip = "";
-    double port = -1;
-    int parametersNum = 2;
-    Client *myClient = new Client();
+    string ip;
+    double port;
+    int parametersNum;
+    Client *myClient;
 public:
-    ConnectCommand() = default;
+    ConnectCommand();
     
     int doCommand(vector<string>);
 

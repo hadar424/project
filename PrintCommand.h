@@ -13,9 +13,10 @@
 
 class PrintCommand : public Command {
     SymbolTable *myTable;
-    string printVar = "";
+    string printVar;
     MakeItDouble *myMakeItDouble;
 public:
+    PrintCommand();
     int doCommand(vector<string>);
     void setSymbolTable(SymbolTable *);
     bool checkIfString(string);

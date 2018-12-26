@@ -20,10 +20,11 @@ class AssignCommand : public Command {
     string var;
     double value;
     string path;
-    int parametersNum = 1;
+    int parametersNum;
     MakeItDouble *myMakeItDouble;
 
 public:
+    AssignCommand();
     int doCommand(vector<string>);
 
     void setSymbolTable(SymbolTable *);

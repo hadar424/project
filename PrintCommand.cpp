@@ -4,6 +4,10 @@
 
 #include "PrintCommand.h"
 
+PrintCommand::PrintCommand() {
+    printVar = "";
+}
+
 void PrintCommand::setSymbolTable(SymbolTable *map) {
     myTable = map;
 }
@@ -11,6 +15,7 @@ void PrintCommand::setSymbolTable(SymbolTable *map) {
 int PrintCommand::doCommand(vector<string> array) {
     int counter = 0;
     double value;
+    printVar = "";
     vector<string>::iterator it;
     CalculateExpression *exp;
     for (it = array.begin(); (*it).compare("\\n") != 0; it++) {

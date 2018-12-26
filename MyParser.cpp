@@ -1,6 +1,10 @@
 #include "MyParser.h"
 
 MyParser::MyParser(string file) {
+    myLexer = new MyLexer();
+    myTable = new SymbolTable();
+    myData = new Data(myTable);
+
     commandArray = myLexer->lexer(file);
     commandMap = myData->getMap();
 }

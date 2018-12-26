@@ -17,22 +17,22 @@
 #include "ConditionParser.h"
 
 class Data {
-    AssignCommand* assignC = new AssignCommand();
-    DefineVarCommand* defineC = new DefineVarCommand();
-    PrintCommand* printC = new PrintCommand();
-    SleepCommand* sleepC = new SleepCommand();
-    ConnectCommand* connectC = new ConnectCommand();
-    LoopCondition* loopC = new LoopCondition();
-    IfCondition* ifConditionC = new IfCondition();
-    OpenServerCommand* serverC = new OpenServerCommand();
-    CommandExpression *server = new CommandExpression(serverC);
-    CommandExpression *connect = new CommandExpression(connectC);
-    CommandExpression *define = new CommandExpression(defineC);
-    CommandExpression *loop = new CommandExpression(loopC);
-    CommandExpression *ifCondition = new CommandExpression(ifConditionC);
-    CommandExpression *print = new CommandExpression(printC);
-    CommandExpression *sleep = new CommandExpression(sleepC);
-    CommandExpression *assign = new CommandExpression(assignC);
+    AssignCommand *assignC;
+    DefineVarCommand *defineC;
+    PrintCommand *printC;
+    SleepCommand *sleepC;
+    ConnectCommand *connectC;
+    LoopCondition *loopC;
+    IfCondition *ifConditionC;
+    OpenServerCommand *serverC;
+    CommandExpression *server;
+    CommandExpression *connect;
+    CommandExpression *define;
+    CommandExpression *loop;
+    CommandExpression *ifCondition;
+    CommandExpression *print;
+    CommandExpression *sleep;
+    CommandExpression *assign;
     SymbolTable* myTable;
     unordered_map<string,CommandExpression*> commandMap;
 public:

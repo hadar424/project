@@ -9,8 +9,9 @@
 #include "CommandExpression.h"
 
 class IfCondition : public ConditionParser{
-    int parametersNum = 1;
+    int parametersNum;
 public:
+    IfCondition();
     int doCommand(vector<string>);
 
 };

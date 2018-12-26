@@ -4,6 +4,10 @@
 
 #include "DefineVarCommand.h"
 
+DefineVarCommand::DefineVarCommand() {
+    parametersNum = 0;
+}
+
 void DefineVarCommand::setSymbolTable(SymbolTable *map) {
     myTable = map;
 }

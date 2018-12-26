@@ -13,6 +13,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <unordered_map>
+#include <mutex>
 #include "Number.h"
 
 #define VAR_1 "/instrumentation/airspeed-indicator/indicated-speed-kt"
@@ -47,15 +48,14 @@ class Server {
     int listenSocket;
     int clientSocket;
     unordered_map<string, double> myTable;
-    string StringToParse = "";
-
+    string StringToParse;
     string getCompleteMessage();
-
     string GetParam(string &);
 
-    bool bReceivedDataFromServer = false;
-    int numOfMessagesFromServer = 0;
+    bool bReceivedDataFromServer;
+    int numOfMessagesFromServer;
     string ArrBindAddresses[MAX_BIND_ENTRIES];
+    mutex mtxForMyTable;
 
 public:
     Server();

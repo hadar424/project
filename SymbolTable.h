@@ -19,10 +19,8 @@ struct myParams {
 
 class SymbolTable {
     unordered_map<string, struct myParams> valueMap;
-    unordered_map<string, struct myParams>::iterator valueIt;
     Server *myServer;
 public:
-    SymbolTable() = default;
     Expression* getValue(string);
 
     void setValue(string, double, string);

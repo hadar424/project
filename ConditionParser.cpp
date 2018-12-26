@@ -4,6 +4,10 @@
 
 #include "ConditionParser.h"
 
+ConditionParser::ConditionParser() {
+    conditionParameters = 3;
+}
+
 void ConditionParser::setSymbolTable(SymbolTable* s) {
     myTable =s;
 }

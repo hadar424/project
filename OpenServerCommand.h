@@ -7,12 +7,13 @@
 using namespace std;
 
 class OpenServerCommand : public Command {
-    int parametersNum = 2;
-    double port = -1;
-    double hertz = -1;
-    Server *myServer = new Server();;
+    int parametersNum;
+    double port;
+    double hertz;
+    Server *myServer;
 
 public:
+    OpenServerCommand();
     int doCommand(vector<string>);
     bool Isnumber(string);
     Server *getServer();

@@ -1,6 +1,23 @@
 #include "Data.h"
 
 Data::Data(SymbolTable* table) {
+    assignC = new AssignCommand();
+    defineC = new DefineVarCommand();
+    printC = new PrintCommand();
+    sleepC = new SleepCommand();
+    connectC = new ConnectCommand();
+    loopC = new LoopCondition();
+    ifConditionC = new IfCondition();
+    serverC = new OpenServerCommand();
+    server = new CommandExpression(serverC);
+    connect = new CommandExpression(connectC);
+    define = new CommandExpression(defineC);
+    loop = new CommandExpression(loopC);
+    ifCondition = new CommandExpression(ifConditionC);
+    print = new CommandExpression(printC);
+    sleep = new CommandExpression(sleepC);
+    assign = new CommandExpression(assignC);
+
     myTable = table;
     commandMap.insert(pair<string, CommandExpression *>("openDataServer", server));
     commandMap.insert(pair<string, CommandExpression *>("connect", connect));

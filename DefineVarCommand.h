@@ -11,12 +11,12 @@
 
 
 class DefineVarCommand : public Command {
-    int parametersNum = 0;
+    int parametersNum;
     string var;
     SymbolTable* myTable;
 
 public:
-    DefineVarCommand() = default;
+    DefineVarCommand();
     int doCommand(vector<string>);
 
     void setSymbolTable(SymbolTable *);
