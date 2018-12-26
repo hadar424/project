@@ -45,7 +45,6 @@ unordered_map<string,CommandExpression*> Data::getMap() {
 }
 
 Data::~Data() {
-    delete myTable;
     delete server;
     delete connect;
     delete define;
@@ -54,8 +53,6 @@ Data::~Data() {
     delete print;
     delete sleep;
     delete assign;
-    delete serverC;
-    delete connectC;
     delete defineC;
     delete printC;
     delete sleepC;

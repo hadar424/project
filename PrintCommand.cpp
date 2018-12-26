@@ -17,21 +17,22 @@ int PrintCommand::doCommand(vector<string> array) {
     double value;
     printVar = "";
     vector<string>::iterator it;
-    CalculateExpression *exp;
+    CalculateExpression exp;
     for (it = array.begin(); (*it).compare("\\n") != 0; it++) {
         try {
-            value = exp->evaluatePostfix(*it)->calculate();
+            string temp = *it;
+            pTemp = exp.evaluatePostfix(temp);
+            value = pTemp->calculate();
             printVar += to_string(value) + " ";
             counter++;
         } catch (exception &e) {
-            if (myTable->getValue(*it) != nullptr) {
-                value = myTable->getValue(*it)->calculate();
+            if ((pTemp = myTable->getValue(*it)) != nullptr) {
+                value = pTemp->calculate();
                 printVar += to_string(value)+" ";
                 counter++;
             } else {
                 try {
-                    myMakeItDouble = new MakeItDouble(myTable);
-                    value = myMakeItDouble->calculateValue(*it);
+                    value = myMakeItDouble.calculateValue(*it, myTable);
                     printVar += to_string(value)+" ";
                     counter++;
                 } catch (exception &e) {
@@ -54,4 +55,8 @@ bool PrintCommand::checkIfString(string s) {
     if (s[0] != '"' || s[s.length() - 1] != '"')
         return false;
     return true;
+}
+
+PrintCommand::~PrintCommand() {
+    delete pTemp;
 }

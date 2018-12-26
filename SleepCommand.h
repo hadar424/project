@@ -15,12 +15,15 @@
 class SleepCommand : public Command {
     SymbolTable *myTable;
     double numOfSeconds;
-    MakeItDouble *myMakeItDouble;
+    MakeItDouble myMakeItDouble;
     int parametersNum;
+    Expression *e;
 public:
     SleepCommand();
     int doCommand(vector<string>);
     void setSymbolTable(SymbolTable *);
+
+    ~SleepCommand();
 };
 
 

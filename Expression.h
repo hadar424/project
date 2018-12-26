@@ -10,7 +10,9 @@ using namespace std;
 
 class Expression {
 public:
-    double virtual calculate() {};
+    virtual double calculate() = 0;
+
+    virtual ~Expression() {};
 };
 
 

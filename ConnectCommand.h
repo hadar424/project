@@ -24,17 +24,15 @@ class ConnectCommand : public Command {
     double port;
     int parametersNum;
     Client *myClient;
-public:
-    ConnectCommand();
-    
-    int doCommand(vector<string>);
 
     bool IsIpValid(string);
 
     bool IsNumberValid(string);
+public:
+    ConnectCommand();
+    int doCommand(vector<string>);
 
     Client *getClient();
-
     ~ConnectCommand();
 };
 

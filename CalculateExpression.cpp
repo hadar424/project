@@ -1,14 +1,14 @@
 
-#include <cstring>
+#include <string>
 #include "CalculateExpression.h"
 
 vector<string> CalculateExpression::shuntingYard(string myInfix){
-    vector<string>* myQueue = new vector<string>;
-    vector<string>* myStack = new vector<string>;
+    vector<string> myQueue = {};
+    vector<string> myStack = {};
     int minusFirst = 0;
     int IsDot = 0;
     string number;
-    for (int i = 0; i < myInfix.length(); i++) {
+    for (unsigned int i = 0; i < myInfix.length(); i++) {
         number = "";
         IsDot = 0;
         while (IsDigit(myInfix[i]) || (myInfix[i] == '.')) {
@@ -19,38 +19,38 @@ vector<string> CalculateExpression::shuntingYard(string myInfix){
             i++;
         }
         if(number.length() != 0) {
-            myQueue->push_back(number);
+            myQueue.push_back(number);
         }
-        if ((myQueue->size() > 0) || (myInfix[i] == '(')) {
+        if ((!myQueue.empty()) || (myInfix[i] == '(')) {
             if (myInfix[i] == '+' || myInfix[i] == '-') {
-                if (myStack->size() > 0) {
-                    if ((myStack->back().compare("*") == 0) || (myStack->back().compare("/") == 0)) {
-                        myQueue->push_back(myStack->back());
-                        myStack->pop_back();
+                if (!myStack.empty()) {
+                    if ((myStack.back().compare("*") == 0) || (myStack.back().compare("/") == 0)) {
+                        myQueue.push_back(myStack.back());
+                        myStack.pop_back();
                     }
                 }
-                myStack->push_back(string(1,myInfix[i]));
+                myStack.push_back(string(1, myInfix[i]));
             }
             if (myInfix[i] == '*' || myInfix[i] == '/' ) {
-                if (myStack->size() > 0) {
-                    if ((myStack->back().compare("*") == 0) || (myStack->back().compare("/") == 0)) {
-                        myQueue->push_back(myStack->back());
-                        myStack->pop_back();
+                if (!myStack.empty()) {
+                    if ((myStack.back().compare("*") == 0) || (myStack.back().compare("/") == 0)) {
+                        myQueue.push_back(myStack.back());
+                        myStack.pop_back();
                     }
                 }
-                myStack->push_back(string(1,myInfix[i]));
+                myStack.push_back(string(1, myInfix[i]));
             }
             if ( myInfix[i] == '(') {
-                myStack->push_back(string(1,myInfix[i]));
+                myStack.push_back(string(1, myInfix[i]));
             }
             if (myInfix[i] == ')') {
-                for(vector<string>::iterator it = myStack->end() - 1; it >= myStack->begin(); it--) {
+                for (vector<string>::iterator it = myStack.end() - 1; it >= myStack.begin(); it--) {
                     if ((*it).compare("(") != 0) {
-                        myQueue->push_back(*it);
-                        myStack->pop_back();
+                        myQueue.push_back(*it);
+                        myStack.pop_back();
                     }
                     else if ((*it).compare("(") == 0) {
-                        myStack->pop_back();
+                        myStack.pop_back();
                         break;
                     }
                 }
@@ -59,15 +59,15 @@ vector<string> CalculateExpression::shuntingYard(string myInfix){
             minusFirst = 1;
         }
     }
-    while (myStack->size() != 0) {
-        myQueue->push_back(myStack->back());
-        myStack->pop_back();
+    while (!myStack.empty()) {
+        myQueue.push_back(myStack.back());
+        myStack.pop_back();
     }
     if(minusFirst == 1) {
-        vector<string> ::iterator it = myQueue->begin();
-        myQueue->insert(it,"-");
+        vector<string>::iterator it = myQueue.begin();
+        myQueue.insert(it, "-");
     }
-    return *myQueue;
+    return myQueue;
 }
 
 
@@ -86,18 +86,22 @@ Expression* CalculateExpression::evaluatePostfix(string exp) {
             double num2;
             if(minusFirst == 1) {
                 num2 = atof((*(it+1)).c_str());
-                result = createExpression((*it)[0],new Number(num2));
+                Number n2(num2);
+                result = createExpression((*it)[0], &n2);
                 it++;
                 minusFirst = 0;
             } else {
                 num2 = s.top();
                 s.pop();
                 if(IsNeg(s,vec) && ((*it)[0] == '-')) {
-                    result = createExpression((*it)[0],new Number(num2));
+                    Number n2(num2);
+                    result = createExpression((*it)[0], &n2);
                 } else {
                     double num1 = s.top();
                     s.pop();
-                    result = createExpression((*it)[0],  new Number(num1),  new Number(num2));
+                    Number n1(num1);
+                    Number n2(num2);
+                    result = createExpression((*it)[0], &n1, &n2);
                 }
             }
             //Push back result of operation on stack.
@@ -109,12 +113,11 @@ Expression* CalculateExpression::evaluatePostfix(string exp) {
         vec.erase(it);
         it--;
     }
-    if(s.size() == 0) {
-        return NULL;
+    if (s.empty()) {
+        return nullptr;
     }
     // If expression is in correct format, Stack will finally have one element. This will be the output.
-    Expression *v = new Number(s.top());
-    return v;
+    return new Number(s.top());
 }
 
 // Function to verify whether a character is numeric digit.
@@ -127,7 +130,7 @@ bool CalculateExpression::IsDigit(char c) {
 
 bool CalculateExpression::IsNumber(string s) {
     int dotCounter =0;
-    for(int i=0;i < s.length(); i++) {
+    for (unsigned int i = 0; i < s.length(); i++) {
         if(s[i] == '.') {
             dotCounter++;
             if(!IsDigit(s[i-1])) {
@@ -150,7 +153,7 @@ string CalculateExpression::allCharsIsValid(string s) {
     while(IsValid != 1) {
         IsDelete = false;
         IsInsert = false;
-        for(int i=0;i < s.length(); i++) {
+        for (unsigned int i = 0; i < s.length(); i++) {
             if(((s[i] == '*') ||(s[i] == '/')) && (i == 0)) {
                 throw invalid_argument("invalid expression");
             }
@@ -179,9 +182,11 @@ string CalculateExpression::allCharsIsValid(string s) {
                 IsInsert = true;
                 break;
             }
-            if(((s[i-1] == '/') || (s[i-1] == '*')) && (s[i] == '-')) {
-                s.insert(i,"(");
-                IsInsert = true;
+            if (i != 0) {
+                if (((s[i - 1] == '/') || (s[i - 1] == '*')) && (s[i] == '-')) {
+                    s.insert(i, "(");
+                    IsInsert = true;
+                }
             }
         }
         if(!(IsDelete)||(IsInsert)) {
@@ -221,20 +226,20 @@ bool CalculateExpression::IsNeg(stack<double> s,vector<string> vec) {
 double CalculateExpression::createExpression(char operation, Expression* num1, Expression* num2) {
     switch (operation) {
         case '+': {
-            Expression *plus = new Plus(num1, num2);
-            return plus->calculate();
+            Plus plus(num1, num2);
+            return plus.calculate();
         }
         case '-': {
-            Expression* minus = new Minus(num1,num2);
-            return minus->calculate();
+            Minus minus(num1, num2);
+            return minus.calculate();
         }
         case '*': {
-            Expression *mul = new Mul(num1, num2);
-            return mul->calculate();
+            Mul mul(num1, num2);
+            return mul.calculate();
         }
         case '/': {
-            Expression* div = new Div(num1,num2);
-            return div->calculate();
+            Div div(num1, num2);
+            return div.calculate();
         }
         default: throw invalid_argument("operator doesnt exist");
     }
@@ -242,8 +247,8 @@ double CalculateExpression::createExpression(char operation, Expression* num1, E
 
 double CalculateExpression::createExpression(char operation, Expression* num) {
     if(operation == '-') {
-        Expression* neg = new Neg(num);
-        return neg->calculate();
+        Neg neg(num);
+        return neg.calculate();
     }
     throw invalid_argument("operator doesnt exist");
 }

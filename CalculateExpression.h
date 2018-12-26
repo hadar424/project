@@ -15,36 +15,26 @@
 #include <string>
 #include<iostream>
 #include<stack>
+#include <list>
 #include "Expression.h"
 
 using namespace std;
 
 class CalculateExpression {
-public:
-
-    CalculateExpression() = default;
-
-    vector<string> shuntingYard(string myInfix);
-
-    // Function to evaluate Postfix expression and return output
-    Expression* evaluatePostfix(string expression);
-
-// Function to perform an operation and return output.
-    double createExpression(char operation, Expression* operand1, Expression* operand2);
-
-    double createExpression(char operation, Expression* operand1);
-
-// Function to verify whether a character is operator symbol or not.
-    bool IsOperator(char);
-
-    bool IsNeg(stack<double> s,vector<string> vec);
-
-    string allCharsIsValid(string s);
-
-// Function to verify whether a character is numeric digit.
     bool IsDigit(char);
 
     bool IsNumber(string s);
+    vector<string> shuntingYard(string myInfix);
+    double createExpression(char operation, Expression* operand1, Expression* operand2);
+    double createExpression(char operation, Expression* operand1);
+
+    string allCharsIsValid(string s);
+    bool IsOperator(char);
+    bool IsNeg(stack<double> s,vector<string> vec);
+
+public:
+    // return pointer to expression (new Number) the caller should delete
+    Expression *evaluatePostfix(string expression);
 };
 
 

@@ -28,7 +28,7 @@ int ConnectCommand::doCommand(vector<string> array) {
 
 
 bool ConnectCommand::IsNumberValid(string s) {
-    for (int i = 0; i < s.length(); i++) {
+    for (unsigned int i = 0; i < s.length(); i++) {
         if (((s[i] < '0') || (s[i] > '9'))) {
             return false;
         }
@@ -39,8 +39,8 @@ bool ConnectCommand::IsNumberValid(string s) {
 bool ConnectCommand::IsIpValid(string s) {
     int counter = 0;
     string temp;
-    for (int i = 0; i < s.length(); i++) {
-        if (s.find('.') != -1) {
+    for (unsigned int i = 0; i < s.length(); i++) {
+        if (s.find('.') != string::npos) {
             temp = s.substr(0, s.find('.'));
             s.erase(0, s.find('.') + 1);
             if (IsNumberValid(temp)) {

@@ -13,19 +13,16 @@ class MakeItDouble {
     double value;
     SymbolTable *myTable;
     string var;
-
-    Expression *IsExpression(string);
-
+    Expression *e;
     Expression *IsVar(string s);
 
 public:
-    MakeItDouble(SymbolTable *);
+    MakeItDouble();
 
-    double getValue();
-
-    double calculateValue(string);
-
+    double calculateValue(string, SymbolTable *);
     bool IsOperator(char c);
+
+    ~MakeItDouble();
 };
 
 

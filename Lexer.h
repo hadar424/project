@@ -11,15 +11,15 @@ using namespace std;
 
 class MyLexer {
    vector<string> vec;
-public:
-    vector<string> lexer(string);
     void lineToArray(string);
     string removeSpaces(string);
     bool IsOperator(char);
-
     bool IsBoolOperator(char);
     string backwardLoop(string, int);
     string forwardLoop(string, int);
+
+public:
+    vector<string> lexer(string);
 };
 
 

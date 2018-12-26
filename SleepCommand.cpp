@@ -14,17 +14,17 @@ void SleepCommand::setSymbolTable(SymbolTable *map) {
 
 int SleepCommand::doCommand(vector<string> array) {
     vector<string>::iterator it = array.begin();
-    CalculateExpression *exp;
+    CalculateExpression exp;
     try {
-        numOfSeconds = exp->evaluatePostfix(*it)->calculate();
-    } catch (exception e) {
-        if (myTable->getValue(*it) != NULL) {
-            numOfSeconds = myTable->getValue(*it)->calculate();
+        e = exp.evaluatePostfix(*it);
+        numOfSeconds = e->calculate();
+    } catch (exception &e1) {
+        if ((e = myTable->getValue(*it)) != nullptr) {
+            numOfSeconds = e->calculate();
         } else {
             try {
-                myMakeItDouble = new MakeItDouble(myTable);
-                numOfSeconds = myMakeItDouble->calculateValue(*it);
-            } catch (exception e) {
+                numOfSeconds = myMakeItDouble.calculateValue(*it, myTable);
+            } catch (exception &e) {
                 throw invalid_argument("invalid define");
             }
         }
@@ -35,4 +35,8 @@ int SleepCommand::doCommand(vector<string> array) {
     usleep(numOfSeconds * 1000);
     cout << "done Sleep" << endl;
     return parametersNum + 1;
+}
+
+SleepCommand::~SleepCommand() {
+    delete e;
 }

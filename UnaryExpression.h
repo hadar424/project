@@ -13,7 +13,7 @@ protected:
 public:
     UnaryExpression(Expression *);
 
-    double calculate() {};
+    double calculate() = 0;
 };
 
 

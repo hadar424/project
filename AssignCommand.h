@@ -21,18 +21,21 @@ class AssignCommand : public Command {
     double value;
     string path;
     int parametersNum;
-    MakeItDouble *myMakeItDouble;
+    MakeItDouble myMakeItDouble;
+
+    string cleanPath(string s);
+
+    Expression *e;
+    Expression *e1;
 
 public:
     AssignCommand();
     int doCommand(vector<string>);
-
     void setSymbolTable(SymbolTable *);
-
-    string cleanPath(string s);
     void setServer(Server *);
-
     void setClient(Client *);
+
+    ~AssignCommand();
 };
 
 

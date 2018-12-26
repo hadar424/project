@@ -8,10 +8,12 @@
 
 int main(int argc, char *argv[]) {
     string fileName;
-    if (argc > 0) {
-        fileName = argv[1];
+    if (argc <= 1) {
+        return 0;
     }
+    fileName = argv[1];
     MyParser *pars = new MyParser(fileName);
     pars->parser();
-    while (1);
+    delete pars;
+    return 0;
 }

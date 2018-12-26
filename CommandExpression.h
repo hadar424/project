@@ -21,6 +21,8 @@ public:
     CommandExpression(Command* c);
     double calculate();
     void setCommandArray(vector<string>);
+
+    virtual ~CommandExpression() {};
 };
 
 

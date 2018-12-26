@@ -6,6 +6,7 @@
 
 DefineVarCommand::DefineVarCommand() {
     parametersNum = 0;
+    var = "";
 }
 
 void DefineVarCommand::setSymbolTable(SymbolTable *map) {
@@ -18,4 +19,5 @@ int DefineVarCommand::doCommand(vector<string> array) {
     myTable->setValue(var, 0, "");
     return parametersNum;
 }
+
 

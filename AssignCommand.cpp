@@ -28,41 +28,45 @@ int AssignCommand::doCommand(vector<string> array) {
     value = 0;
     string serverPath;
     bool needChangeClient = false;
-    if (myTable->getValue(var) != nullptr) {
+    e1 = myTable->getValue(var);
+    if (e1 != nullptr) {
         if (myTable->getPath(var).compare("") != 0) {
             path = myTable->getPath(var);
-            value = myTable->getValue(var)->calculate();
+            value = e1->calculate();
             needChangeClient = true;
         }
     }
 
     it += 2;
     bool isBind = false;
-    CalculateExpression *exp;
+    CalculateExpression exp;
     if ((*it).compare("bind") == 0) {
         isBind = true;
         it++;
-        if (myTable->getValue(*it) != nullptr) {
+        e1 = myTable->getValue(*it);
+        if (e1 != nullptr) {
             path = myTable->getPath(*it);
-            value = myTable->getValue(*it)->calculate();
+            value = e1->calculate();
         } else {
             string newPath = cleanPath(*it);
             path = newPath;
-            if (myServer->getValueFromMap(newPath) != nullptr) {
-                value = myServer->getValueFromMap(newPath)->calculate();
+            e1 = myServer->getValueFromMap(newPath);
+            if (e1 != nullptr) {
+                value = e1->calculate();
             } else {
                 value = 0;
             }
         }
     } else {
         try {
-            value = exp->evaluatePostfix(*it)->calculate();
+            e = exp.evaluatePostfix(*it);
+            value = e->calculate();
         } catch (exception &e) {
-            if (myTable->getValue(*it) != nullptr) {
-                value = myTable->getValue(*it)->calculate();
+            e1 = myTable->getValue(*it);
+            if (e1 != nullptr) {
+                value = e1->calculate();
             } else {
-                myMakeItDouble = new MakeItDouble(myTable);
-                value = myMakeItDouble->calculateValue(*it);
+                value = myMakeItDouble.calculateValue(*it, myTable);
             }
         }
     }
@@ -83,4 +87,9 @@ string AssignCommand::cleanPath(string s) {
     s.erase(0, 1);
     s.erase(s.length() - 1, s.length());
     return s;
+}
+
+AssignCommand::~AssignCommand() {
+    delete e;
+    delete e1;
 }

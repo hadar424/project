@@ -33,4 +33,5 @@ void MyParser::parser() {
 MyParser::~MyParser() {
     delete myLexer;
     delete myData;
+    delete myTable;
 }

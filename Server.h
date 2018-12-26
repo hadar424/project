@@ -61,7 +61,6 @@ public:
     Server();
 
     bool continueThread = true;
-    void initializeMap();
     int getClientSocket();
     void ParserOfVars(string);
 

@@ -13,7 +13,8 @@ protected:
     Expression* right;
 public:
     BinaryExpression(Expression*, Expression*);
-    double calculate() {};
+
+    double calculate() = 0;
 };
 
 

@@ -7,8 +7,9 @@
 Expression* SymbolTable::getValue(string s) {
     Expression *exp = nullptr;
     if((valueMap.find(s)) != valueMap.end()) {
+        e = myServer->getValueFromMap(valueMap.find(s)->second.path);
         if (myServer->getValueFromMap(valueMap.find(s)->second.path) != nullptr) {
-            exp = myServer->getValueFromMap(valueMap.find(s)->second.path);
+            exp = e;
         } else {
             exp = new Number(valueMap.find(s)->second.value);
         }
@@ -21,10 +22,11 @@ void SymbolTable::setServer(Server *server) {
 }
 
 string SymbolTable::getPath(string s) {
+    string path = "";
     if ((valueMap.find(s)) != valueMap.end()) {
-        string path = valueMap.find(s)->second.path;
-        return path;
+        path = valueMap.find(s)->second.path;
     }
+    return path;
 }
 
 void SymbolTable::setValue(string s, double num, string path) {
@@ -44,3 +46,6 @@ void SymbolTable::updateValueAndPath(string s, double num, string path) {
     valueMap.find(s)->second.path = path;
 }
 
+SymbolTable::~SymbolTable() {
+    delete e;
+}

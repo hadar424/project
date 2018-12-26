@@ -17,31 +17,17 @@ void ConditionParser::setCommandMap(unordered_map<string,CommandExpression*> map
 }
 
 int ConditionParser::doCommand(vector<string> array) {
-    MakeItDouble *makeItDouble = new MakeItDouble(myTable);
+    MakeItDouble makeItDouble;
     vector<string>::iterator it = array.begin();
-    //left = setCondition(*it);
-    left = makeItDouble->calculateValue(*it);
+    left = makeItDouble.calculateValue(*it, myTable);
     it++;
     boolOperator = *it;
     it++;
-    right = makeItDouble->calculateValue(*it);
-    //right = setCondition(*it);
+    right = makeItDouble.calculateValue(*it, myTable);
     it++;
     array.erase(array.begin(),it);
     int result = checkCondition(boolOperator);
     return result;
-}
-
-double ConditionParser::setCondition(string s) {
-    CalculateExpression* exp;
-    try {
-        return exp->evaluatePostfix(s)->calculate();
-    } catch (exception e) {
-        if (myTable->getValue(s) != nullptr) {
-            return myTable->getValue(s)->calculate();
-        }
-        throw invalid_argument("invalid condition");
-    }
 }
 
 int ConditionParser::checkCondition(string s) {
@@ -82,17 +68,18 @@ int ConditionParser::doAllCommands(vector<string> array) {
     int counter =0;
     int varsInCommend =0;
     vector<string>::iterator it;
+    CommandExpression *temp;
     while (*(it = array.begin()) != "}") {
         if((commandMap.find(*it))!= commandMap.end()) {
-            CommandExpression* temp = commandMap.find(*it)->second;
+            temp = commandMap.find(*it)->second;
             array.erase(array.begin());
             temp->setCommandArray(array);
             varsInCommend = temp->calculate();
             it+= varsInCommend;
             counter+=varsInCommend;
             array.erase(array.begin(), it);
-        } else if(myTable->getValue(*it) != NULL) {
-            CommandExpression *temp = commandMap.find("=")->second;
+        } else if ((e = myTable->getValue(*it)) != nullptr) {
+            temp = commandMap.find("=")->second;
             temp->setCommandArray(array);
             varsInCommend = temp->calculate();
             it+= varsInCommend;
@@ -104,4 +91,8 @@ int ConditionParser::doAllCommands(vector<string> array) {
         }
     }
     return counter + conditionParameters;
+}
+
+ConditionParser::~ConditionParser() {
+    delete e;
 }
