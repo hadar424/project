@@ -1,14 +1,10 @@
-//
-// Created by sharon on 17/12/18.
-//
-
 #ifndef UNTITLED_MUL_H
 #define UNTITLED_MUL_H
 
 #include "BinaryExpression.h"
 class Mul : public BinaryExpression{
 public:
-    Mul(Expression*, Expression*);
+    Mul(Expression *l, Expression *r) : BinaryExpression(l, r) {};
     double calculate();
 };
 

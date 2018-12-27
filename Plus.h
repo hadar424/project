@@ -1,7 +1,3 @@
-//
-// Created by sharon on 17/12/18.
-//
-
 #ifndef UNTITLED_PLUS_H
 #define UNTITLED_PLUS_H
 
@@ -9,7 +5,7 @@
 
 class Plus : public BinaryExpression{
 public:
-    Plus(Expression*, Expression*);
+    Plus(Expression *l, Expression *r) : BinaryExpression(l, r) {};
     double calculate();
 };
 

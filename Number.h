@@ -1,7 +1,3 @@
-//
-// Created by sharon on 17/12/18.
-//
-
 #ifndef UNTITLED_NUMBER_H
 #define UNTITLED_NUMBER_H
 

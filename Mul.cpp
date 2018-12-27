@@ -1,11 +1,11 @@
-//
-// Created by sharon on 17/12/18.
-//
-
 #include "Mul.h"
 
-Mul::Mul(Expression* l, Expression* r) : BinaryExpression(l, r) {}
-
+/*
+ * Function Name: calculate
+ * Input: -
+ * Output: double
+ * Function Operation: calculate left*right
+ */
 double Mul::calculate() {
     return left->calculate() * right->calculate();
 }

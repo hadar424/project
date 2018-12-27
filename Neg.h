@@ -5,7 +5,7 @@
 
 class Neg : public UnaryExpression {
 public:
-    Neg(Expression*);
+    Neg(Expression *num) : UnaryExpression(num) {};
     double calculate();
 };
 

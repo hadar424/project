@@ -1,11 +1,11 @@
-//
-// Created by sharon on 17/12/18.
-//
-
 #include "Plus.h"
 
-Plus::Plus(Expression* l, Expression* r) : BinaryExpression(l, r) {}
-
+/*
+ * Function Name: calculate
+ * Input: -
+ * Output: -
+ * Function Operation: calculate left-right
+ */
 double Plus::calculate() {
     return left->calculate() + right->calculate();
 }

@@ -1,7 +1,3 @@
-//
-// Created by sharon on 21/12/18.
-//
-
 #ifndef UNTITLED_SERVER_H
 #define UNTITLED_SERVER_H
 
@@ -40,6 +36,7 @@
 #define VAR_22 "/controls/engines/engine/throttle"
 #define VAR_23 "/engines/engine/rpm"
 #define MAX_BIND_ENTRIES 23
+#define SECOND_TIME_DATA 2
 
 
 using namespace std;
@@ -48,10 +45,10 @@ class Server {
     int listenSocket;
     int clientSocket;
     unordered_map<string, double> myTable;
-    string StringToParse;
+    string stringToParse;
     string getCompleteMessage();
-    string GetParam(string &);
 
+    string getParam(string &);
     bool bReceivedDataFromServer;
     int numOfMessagesFromServer;
     string ArrBindAddresses[MAX_BIND_ENTRIES];
@@ -59,14 +56,13 @@ class Server {
 
 public:
     Server();
-
     bool continueThread = true;
     int getClientSocket();
-    void ParserOfVars(string);
 
+    void parserOfVars(string);
     void createServer(double);
-    Expression *getValueFromMap(string);
 
+    Expression *getValueFromMap(string);
     ~Server();
 };
 

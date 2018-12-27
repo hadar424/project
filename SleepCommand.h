@@ -1,7 +1,3 @@
-//
-// Created by sharon on 21/12/18.
-//
-
 #ifndef UNTITLED_SLEEPCOMMAND_H
 #define UNTITLED_SLEEPCOMMAND_H
 
@@ -22,7 +18,6 @@ public:
     SleepCommand();
     int doCommand(vector<string>);
     void setSymbolTable(SymbolTable *);
-
     ~SleepCommand();
 };
 

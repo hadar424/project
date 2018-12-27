@@ -1,7 +1,3 @@
-//
-// Created by sharon on 22/12/18.
-//
-
 #ifndef UNTITLED_MAKEITDOUBLE_H
 #define UNTITLED_MAKEITDOUBLE_H
 
@@ -14,14 +10,15 @@ class MakeItDouble {
     SymbolTable *myTable;
     string var;
     Expression *e;
-    Expression *IsVar(string s);
+
+    Expression *isVar(string s);
+
+    bool isOperator(char c);
 
 public:
     MakeItDouble();
 
     double calculateValue(string, SymbolTable *);
-    bool IsOperator(char c);
-
     ~MakeItDouble();
 };
 

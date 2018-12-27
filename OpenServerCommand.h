@@ -12,12 +12,13 @@ class OpenServerCommand : public Command {
     double hertz;
     Server *myServer;
 
+    bool isnumber(string);
+
 public:
     OpenServerCommand();
     int doCommand(vector<string>);
-    bool Isnumber(string);
-    Server *getServer();
 
+    Server *getServer();
     ~OpenServerCommand();
 };
 

@@ -1,8 +1,11 @@
-
 #include "Neg.h"
 
-Neg::Neg(Expression* num) : UnaryExpression(num) { }
-
+/*
+ * Function Name: calculate
+ * Input: -
+ * Output: -
+ * Function Operation: calculate -1*num
+ */
 double Neg::calculate() {
-    return  (-1)* myExp->calculate();
+    return (-1) * myNum->calculate();
 }

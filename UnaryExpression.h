@@ -1,7 +1,3 @@
-//
-// Created by hadar on 12/18/18.
-//
-
 #ifndef UNTITLED_UNARYEXPRESSION_H
 #define UNTITLED_UNARYEXPRESSION_H
 
@@ -9,10 +5,9 @@
 
 class UnaryExpression : public Expression {
 protected:
-    Expression *myExp;
+    Expression *myNum;
 public:
     UnaryExpression(Expression *);
-
     double calculate() = 0;
 };
 

@@ -1,9 +1,11 @@
-//
-// Created by hadar on 12/18/18.
-//
-
 #include "UnaryExpression.h"
 
-UnaryExpression::UnaryExpression(Expression *oneNum) {
-    myExp = oneNum;
+/*
+ * Function Name: UnaryExpression
+ * Input: Expression* num
+ * Output: -
+ * Function Operation: constructor
+ */
+UnaryExpression::UnaryExpression(Expression *num) {
+    myNum = num;
 }

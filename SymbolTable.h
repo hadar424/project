@@ -26,9 +26,7 @@ public:
     void setValue(string, double, string);
     string getPath(string s);
     void updateValueAndPath(string, double, string);
-
     void setServer(Server *);
-
     ~SymbolTable();
 };
 

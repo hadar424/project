@@ -1,7 +1,3 @@
-//
-// Created by sharon on 21/12/18.
-//
-
 #ifndef UNTITLED_PRINTCOMMAND_H
 #define UNTITLED_PRINTCOMMAND_H
 
@@ -21,7 +17,6 @@ public:
     int doCommand(vector<string>);
     void setSymbolTable(SymbolTable *);
     bool checkIfString(string);
-
     ~PrintCommand();
 };
 

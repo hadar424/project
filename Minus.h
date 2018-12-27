@@ -1,7 +1,3 @@
-//
-// Created by sharon on 17/12/18.
-//
-
 #ifndef UNTITLED_MINUS_H
 #define UNTITLED_MINUS_H
 
@@ -9,7 +5,7 @@
 
 class Minus : public BinaryExpression {
 public:
-    Minus(Expression*, Expression*);
+    Minus(Expression *l, Expression *r) : BinaryExpression(l, r) {};
     double calculate();
 };
 
