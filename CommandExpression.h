@@ -1,7 +1,3 @@
-//
-// Created by hadar on 12/23/18.
-//
-
 #ifndef UNTITLED_COMMANDEXPRESSION_H
 #define UNTITLED_COMMANDEXPRESSION_H
 

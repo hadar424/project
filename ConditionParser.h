@@ -1,7 +1,3 @@
-//
-// Created by hadar on 12/19/18.
-//
-
 #ifndef UNTITLED_CONDITIONPARSER_H
 #define UNTITLED_CONDITIONPARSER_H
 
@@ -33,7 +29,6 @@ public:
     int doAllCommands(vector<string>);
     void setSymbolTable(SymbolTable*);
     void setCommandMap(unordered_map<string,CommandExpression*>);
-
     ~ConditionParser();
 };
 

@@ -1,7 +1,3 @@
-//
-// Created by hadar on 12/18/18.
-//
-
 #ifndef UNTITLED_CONNECTCOMMAND_H
 #define UNTITLED_CONNECTCOMMAND_H
 
@@ -24,14 +20,11 @@ class ConnectCommand : public Command {
     double port;
     int parametersNum;
     Client *myClient;
-
     bool IsIpValid(string);
-
     bool IsNumberValid(string);
 public:
     ConnectCommand();
     int doCommand(vector<string>);
-
     Client *getClient();
     ~ConnectCommand();
 };

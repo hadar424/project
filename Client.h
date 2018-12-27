@@ -1,7 +1,3 @@
-//
-// Created by sharon on 21/12/18.
-//
-
 #ifndef UNTITLED_CLIENT_H
 #define UNTITLED_CLIENT_H
 
@@ -23,6 +19,5 @@ public:
     void setValueInMap(string, double);
     ~Client();
 };
-
 
 #endif //UNTITLED_CLIENT_H

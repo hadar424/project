@@ -1,7 +1,3 @@
-//
-// Created by sharon on 22/12/18.
-//
-
 #ifndef UNTITLED_ASSIGNCOMMAND_H
 #define UNTITLED_ASSIGNCOMMAND_H
 
@@ -22,9 +18,7 @@ class AssignCommand : public Command {
     string path;
     int parametersNum;
     MakeItDouble myMakeItDouble;
-
     string cleanPath(string s);
-
     Expression *e;
     Expression *e1;
 
@@ -34,7 +28,6 @@ public:
     void setSymbolTable(SymbolTable *);
     void setServer(Server *);
     void setClient(Client *);
-
     ~AssignCommand();
 };
 

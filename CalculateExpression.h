@@ -1,7 +1,3 @@
-//
-// Created by sharon on 18/12/18.
-//
-
 #ifndef UNTITLED_SHUNTINGYARD_H
 #define UNTITLED_SHUNTINGYARD_H
 
@@ -21,13 +17,12 @@
 using namespace std;
 
 class CalculateExpression {
-    bool IsDigit(char);
 
+    bool IsDigit(char);
     bool IsNumber(string s);
     vector<string> shuntingYard(string myInfix);
     double createExpression(char operation, Expression* operand1, Expression* operand2);
     double createExpression(char operation, Expression* operand1);
-
     string allCharsIsValid(string s);
     bool IsOperator(char);
     bool IsNeg(stack<double> s,vector<string> vec);
