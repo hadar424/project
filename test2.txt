@@ -1,2 +1,1 @@
-var y = ( 4 - 1 ) / 2
-print y
+sleep 10000

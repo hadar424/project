@@ -19,8 +19,6 @@ class AssignCommand : public Command {
     int parametersNum;
     MakeItDouble myMakeItDouble;
     string cleanPath(string s);
-    Expression *e;
-    Expression *e1;
 
 public:
     AssignCommand();

@@ -11,7 +11,6 @@ class PrintCommand : public Command {
     SymbolTable *myTable;
     string printVar;
     MakeItDouble myMakeItDouble;
-    Expression *pTemp;
 public:
     PrintCommand();
     int doCommand(vector<string>);

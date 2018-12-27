@@ -32,6 +32,7 @@ void *threadFunc(void *arg) {
  * Function Operation: constructor, initialize array of vars from server
  */
 Server::Server() {
+    clientSocket = -1;
     stringToParse = "";
     bReceivedDataFromServer = false;
     numOfMessagesFromServer = 0;
@@ -231,5 +232,6 @@ Expression *Server::getValueFromMap(string s) {
  */
 Server::~Server() {
     continueThread = false;
-    close(clientSocket);
+    if (clientSocket != -1)
+        close(clientSocket);
 }

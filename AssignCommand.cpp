@@ -55,6 +55,8 @@ void AssignCommand::setClient(Client* client) {
  * the function returns the number of args it got.
  */
 int AssignCommand::doCommand(vector<string> array) {
+    Expression *e;
+    Expression *e1;
     // initialize variables.
     parametersNum = 1;
     vector<string>::iterator it = array.begin();
@@ -76,6 +78,8 @@ int AssignCommand::doCommand(vector<string> array) {
             needChangeClient = true;
         }
     }
+    delete e1;
+    e1 = nullptr;
     it += 2;
     bool isBind = false;
     CalculateExpression exp;
@@ -100,6 +104,8 @@ int AssignCommand::doCommand(vector<string> array) {
                 value = 0;
             }
         }
+        delete e1;
+        e1 = nullptr;
         // just a update of local variable in the table
     } else {
         // calculate the value from the string
@@ -114,6 +120,10 @@ int AssignCommand::doCommand(vector<string> array) {
                 value = myMakeItDouble.calculateValue(*it, myTable);
             }
         }
+        delete e;
+        delete e1;
+        e = nullptr;
+        e1 = nullptr;
     }
     // update the value in the SymbolTable
     myTable->setValue(var, value, path);
@@ -139,15 +149,4 @@ string AssignCommand::cleanPath(string s) {
     s.erase(0, 1);
     s.erase(s.length() - 1, s.length());
     return s;
-}
-
-/*
- * Function Name: ~AssignCommand
- * Input:
- * Output:
- * Function Operation: AssignCommand destructor
- */
-AssignCommand::~AssignCommand() {
-    delete e;
-    delete e1;
 }
