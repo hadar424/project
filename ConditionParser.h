@@ -20,7 +20,7 @@ class ConditionParser : public Command {
     SymbolTable* myTable;
     unordered_map<string,CommandExpression*> commandMap;
     int conditionParameters;
-    Expression *e;
+
 
 public:
     ConditionParser();
@@ -29,7 +29,6 @@ public:
     int doAllCommands(vector<string>);
     void setSymbolTable(SymbolTable*);
     void setCommandMap(unordered_map<string,CommandExpression*>);
-    ~ConditionParser();
 };
 
 

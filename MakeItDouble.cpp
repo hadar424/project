@@ -44,9 +44,11 @@ double MakeItDouble::calculateValue(string myString, SymbolTable *map) {
             string left = copy.substr(lastOperator + 1, i - lastOperator - 1);
             int length = left.length();
             // check if the string before the operator is var from table
-            if (isVar(left)) {
-                e = myTable->getValue(left);
-                string temp = to_string(e->calculate());
+            if (myTable->getValue(left)) {
+                Expression *pTmp = myTable->getValue(left);
+                string temp = to_string(pTmp->calculate());
+                if (pTmp)
+                    delete pTmp;
                 copy.erase(lastOperator + 1, left.length());
                 copy = copy.substr(0, lastOperator + 1) + temp +
                        copy.substr(lastOperator + 1);
@@ -58,43 +60,35 @@ double MakeItDouble::calculateValue(string myString, SymbolTable *map) {
         // if last char on string
         if (i == copy.length() - 1) {
             string left = copy.substr(lastOperator + 1);
-            if (isVar(left)) {
-                e = myTable->getValue(left);
-                string temp = to_string(e->calculate());
+            Expression *pLeftExp;
+            pLeftExp = myTable->getValue(left);
+            if (pLeftExp) {
+                Expression *pTmp;
+                pTmp = myTable->getValue(left);
+                string temp = to_string(pTmp->calculate());
+                if (pTmp)
+                    delete pTmp;
                 copy.erase(lastOperator + 1);
                 copy = copy.substr(0, lastOperator + 1) + temp;
+                delete pLeftExp;
             }
         }
     }
     // try to calculate the string after replace vars in their values
     try {
-        e = exp.evaluatePostfix(var);
-        value = e->calculate();
+        Expression *pTmp;
+        pTmp = exp.evaluatePostfix(var);
+        if (pTmp) {
+            value = pTmp->calculate();
+            delete pTmp;
+            return value;
+        }
         // return the result
-        return value;
+        throw invalid_argument("invalid expression string");
     }
     catch (exception &e1) {
         throw invalid_argument("invalid expression string");
     }
 }
 
-/*
- * Function Name: isVar
- * Input: string s
- * Output: Expression*
- * Function Operation: return the value of the var from the symbol table
- */
-Expression *MakeItDouble::isVar(string s) {
-    e = myTable->getValue(s);
-    return e;
-}
 
-/*
- * Function Name: ~MakeItDouble
- * Input: -
- * Output: -
- * Function Operation: destructor.
- */
-MakeItDouble::~MakeItDouble() {
-    delete e;
-}

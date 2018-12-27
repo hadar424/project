@@ -102,6 +102,7 @@ int ConditionParser::checkCondition(string s) {
  */
 int ConditionParser::doAllCommands(vector<string> array) {
     vector<string>::iterator iter = array.begin();
+    Expression *e;
     iter += 3;
     // remove tje condition
     array.erase(array.begin(), iter);
@@ -121,27 +122,23 @@ int ConditionParser::doAllCommands(vector<string> array) {
             counter+=varsInCommend;
             array.erase(array.begin(), it);
             // if it founds a var exist in the table.
-        } else if ((e = myTable->getValue(*it)) != nullptr) {
-            temp = commandMap.find("=")->second;
-            temp->setCommandArray(array);
-            varsInCommend = temp->calculate();
-            it+= varsInCommend;
-            counter+=varsInCommend;
-            array.erase(array.begin(), it);
         } else {
-            counter++;
-            array.erase(array.begin(), it + 1);
+            e = myTable->getValue(*it);
+            if (e != nullptr) {
+                temp = commandMap.find("=")->second;
+                temp->setCommandArray(array);
+                varsInCommend = temp->calculate();
+                it += varsInCommend;
+                counter += varsInCommend;
+                array.erase(array.begin(), it);
+            } else {
+                counter++;
+                array.erase(array.begin(), it + 1);
+            }
+            if (e) {
+                delete e;
+            }
         }
     }
     return counter + conditionParameters;
-}
-
-/*
- * Function Name: ~ConditionParser()
- * Input:
- * Output:
- * Function Operation: ConditionParser destructor
- */
-ConditionParser::~ConditionParser() {
-    delete e;
 }

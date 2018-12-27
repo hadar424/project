@@ -26,7 +26,6 @@ public:
     void setSymbolTable(SymbolTable *);
     void setServer(Server *);
     void setClient(Client *);
-    ~AssignCommand();
 };
 
 
