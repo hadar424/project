@@ -1,7 +1,3 @@
-//
-// Created by hadar on 12/21/18.
-//
-
 #ifndef UNTITLED_IFCONDITION_H
 #define UNTITLED_IFCONDITION_H
 

@@ -1,12 +1,13 @@
-//
-// Created by sharon on 17/12/18.
-//
-
 #include "Div.h"
 
-Div::Div(Expression* l, Expression* r) : BinaryExpression(l, r){}
-
+/*
+ * Function Name: calculate
+ * Input: -
+ * Output: -
+ * Function Operation: calculate left*right
+ */
 double Div::calculate() {
+    // check if the right is 0
     if (right->calculate() == 0)
         throw runtime_error("can not divide in 0");
     return left->calculate() / right->calculate();
