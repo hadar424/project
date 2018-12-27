@@ -17,7 +17,7 @@ MakeItDouble::MakeItDouble() {
  * Output: bool (true/false)
  * Function Operation: if operator, return true. otherwise, return false.
  */
-bool MakeItDouble::IsOperator(char c) {
+bool MakeItDouble::isOperator(char c) {
     if (c == '+' || c == '-' || c == '*' || c == '/' || c == '(' || c == ')') {
         return true;
     }
@@ -40,11 +40,11 @@ double MakeItDouble::calculateValue(string myString, SymbolTable *map) {
     // run over the string
     for (unsigned int i = 0; i < (var = copy).length(); i++) {
         // check if current char is operator
-        if (IsOperator(copy[i])) {
+        if (isOperator(copy[i])) {
             string left = copy.substr(lastOperator + 1, i - lastOperator - 1);
             int length = left.length();
             // check if the string before the operator is var from table
-            if (IsVar(left)) {
+            if (isVar(left)) {
                 e = myTable->getValue(left);
                 string temp = to_string(e->calculate());
                 copy.erase(lastOperator + 1, left.length());
@@ -58,7 +58,7 @@ double MakeItDouble::calculateValue(string myString, SymbolTable *map) {
         // if last char on string
         if (i == copy.length() - 1) {
             string left = copy.substr(lastOperator + 1);
-            if (IsVar(left)) {
+            if (isVar(left)) {
                 e = myTable->getValue(left);
                 string temp = to_string(e->calculate());
                 copy.erase(lastOperator + 1);
@@ -84,7 +84,7 @@ double MakeItDouble::calculateValue(string myString, SymbolTable *map) {
  * Output: Expression*
  * Function Operation: return the value of the var from the symbol table
  */
-Expression *MakeItDouble::IsVar(string s) {
+Expression *MakeItDouble::isVar(string s) {
     e = myTable->getValue(s);
     return e;
 }

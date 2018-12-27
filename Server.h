@@ -47,6 +47,7 @@ class Server {
     unordered_map<string, double> myTable;
     string stringToParse;
     string getCompleteMessage();
+
     string getParam(string &);
     bool bReceivedDataFromServer;
     int numOfMessagesFromServer;
@@ -57,6 +58,7 @@ public:
     Server();
     bool continueThread = true;
     int getClientSocket();
+
     void parserOfVars(string);
     void createServer(double);
 

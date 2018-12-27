@@ -1,3 +1,7 @@
+//
+// Created by hadar on 12/23/18.
+//
+
 #ifndef UNTITLED_COMMANDEXPRESSION_H
 #define UNTITLED_COMMANDEXPRESSION_H
 
@@ -11,7 +15,7 @@
 
 
 class CommandExpression : public Expression {
-    Command *myCommand = nullptr;
+    Command* myCommand;
     vector<string> myCommandArray;
 public:
     CommandExpression(Command* c);

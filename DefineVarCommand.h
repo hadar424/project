@@ -9,7 +9,7 @@
 class DefineVarCommand : public Command {
     int parametersNum;
     string var;
-    SymbolTable *myTable = nullptr;
+    SymbolTable* myTable;
 
 public:
     DefineVarCommand();

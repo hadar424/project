@@ -5,7 +5,7 @@
 
 class UnaryExpression : public Expression {
 protected:
-    Expression *myNum = nullptr;
+    Expression *myNum;
 public:
     UnaryExpression(Expression *);
     double calculate() = 0;

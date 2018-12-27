@@ -19,13 +19,15 @@ struct myParams {
 
 class SymbolTable {
     unordered_map<string, struct myParams> valueMap;
-    Server *myServer = nullptr;
+    Server *myServer;
+    Expression *e;
 public:
     Expression* getValue(string);
     void setValue(string, double, string);
     string getPath(string s);
     void updateValueAndPath(string, double, string);
     void setServer(Server *);
+    ~SymbolTable();
 };
 
 #endif //UNTITLED_SYMBOLTABLE_H

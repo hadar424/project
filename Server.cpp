@@ -7,7 +7,6 @@
  * Function Operation: read as long as the simulator is on
  */
 void *threadFunc(void *arg) {
-    cout << "HHH" << endl;
     // get this (threadFunc is C function, and we want to have Server functions)
     Server *myServer = (Server *) arg;
     char buffer[1025] = {0};
@@ -33,7 +32,6 @@ void *threadFunc(void *arg) {
  * Function Operation: constructor, initialize array of vars from server
  */
 Server::Server() {
-    clientSocket = -1;
     stringToParse = "";
     bReceivedDataFromServer = false;
     numOfMessagesFromServer = 0;
@@ -233,7 +231,5 @@ Expression *Server::getValueFromMap(string s) {
  */
 Server::~Server() {
     continueThread = false;
-    if (clientSocket != -1) {
-        close(clientSocket);
-    }
+    close(clientSocket);
 }

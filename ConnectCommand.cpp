@@ -1,11 +1,9 @@
+//
+// Created by hadar on 12/18/18.
+//
+
 #include "ConnectCommand.h"
 
-/*
- * Function Name: ConnectCommand
- * Input:
- * Output:
- * Function Operation: ConnectCommand constructor
- */
 ConnectCommand::ConnectCommand() {
     ip = "";
     port = -1;
@@ -13,13 +11,6 @@ ConnectCommand::ConnectCommand() {
     myClient = new Client();
 }
 
-/*
- * Function Name: doCommand
- * Input: vector<string> array
- * Output: int
- * Function Operation: the function set the ip and port data as members from
- * the vector and call to createClient function. returnd the parameters number.
- */
 int ConnectCommand::doCommand(vector<string> array) {
     vector<string>::iterator it = array.begin();
     if (IsIpValid(*it)) {
@@ -35,13 +26,7 @@ int ConnectCommand::doCommand(vector<string> array) {
     return parametersNum +1;
 }
 
-/*
- * Function Name: IsNumberValid
- * Input: string
- * Output: bool
- * Function Operation: the function get a string and checks if all his chars
- * are numeric digits so it is a number or not.
- */
+
 bool ConnectCommand::IsNumberValid(string s) {
     for (unsigned int i = 0; i < s.length(); i++) {
         if (((s[i] < '0') || (s[i] > '9'))) {
@@ -51,13 +36,6 @@ bool ConnectCommand::IsNumberValid(string s) {
     return true;
 }
 
-/*
- * Function Name: IsIpValid
- * Input: string
- * Output: bool
- * Function Operation: the function get a string and checks if all his chars
- * are numeric digits and verified it has only 3 dots so it is a valid ip.
- */
 bool ConnectCommand::IsIpValid(string s) {
     int counter = 0;
     string temp;
@@ -80,24 +58,10 @@ bool ConnectCommand::IsIpValid(string s) {
     return true;
 }
 
-/*
- * Function Name: getClient
- * Input:
- * Output: Client*
- * Function Operation: the function return the Client* member.
- */
-Client* ConnectCommand::getClient() {
+Client *ConnectCommand::getClient() {
     return myClient;
 }
 
-/*
- * Function Name: ~ConnectCommand
- * Input:
- * Output:
- * Function Operation: ConnectCommand destructor
- */
 ConnectCommand::~ConnectCommand() {
-    if (myClient) {
-        delete myClient;
-    }
+    delete myClient;
 }

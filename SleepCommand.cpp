@@ -1,3 +1,7 @@
+//
+// Created by sharon on 21/12/18.
+//
+
 #include "SleepCommand.h"
 
 /*
@@ -29,22 +33,14 @@ void SleepCommand::setSymbolTable(SymbolTable *map) {
 int SleepCommand::doCommand(vector<string> array) {
     vector<string>::iterator it = array.begin();
     CalculateExpression exp;
-    Expression *e = nullptr;
     try {
         // try to calculate
-        string tempStr = *it;
-        e = exp.evaluatePostfix(tempStr);
+        e = exp.evaluatePostfix(*it);
         numOfSeconds = e->calculate();
-        if (e != nullptr) {
-            delete e;
-        }
     } catch (exception &e1) {
-        string tempStr = *it;
         // check if the parameter is var (on table)
-        e = myTable->getValue(tempStr);
-        if (e != nullptr) {
+        if ((e = myTable->getValue(*it)) != nullptr) {
             numOfSeconds = e->calculate();
-            delete e;
         } else {
             try {
                 // check if mix of var and numbers
@@ -57,4 +53,14 @@ int SleepCommand::doCommand(vector<string> array) {
     // sleep this time
     usleep(numOfSeconds * 1000);
     return parametersNum + 1;
+}
+
+/*
+ * Function Name: ~SleepCommand
+ * Input: -
+ * Output: -
+ * Function Operation: destructor
+ */
+SleepCommand::~SleepCommand() {
+    delete e;
 }

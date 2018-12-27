@@ -1,7 +1,2 @@
-var x = 5
-print x
-if x > 3 {
-print "good"
-print x
-}
-sleep x
+var y = ( 4 - 1 ) / 2
+print y

@@ -10,7 +10,7 @@ class OpenServerCommand : public Command {
     int parametersNum;
     double port;
     double hertz;
-    Server *myServer = nullptr;
+    Server *myServer;
 
     bool isnumber(string);
 

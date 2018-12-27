@@ -6,21 +6,19 @@
 #include "SymbolTable.h"
 
 class MakeItDouble {
-
     double value;
     SymbolTable *myTable;
     string var;
     Expression *e;
 
-    Expression *IsVar(string s);
+    Expression *isVar(string s);
 
-    bool IsOperator(char c);
+    bool isOperator(char c);
 
 public:
     MakeItDouble();
 
     double calculateValue(string, SymbolTable *);
-
     ~MakeItDouble();
 };
 

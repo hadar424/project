@@ -54,9 +54,8 @@ vector<string> MyLexer::lexer(string fileName) {
             // push '\n' to know when we get to new line
             vec.push_back("\\n");
         }
-        file.close();
     }
-
+    file.close();
     // close the string vector
     return vec;
 }
@@ -81,7 +80,7 @@ string MyLexer::removeSpaces(string s) {
             i = s.find('"', i + 1);
         }
         // check if operator
-        if (IsOperator(s[i])) {
+        if (isOperator(s[i])) {
             if (i != 0) {
                 // remove spaces (before and after the operator)
                 s = forwardLoop(s, i);
@@ -102,7 +101,8 @@ string MyLexer::removeSpaces(string s) {
  * Output: bool (true/false)
  * Function Operation: check if the char is operator
  */
-bool MyLexer::IsOperator(char c) {
+bool MyLexer::isOperator(char c)
+{
     if(c == '+' || c == '-' || c == '*' || c == '/' || c == '(' || c == ')') {
         return true;
     }
@@ -115,7 +115,7 @@ bool MyLexer::IsOperator(char c) {
  * Output: bool (true/false)
  * Function Operation: check if the char is bool operator
  */
-bool MyLexer::IsBoolOperator(char c) {
+bool MyLexer::isBoolOperator(char c) {
     if (c == '=' || c == '!' || c == '<' || c == '>' || c == '{') {
         return true;
     }
@@ -131,11 +131,11 @@ bool MyLexer::IsBoolOperator(char c) {
 string MyLexer::backwardLoop(string s, int i) {
     i--;
     // loop over the line till operator / beginning of line
-    while ((IsOperator(s[i]) == false) && (i != 0)) {
+    while ((isOperator(s[i]) == false) && (i != 0)) {
         // if this char is space
         if(s[i] == ' ') {
             // check if the next char is boolean operator
-            if (IsBoolOperator(s[i - 1])) {
+            if (isBoolOperator(s[i - 1])) {
                 // if it is, do not erase the space
                 break;
             }
@@ -163,11 +163,11 @@ string MyLexer::backwardLoop(string s, int i) {
 string MyLexer::forwardLoop(string s, int i) {
     i++;
     // loop over the line till operator / end of line
-    while ((IsOperator(s[i]) == false) && ((unsigned int) i < s.length())) {
+    while ((isOperator(s[i]) == false) && ((unsigned int) i < s.length())) {
         // if this char is space
         if(s[i] == ' ') {
             // check if the next char is boolean operator
-            if (IsBoolOperator(s[i + 1])) {
+            if (isBoolOperator(s[i + 1])) {
                 // if it is, do not erase the space
                 break;
             }
