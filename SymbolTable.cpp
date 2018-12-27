@@ -7,25 +7,19 @@
  * Function Operation: get value of var
  */
 Expression* SymbolTable::getValue(string s) {
-    Expression *exp = nullptr;
-
     // check if the var exists (defined)
     if((valueMap.find(s)) != valueMap.end()) {
-        Expression *e;
-        e = myServer->getValueFromMap(valueMap.find(s)->second.path);
         // check if exist in server map
         if (myServer->getValueFromMap(valueMap.find(s)->second.path) != nullptr) {
-            exp = e;
+            Number newNum(valueMap.find(s)->second.value);
+            // return the expression
+            return &newNum;
         } else {
-            exp = new Number(valueMap.find(s)->second.value);
-        }
-        if (e) {
-            delete e;
+            Number newNum(valueMap.find(s)->second.value);
+            // return the expression
+            return &newNum;
         }
     }
-
-    // return the expression
-    return exp;
 }
 
 /*
