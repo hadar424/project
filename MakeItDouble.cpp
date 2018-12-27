@@ -17,7 +17,7 @@ MakeItDouble::MakeItDouble() {
  * Output: bool (true/false)
  * Function Operation: if operator, return true. otherwise, return false.
  */
-bool MakeItDouble::isOperator(char c) {
+bool MakeItDouble::IsOperator(char c) {
     if (c == '+' || c == '-' || c == '*' || c == '/' || c == '(' || c == ')') {
         return true;
     }
@@ -40,18 +40,17 @@ double MakeItDouble::calculateValue(string myString, SymbolTable *map) {
     // run over the string
     for (unsigned int i = 0; i < (var = copy).length(); i++) {
         // check if current char is operator
-        if (isOperator(copy[i])) {
+        if (IsOperator(copy[i])) {
             string left = copy.substr(lastOperator + 1, i - lastOperator - 1);
             int length = left.length();
             // check if the string before the operator is var from table
-            Expression *pTmp = myTable->getValue(left);
-            if (pTmp) {
-                string temp = to_string(pTmp->calculate());
+            if (IsVar(left)) {
+                e = myTable->getValue(left);
+                string temp = to_string(e->calculate());
                 copy.erase(lastOperator + 1, left.length());
                 copy = copy.substr(0, lastOperator + 1) + temp +
                        copy.substr(lastOperator + 1);
                 length = temp.length();
-                delete pTmp;
             }
             lastOperator = lastOperator + length + 1;
             i = lastOperator;
@@ -59,12 +58,9 @@ double MakeItDouble::calculateValue(string myString, SymbolTable *map) {
         // if last char on string
         if (i == copy.length() - 1) {
             string left = copy.substr(lastOperator + 1);
-            Expression *pLeftExp = myTable->getValue(left);
-            if (pLeftExp) {
-                string temp = to_string(pLeftExp->calculate());
-                if (pLeftExp) {
-                    delete pLeftExp;
-                }
+            if (IsVar(left)) {
+                e = myTable->getValue(left);
+                string temp = to_string(e->calculate());
                 copy.erase(lastOperator + 1);
                 copy = copy.substr(0, lastOperator + 1) + temp;
             }
@@ -72,17 +68,33 @@ double MakeItDouble::calculateValue(string myString, SymbolTable *map) {
     }
     // try to calculate the string after replace vars in their values
     try {
-        Expression *pTmp = exp.evaluatePostfix(var);
-        if (pTmp) {
-            value = pTmp->calculate();
-            delete pTmp;
-            // return the result
-            return value;
-        }
+        e = exp.evaluatePostfix(var);
+        value = e->calculate();
+        // return the result
+        return value;
     }
     catch (exception &e1) {
         throw invalid_argument("invalid expression string");
     }
 }
 
+/*
+ * Function Name: isVar
+ * Input: string s
+ * Output: Expression*
+ * Function Operation: return the value of the var from the symbol table
+ */
+Expression *MakeItDouble::IsVar(string s) {
+    e = myTable->getValue(s);
+    return e;
+}
 
+/*
+ * Function Name: ~MakeItDouble
+ * Input: -
+ * Output: -
+ * Function Operation: destructor.
+ */
+MakeItDouble::~MakeItDouble() {
+    delete e;
+}

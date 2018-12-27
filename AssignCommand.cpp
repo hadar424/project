@@ -78,7 +78,7 @@ int AssignCommand::doCommand(vector<string> array) {
             needChangeClient = true;
         }
     }
-    if (e1) {
+    if (e1 != nullptr) {
         delete e1;
     }
     e1 = nullptr;
@@ -106,9 +106,8 @@ int AssignCommand::doCommand(vector<string> array) {
                 value = 0;
             }
         }
-        if (e1) {
-            delete e1;
-        }
+        delete e1;
+        e1 = nullptr;
         // just a update of local variable in the table
     } else {
         // calculate the value from the string
@@ -123,17 +122,19 @@ int AssignCommand::doCommand(vector<string> array) {
                 value = myMakeItDouble.calculateValue(*it, myTable);
             }
         }
-        if (e) {
+        if (e != nullptr) {
             delete e;
         }
-        if (e1) {
+        if (e1 != nullptr) {
             delete e1;
         }
+        e = nullptr;
+        e1 = nullptr;
     }
     // update the value in the SymbolTable
     myTable->setValue(var, value, path);
     if (needChangeClient) {
-       // updating the simulator
+        // updating the simulator
         myClient->setValueInMap(path, value);
     }
     if (isBind) {

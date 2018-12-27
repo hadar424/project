@@ -1,6 +1,7 @@
-var x = 2
-if x < 5 {
-print 10
+var x = 5
+print x
+if x > 3 {
+print "good"
+print x
 }
-sleep 1000
-print "ok"
+sleep x

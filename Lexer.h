@@ -13,8 +13,10 @@ class MyLexer {
    vector<string> vec;
     void lineToArray(string);
     string removeSpaces(string);
-    bool isOperator(char);
-    bool isBoolOperator(char);
+
+    bool IsOperator(char);
+
+    bool IsBoolOperator(char);
     string backwardLoop(string, int);
     string forwardLoop(string, int);
 

@@ -6,14 +6,22 @@
 #include "SymbolTable.h"
 
 class MakeItDouble {
+
     double value;
-    SymbolTable *myTable = nullptr;
+    SymbolTable *myTable;
     string var;
-    bool isOperator(char c);
+    Expression *e;
+
+    Expression *IsVar(string s);
+
+    bool IsOperator(char c);
 
 public:
     MakeItDouble();
+
     double calculateValue(string, SymbolTable *);
+
+    ~MakeItDouble();
 };
 
 

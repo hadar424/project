@@ -62,12 +62,12 @@ string SymbolTable::getPath(string var) {
 void SymbolTable::setValue(string s, double num, string path) {
     // if new
     if (getValue(s) == nullptr) {
-        struct myParams *params = new myParams();
+        struct myParams params;
         // set value and map
-        params->value = num;
-        params->path = path;
+        params.value = num;
+        params.path = path;
         // insert to value map
-        valueMap.insert(make_pair(s, *params));
+        valueMap.insert(make_pair(s, params));
     } else {
         // if already exist, update
         updateValueAndPath(s, num, path);

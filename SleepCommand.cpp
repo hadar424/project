@@ -1,7 +1,3 @@
-//
-// Created by sharon on 21/12/18.
-//
-
 #include "SleepCommand.h"
 
 /*
@@ -36,15 +32,17 @@ int SleepCommand::doCommand(vector<string> array) {
     Expression *e = nullptr;
     try {
         // try to calculate
-        e = exp.evaluatePostfix(*it);
+        string tempStr = *it;
+        e = exp.evaluatePostfix(tempStr);
         numOfSeconds = e->calculate();
-        if (e) {
+        if (e != nullptr) {
             delete e;
         }
     } catch (exception &e1) {
+        string tempStr = *it;
         // check if the parameter is var (on table)
-        e = myTable->getValue(*it);
-        if (e) {
+        e = myTable->getValue(tempStr);
+        if (e != nullptr) {
             numOfSeconds = e->calculate();
             delete e;
         } else {

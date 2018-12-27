@@ -7,6 +7,7 @@
  * Function Operation: read as long as the simulator is on
  */
 void *threadFunc(void *arg) {
+    cout << "HHH" << endl;
     // get this (threadFunc is C function, and we want to have Server functions)
     Server *myServer = (Server *) arg;
     char buffer[1025] = {0};

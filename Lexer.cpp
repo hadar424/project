@@ -81,7 +81,7 @@ string MyLexer::removeSpaces(string s) {
             i = s.find('"', i + 1);
         }
         // check if operator
-        if (isOperator(s[i])) {
+        if (IsOperator(s[i])) {
             if (i != 0) {
                 // remove spaces (before and after the operator)
                 s = forwardLoop(s, i);
@@ -102,8 +102,7 @@ string MyLexer::removeSpaces(string s) {
  * Output: bool (true/false)
  * Function Operation: check if the char is operator
  */
-bool MyLexer::isOperator(char c)
-{
+bool MyLexer::IsOperator(char c) {
     if(c == '+' || c == '-' || c == '*' || c == '/' || c == '(' || c == ')') {
         return true;
     }
@@ -116,7 +115,7 @@ bool MyLexer::isOperator(char c)
  * Output: bool (true/false)
  * Function Operation: check if the char is bool operator
  */
-bool MyLexer::isBoolOperator(char c) {
+bool MyLexer::IsBoolOperator(char c) {
     if (c == '=' || c == '!' || c == '<' || c == '>' || c == '{') {
         return true;
     }
@@ -132,11 +131,11 @@ bool MyLexer::isBoolOperator(char c) {
 string MyLexer::backwardLoop(string s, int i) {
     i--;
     // loop over the line till operator / beginning of line
-    while ((isOperator(s[i]) == false) && (i != 0)) {
+    while ((IsOperator(s[i]) == false) && (i != 0)) {
         // if this char is space
         if(s[i] == ' ') {
             // check if the next char is boolean operator
-            if (isBoolOperator(s[i - 1])) {
+            if (IsBoolOperator(s[i - 1])) {
                 // if it is, do not erase the space
                 break;
             }
@@ -164,11 +163,11 @@ string MyLexer::backwardLoop(string s, int i) {
 string MyLexer::forwardLoop(string s, int i) {
     i++;
     // loop over the line till operator / end of line
-    while ((isOperator(s[i]) == false) && ((unsigned int) i < s.length())) {
+    while ((IsOperator(s[i]) == false) && ((unsigned int) i < s.length())) {
         // if this char is space
         if(s[i] == ' ') {
             // check if the next char is boolean operator
-            if (isBoolOperator(s[i + 1])) {
+            if (IsBoolOperator(s[i + 1])) {
                 // if it is, do not erase the space
                 break;
             }
