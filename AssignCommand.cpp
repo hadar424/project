@@ -1,9 +1,11 @@
-//
-// Created by sharon on 22/12/18.
-//
-
 #include "AssignCommand.h"
 
+/*
+ * Function Name:
+ * Input:
+ * Output:
+ * Function Operation:
+ */
 AssignCommand::AssignCommand() {
     parametersNum = 1;
 }
