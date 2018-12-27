@@ -1,6 +1,13 @@
 #include "Data.h"
 
+/*
+ * Function Name: Data
+ * Input: SymbolTable*
+ * Output:
+ * Function Operation: Data constructor
+ */
 Data::Data(SymbolTable* table) {
+    // create all the commands.
     assignC = new AssignCommand();
     defineC = new DefineVarCommand();
     printC = new PrintCommand();
@@ -19,6 +26,7 @@ Data::Data(SymbolTable* table) {
     assign = new CommandExpression(assignC);
 
     myTable = table;
+    // insert all the commands to the map.
     commandMap.insert(pair<string, CommandExpression *>("openDataServer", server));
     commandMap.insert(pair<string, CommandExpression *>("connect", connect));
     commandMap.insert(pair<string, CommandExpression *>("var", define));
@@ -27,6 +35,8 @@ Data::Data(SymbolTable* table) {
     commandMap.insert(pair<string, CommandExpression *>("print", print));
     commandMap.insert(pair<string, CommandExpression *>("sleep", sleep));
     commandMap.insert(pair<string, CommandExpression *>("=", assign));
+
+    // set the map and table to the commands that use it
     myTable->setServer(serverC->getServer());
     defineC->setSymbolTable(myTable);
     loopC->setSymbolTable(myTable);
@@ -44,19 +54,59 @@ unordered_map<string,CommandExpression*> Data::getMap() {
     return commandMap;
 }
 
+/*
+ * Function Name: Data
+ * Input:
+ * Output:
+ * Function Operation: Data destructor
+ */
 Data::~Data() {
-    delete server;
-    delete connect;
-    delete define;
-    delete loop;
-    delete ifCondition;
-    delete print;
-    delete sleep;
-    delete assign;
-    delete defineC;
-    delete printC;
-    delete sleepC;
-    delete assignC;
-    delete loopC;
-    delete ifConditionC;
+    if (server) {
+        delete server;
+    }
+    if (connect) {
+        delete connect;
+    }
+    if (define) {
+        delete define;
+    }
+    if (loop) {
+        delete loop;
+    }
+    if (ifCondition) {
+        delete ifCondition;
+    }
+    if (print) {
+        delete print;
+    }
+    if (sleep) {
+        delete sleep;
+    }
+    if (assign) {
+        delete assign;
+    }
+    if (defineC) {
+        delete defineC;
+    }
+    if (printC) {
+        delete printC;
+    }
+    if (sleepC) {
+        delete sleepC;
+    }
+    if (assignC) {
+        delete assignC;
+    }
+    if (loopC) {
+        delete loopC;
+    }
+    if (ifConditionC) {
+        delete ifConditionC;
+    }
+    if (serverC) {
+        delete serverC;
+    }
+    if (connectC) {
+        delete connectC;
+    }
 }

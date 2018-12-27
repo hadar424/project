@@ -10,12 +10,10 @@
 using namespace std;
 
 class MyLexer {
-   vector<string> vec;
+    vector<string> vec;
     void lineToArray(string);
     string removeSpaces(string);
-
     bool isOperator(char);
-
     bool isBoolOperator(char);
     string backwardLoop(string, int);
     string forwardLoop(string, int);

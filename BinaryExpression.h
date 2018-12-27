@@ -1,7 +1,3 @@
-//
-// Created by sharon on 17/12/18.
-//
-
 #ifndef UNTITLED_BINARYEXPRESSION_H
 #define UNTITLED_BINARYEXPRESSION_H
 
@@ -9,11 +5,10 @@
 
 class BinaryExpression : public Expression{
 protected:
-    Expression* left;
-    Expression* right;
+    Expression *left = nullptr;
+    Expression *right = nullptr;
 public:
     BinaryExpression(Expression*, Expression*);
-
     double calculate() = 0;
 };
 

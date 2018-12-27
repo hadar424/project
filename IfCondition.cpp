@@ -24,4 +24,3 @@ int IfCondition::doCommand(vector<string> array) {
     }
     return parametersNum + 1;
 }
-

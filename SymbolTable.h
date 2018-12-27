@@ -1,7 +1,3 @@
-//
-// Created by hadar on 12/19/18.
-//
-
 #ifndef UNTITLED_SYMBOLTABLE_H
 #define UNTITLED_SYMBOLTABLE_H
 #include <string>
@@ -26,6 +22,7 @@ public:
     void setValue(string, double, string);
     string getPath(string s);
     void updateValueAndPath(string, double, string);
+
     void setServer(Server *);
     ~SymbolTable();
 };

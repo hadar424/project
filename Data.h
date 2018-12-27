@@ -13,23 +13,23 @@
 #include "ConditionParser.h"
 
 class Data {
-    AssignCommand* assignC;
-    DefineVarCommand* defineC;
-    PrintCommand* printC;
-    SleepCommand* sleepC;
-    ConnectCommand* connectC;
-    LoopCondition* loopC;
-    IfCondition* ifConditionC;
-    OpenServerCommand* serverC;
-    CommandExpression* server;
-    CommandExpression* connect;
-    CommandExpression* define;
-    CommandExpression* loop;
-    CommandExpression* ifCondition;
-    CommandExpression* print;
-    CommandExpression* sleep;
-    CommandExpression* assign;
-    SymbolTable* myTable;
+    AssignCommand *assignC = nullptr;
+    DefineVarCommand *defineC = nullptr;
+    PrintCommand *printC = nullptr;
+    SleepCommand *sleepC = nullptr;
+    ConnectCommand *connectC = nullptr;
+    LoopCondition *loopC = nullptr;
+    IfCondition *ifConditionC = nullptr;
+    OpenServerCommand *serverC = nullptr;
+    CommandExpression *server = nullptr;
+    CommandExpression *connect = nullptr;
+    CommandExpression *define = nullptr;
+    CommandExpression *loop = nullptr;
+    CommandExpression *ifCondition = nullptr;
+    CommandExpression *print = nullptr;
+    CommandExpression *sleep = nullptr;
+    CommandExpression *assign = nullptr;
+    SymbolTable *myTable = nullptr;
     unordered_map<string,CommandExpression*> commandMap;
 public:
     Data(SymbolTable*);

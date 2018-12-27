@@ -8,16 +8,14 @@
 #include "MakeItDouble.h"
 
 class PrintCommand : public Command {
-    SymbolTable *myTable;
+    SymbolTable *myTable = nullptr;
     string printVar;
     MakeItDouble myMakeItDouble;
-    Expression *pTemp;
 public:
     PrintCommand();
     int doCommand(vector<string>);
     void setSymbolTable(SymbolTable *);
     bool checkIfString(string);
-    ~PrintCommand();
 };
 
 

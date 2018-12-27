@@ -34,4 +34,3 @@ int DefineVarCommand::doCommand(vector<string> array) {
     return parametersNum;
 }
 
-

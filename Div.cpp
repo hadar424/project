@@ -4,7 +4,7 @@
  * Function Name: calculate
  * Input: -
  * Output: -
- * Function Operation: calculate left*right
+ * Function Operation: calculate left/right
  */
 double Div::calculate() {
     // check if the right is 0

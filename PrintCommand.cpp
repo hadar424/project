@@ -29,6 +29,7 @@ void PrintCommand::setSymbolTable(SymbolTable *map) {
 int PrintCommand::doCommand(vector<string> array) {
     int counter = 0;
     double value;
+    Expression *pTemp = nullptr;
     printVar = "";
     vector<string>::iterator it;
     CalculateExpression exp;
@@ -38,15 +39,26 @@ int PrintCommand::doCommand(vector<string> array) {
             // try to calculate
             string temp = *it;
             pTemp = exp.evaluatePostfix(temp);
-            value = pTemp->calculate();
+            if (pTemp) {
+                value = pTemp->calculate();
+                if (pTemp) {
+                    delete pTemp;
+                }
+                pTemp = nullptr;
+            }
             printVar += to_string(value) + " ";
             counter++;
         } catch (exception &e) {
             // check if the parameter is var (on table)
-            if ((pTemp = myTable->getValue(*it)) != nullptr) {
+            pTemp = myTable->getValue(*it);
+            if (pTemp != nullptr) {
                 value = pTemp->calculate();
                 printVar += to_string(value) + " ";
                 counter++;
+                if (pTemp) {
+                    delete pTemp;
+                }
+                pTemp = nullptr;
             } else {
                 try {
                     // check if mix of var and numbers
@@ -80,14 +92,4 @@ bool PrintCommand::checkIfString(string s) {
     if (s[0] != '"' || s[s.length() - 1] != '"')
         return false;
     return true;
-}
-
-/*
- * Function Name: ~PrintCommand
- * Input: -
- * Output: -
- * Function Operation: destructor
- */
-PrintCommand::~PrintCommand() {
-    delete pTemp;
 }

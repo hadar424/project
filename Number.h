@@ -4,7 +4,7 @@
 #include "Expression.h"
 
 class Number : public Expression{
-double value;
+    double value;
 public:
     Number(double);
     double calculate();

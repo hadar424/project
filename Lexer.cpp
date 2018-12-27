@@ -54,8 +54,9 @@ vector<string> MyLexer::lexer(string fileName) {
             // push '\n' to know when we get to new line
             vec.push_back("\\n");
         }
+        file.close();
     }
-    file.close();
+
     // close the string vector
     return vec;
 }

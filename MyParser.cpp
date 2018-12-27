@@ -56,7 +56,13 @@ void MyParser::parser() {
  * Function Operation: destructor.
  */
 MyParser::~MyParser() {
-    delete myLexer;
-    delete myData;
-    delete myTable;
+    if (myLexer != nullptr) {
+        delete myLexer;
+    }
+    if (myData != nullptr) {
+        delete myData;
+    }
+    if (myTable != nullptr) {
+        delete myTable;
+    }
 }
