@@ -84,7 +84,7 @@ bool ConnectCommand::IsIpValid(string s) {
  * Function Name: getClient
  * Input:
  * Output: Client*
- * Function Operation: the function returnd the Client* member.
+ * Function Operation: the function return the Client* member.
  */
 Client* ConnectCommand::getClient() {
     return myClient;

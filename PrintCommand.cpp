@@ -41,7 +41,9 @@ int PrintCommand::doCommand(vector<string> array) {
             pTemp = exp.evaluatePostfix(temp);
             if (pTemp) {
                 value = pTemp->calculate();
-                delete pTemp;
+                if (pTemp) {
+                    delete pTemp;
+                }
                 pTemp = nullptr;
             }
             printVar += to_string(value) + " ";

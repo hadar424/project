@@ -51,9 +51,8 @@ double MakeItDouble::calculateValue(string myString, SymbolTable *map) {
                 copy = copy.substr(0, lastOperator + 1) + temp +
                        copy.substr(lastOperator + 1);
                 length = temp.length();
-            }
-            if (pTmp)
                 delete pTmp;
+            }
             lastOperator = lastOperator + length + 1;
             i = lastOperator;
         }
@@ -62,15 +61,12 @@ double MakeItDouble::calculateValue(string myString, SymbolTable *map) {
             string left = copy.substr(lastOperator + 1);
             Expression *pLeftExp = myTable->getValue(left);
             if (pLeftExp) {
-                Expression *pTmp = myTable->getValue(left);
-                string temp = to_string(pTmp->calculate());
-                if (pTmp)
-                    delete pTmp;
-                copy.erase(lastOperator + 1);
-                copy = copy.substr(0, lastOperator + 1) + temp;
+                string temp = to_string(pLeftExp->calculate());
                 if (pLeftExp) {
                     delete pLeftExp;
                 }
+                copy.erase(lastOperator + 1);
+                copy = copy.substr(0, lastOperator + 1) + temp;
             }
         }
     }

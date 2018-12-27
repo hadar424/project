@@ -78,7 +78,9 @@ int AssignCommand::doCommand(vector<string> array) {
             needChangeClient = true;
         }
     }
-    delete e1;
+    if (e1) {
+        delete e1;
+    }
     e1 = nullptr;
     it += 2;
     bool isBind = false;
@@ -104,15 +106,16 @@ int AssignCommand::doCommand(vector<string> array) {
                 value = 0;
             }
         }
-        delete e1;
-        e1 = nullptr;
+        if (e1) {
+            delete e1;
+        }
         // just a update of local variable in the table
     } else {
         // calculate the value from the string
         try {
             e = exp.evaluatePostfix(*it);
             value = e->calculate();
-        } catch (exception &e) {
+        } catch (exception &e2) {
             e1 = myTable->getValue(*it);
             if (e1 != nullptr) {
                 value = e1->calculate();
@@ -120,10 +123,12 @@ int AssignCommand::doCommand(vector<string> array) {
                 value = myMakeItDouble.calculateValue(*it, myTable);
             }
         }
-        delete e;
-        delete e1;
-        e = nullptr;
-        e1 = nullptr;
+        if (e) {
+            delete e;
+        }
+        if (e1) {
+            delete e1;
+        }
     }
     // update the value in the SymbolTable
     myTable->setValue(var, value, path);
