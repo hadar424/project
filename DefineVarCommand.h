@@ -1,7 +1,3 @@
-//
-// Created by hadar on 12/19/18.
-//
-
 #ifndef UNTITLED_VARCOMMAND_H
 #define UNTITLED_VARCOMMAND_H
 
@@ -18,7 +14,6 @@ class DefineVarCommand : public Command {
 public:
     DefineVarCommand();
     int doCommand(vector<string>);
-
     void setSymbolTable(SymbolTable *);
 };
 
