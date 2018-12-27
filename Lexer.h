@@ -14,9 +14,9 @@ class MyLexer {
     void lineToArray(string);
     string removeSpaces(string);
 
-    bool isOperator(char);
+    bool IsOperator(char);
 
-    bool isBoolOperator(char);
+    bool IsBoolOperator(char);
     string backwardLoop(string, int);
     string forwardLoop(string, int);
 
