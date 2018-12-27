@@ -33,14 +33,20 @@ void SleepCommand::setSymbolTable(SymbolTable *map) {
 int SleepCommand::doCommand(vector<string> array) {
     vector<string>::iterator it = array.begin();
     CalculateExpression exp;
+    Expression *e = nullptr;
     try {
         // try to calculate
         e = exp.evaluatePostfix(*it);
         numOfSeconds = e->calculate();
+        if (e) {
+            delete e;
+        }
     } catch (exception &e1) {
         // check if the parameter is var (on table)
-        if ((e = myTable->getValue(*it)) != nullptr) {
+        e = myTable->getValue(*it);
+        if (e) {
             numOfSeconds = e->calculate();
+            delete e;
         } else {
             try {
                 // check if mix of var and numbers
@@ -53,14 +59,4 @@ int SleepCommand::doCommand(vector<string> array) {
     // sleep this time
     usleep(numOfSeconds * 1000);
     return parametersNum + 1;
-}
-
-/*
- * Function Name: ~SleepCommand
- * Input: -
- * Output: -
- * Function Operation: destructor
- */
-SleepCommand::~SleepCommand() {
-    delete e;
 }

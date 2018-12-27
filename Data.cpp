@@ -61,20 +61,52 @@ unordered_map<string,CommandExpression*> Data::getMap() {
  * Function Operation: Data destructor
  */
 Data::~Data() {
-    delete server;
-    delete connect;
-    delete define;
-    delete loop;
-    delete ifCondition;
-    delete print;
-    delete sleep;
-    delete assign;
-    delete defineC;
-    delete printC;
-    delete sleepC;
-    delete assignC;
-    delete loopC;
-    delete ifConditionC;
-    delete serverC;
-    delete connectC;
+    if (server) {
+        delete server;
+    }
+    if (connect) {
+        delete connect;
+    }
+    if (define) {
+        delete define;
+    }
+    if (loop) {
+        delete loop;
+    }
+    if (ifCondition) {
+        delete ifCondition;
+    }
+    if (print) {
+        delete print;
+    }
+    if (sleep) {
+        delete sleep;
+    }
+    if (assign) {
+        delete assign;
+    }
+    if (defineC) {
+        delete defineC;
+    }
+    if (printC) {
+        delete printC;
+    }
+    if (sleepC) {
+        delete sleepC;
+    }
+    if (assignC) {
+        delete assignC;
+    }
+    if (loopC) {
+        delete loopC;
+    }
+    if (ifConditionC) {
+        delete ifConditionC;
+    }
+    if (serverC) {
+        delete serverC;
+    }
+    if (connectC) {
+        delete connectC;
+    }
 }

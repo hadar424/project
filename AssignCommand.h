@@ -10,9 +10,9 @@
 #include "Client.h"
 
 class AssignCommand : public Command {
-    Server *myServer;
-    Client *myClient;
-    SymbolTable *myTable;
+    Server *myServer = nullptr;
+    Client *myClient = nullptr;
+    SymbolTable *myTable = nullptr;
     string var;
     double value;
     string path;

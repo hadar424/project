@@ -97,5 +97,7 @@ Client* ConnectCommand::getClient() {
  * Function Operation: ConnectCommand destructor
  */
 ConnectCommand::~ConnectCommand() {
-    delete myClient;
+    if (myClient) {
+        delete myClient;
+    }
 }

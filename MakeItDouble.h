@@ -7,13 +7,12 @@
 
 class MakeItDouble {
     double value;
-    SymbolTable *myTable;
+    SymbolTable *myTable = nullptr;
     string var;
     bool isOperator(char c);
 
 public:
     MakeItDouble();
-
     double calculateValue(string, SymbolTable *);
 };
 

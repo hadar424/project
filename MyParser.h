@@ -8,11 +8,11 @@
 using namespace std;
 
 class MyParser {
-    MyLexer *myLexer;
+    MyLexer *myLexer = nullptr;
     vector<string> commandArray;
     unordered_map<string,CommandExpression*> commandMap;
-    SymbolTable *myTable;
-    Data *myData;
+    SymbolTable *myTable = nullptr;
+    Data *myData = nullptr;
 
 public:
     MyParser(string);

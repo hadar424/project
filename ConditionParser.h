@@ -17,7 +17,7 @@ class ConditionParser : public Command {
     double left;
     double right;
     string boolOperator;
-    SymbolTable* myTable;
+    SymbolTable *myTable = nullptr;
     unordered_map<string,CommandExpression*> commandMap;
     int conditionParameters;
 

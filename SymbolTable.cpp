@@ -8,8 +8,10 @@
  */
 Expression* SymbolTable::getValue(string s) {
     Expression *exp = nullptr;
+
     // check if the var exists (defined)
     if((valueMap.find(s)) != valueMap.end()) {
+        Expression *e;
         e = myServer->getValueFromMap(valueMap.find(s)->second.path);
         // check if exist in server map
         if (myServer->getValueFromMap(valueMap.find(s)->second.path) != nullptr) {
@@ -17,7 +19,11 @@ Expression* SymbolTable::getValue(string s) {
         } else {
             exp = new Number(valueMap.find(s)->second.value);
         }
+        if (e) {
+            delete e;
+        }
     }
+
     // return the expression
     return exp;
 }
@@ -78,14 +84,4 @@ void SymbolTable::setValue(string s, double num, string path) {
 void SymbolTable::updateValueAndPath(string s, double num, string path) {
     valueMap.find(s)->second.value = num;
     valueMap.find(s)->second.path = path;
-}
-
-/*
- * Function Name: ~SymbolTable
- * Input: -
- * Output: -
- * Function Operation: destructor
- */
-SymbolTable::~SymbolTable() {
-    delete e;
 }

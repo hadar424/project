@@ -53,7 +53,9 @@ int PrintCommand::doCommand(vector<string> array) {
                 value = pTemp->calculate();
                 printVar += to_string(value) + " ";
                 counter++;
-                delete pTemp;
+                if (pTemp) {
+                    delete pTemp;
+                }
                 pTemp = nullptr;
             } else {
                 try {
@@ -88,14 +90,4 @@ bool PrintCommand::checkIfString(string s) {
     if (s[0] != '"' || s[s.length() - 1] != '"')
         return false;
     return true;
-}
-
-/*
- * Function Name: ~PrintCommand
- * Input: -
- * Output: -
- * Function Operation: destructor
- */
-PrintCommand::~PrintCommand() {
-
 }

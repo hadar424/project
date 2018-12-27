@@ -232,6 +232,7 @@ Expression *Server::getValueFromMap(string s) {
  */
 Server::~Server() {
     continueThread = false;
-    if (clientSocket != -1)
+    if (clientSocket != -1) {
         close(clientSocket);
+    }
 }

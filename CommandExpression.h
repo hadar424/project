@@ -11,7 +11,7 @@
 
 
 class CommandExpression : public Expression {
-    Command* myCommand;
+    Command *myCommand = nullptr;
     vector<string> myCommandArray;
 public:
     CommandExpression(Command* c);

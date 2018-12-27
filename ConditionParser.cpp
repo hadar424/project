@@ -37,17 +37,25 @@ void ConditionParser::setCommandMap(unordered_map<string,CommandExpression*>
  * Input: vector<string>
  * Output: int
  * Function Operation: the function get vector of strings, the 3 first strings
- * are represent the condition. the function check if the candition is
+ * are represent the condition. the function check if the condition is
  * true (returned 1) or false (returned 0).
  */
 int ConditionParser::doCommand(vector<string> array) {
     MakeItDouble makeItDouble;
     vector<string>::iterator it = array.begin();
-    left = makeItDouble.calculateValue(*it, myTable);
+    try {
+        left = makeItDouble.calculateValue(*it, myTable);
+    } catch (exception &e) {
+        throw invalid_argument("left is invalid expression string");
+    }
     it++;
     boolOperator = *it;
     it++;
-    right = makeItDouble.calculateValue(*it, myTable);
+    try {
+        right = makeItDouble.calculateValue(*it, myTable);
+    } catch (exception &e) {
+        throw invalid_argument("right is invalid expression string");
+    }
     it++;
     array.erase(array.begin(),it);
     int result = checkCondition(boolOperator);

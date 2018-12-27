@@ -9,16 +9,15 @@
 #include "MakeItDouble.h"
 
 class SleepCommand : public Command {
-    SymbolTable *myTable;
+    SymbolTable *myTable = nullptr;
     double numOfSeconds;
     MakeItDouble myMakeItDouble;
     int parametersNum;
-    Expression *e;
 public:
     SleepCommand();
     int doCommand(vector<string>);
+
     void setSymbolTable(SymbolTable *);
-    ~SleepCommand();
 };
 
 

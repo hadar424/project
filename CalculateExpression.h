@@ -17,7 +17,6 @@
 using namespace std;
 
 class CalculateExpression {
-
     bool IsDigit(char);
     bool IsNumber(string s);
     vector<string> shuntingYard(string myInfix);

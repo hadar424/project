@@ -44,47 +44,45 @@ double MakeItDouble::calculateValue(string myString, SymbolTable *map) {
             string left = copy.substr(lastOperator + 1, i - lastOperator - 1);
             int length = left.length();
             // check if the string before the operator is var from table
-            if (myTable->getValue(left)) {
-                Expression *pTmp = myTable->getValue(left);
+            Expression *pTmp = myTable->getValue(left);
+            if (pTmp) {
                 string temp = to_string(pTmp->calculate());
-                if (pTmp)
-                    delete pTmp;
                 copy.erase(lastOperator + 1, left.length());
                 copy = copy.substr(0, lastOperator + 1) + temp +
                        copy.substr(lastOperator + 1);
                 length = temp.length();
             }
+            if (pTmp)
+                delete pTmp;
             lastOperator = lastOperator + length + 1;
             i = lastOperator;
         }
         // if last char on string
         if (i == copy.length() - 1) {
             string left = copy.substr(lastOperator + 1);
-            Expression *pLeftExp;
-            pLeftExp = myTable->getValue(left);
+            Expression *pLeftExp = myTable->getValue(left);
             if (pLeftExp) {
-                Expression *pTmp;
-                pTmp = myTable->getValue(left);
+                Expression *pTmp = myTable->getValue(left);
                 string temp = to_string(pTmp->calculate());
                 if (pTmp)
                     delete pTmp;
                 copy.erase(lastOperator + 1);
                 copy = copy.substr(0, lastOperator + 1) + temp;
-                delete pLeftExp;
+                if (pLeftExp) {
+                    delete pLeftExp;
+                }
             }
         }
     }
     // try to calculate the string after replace vars in their values
     try {
-        Expression *pTmp;
-        pTmp = exp.evaluatePostfix(var);
+        Expression *pTmp = exp.evaluatePostfix(var);
         if (pTmp) {
             value = pTmp->calculate();
             delete pTmp;
+            // return the result
             return value;
         }
-        // return the result
-        throw invalid_argument("invalid expression string");
     }
     catch (exception &e1) {
         throw invalid_argument("invalid expression string");

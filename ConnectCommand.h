@@ -19,12 +19,13 @@ class ConnectCommand : public Command {
     string ip;
     double port;
     int parametersNum;
-    Client *myClient;
+    Client *myClient = nullptr;
     bool IsIpValid(string);
     bool IsNumberValid(string);
 public:
     ConnectCommand();
     int doCommand(vector<string>);
+
     Client *getClient();
     ~ConnectCommand();
 };

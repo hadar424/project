@@ -70,5 +70,7 @@ Server *OpenServerCommand::getServer() {
  * Function Operation: destructor
  */
 OpenServerCommand::~OpenServerCommand() {
-    delete myServer;
+    if (myServer) {
+        delete myServer;
+    }
 }

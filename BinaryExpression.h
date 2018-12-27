@@ -5,8 +5,8 @@
 
 class BinaryExpression : public Expression{
 protected:
-    Expression* left;
-    Expression* right;
+    Expression *left = nullptr;
+    Expression *right = nullptr;
 public:
     BinaryExpression(Expression*, Expression*);
     double calculate() = 0;
