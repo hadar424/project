@@ -80,6 +80,12 @@ string MyLexer::removeSpaces(string s) {
         if (s[i] == '"') {
             i = s.find('"', i + 1);
         }
+        if ((i != 0) && (i < s.length() - 1)) {
+            if ((s[i] == '=') && (s[i - 1] != ' ') && (s[i + 1] != ' ')) {
+                s.insert(i, " ");
+                s.insert(i + 2, " ");
+            }
+        }
         // check if operator
         if (isOperator(s[i])) {
             if (i != 0) {
