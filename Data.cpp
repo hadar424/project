@@ -109,4 +109,7 @@ Data::~Data() {
     if (connectC) {
         delete connectC;
     }
+    if (commandMap.size() != 0) {
+        commandMap.clear();
+    }
 }

@@ -21,6 +21,7 @@ MyParser::MyParser(string file) {
  * Function Operation: loop over all the commands in the script, and do them.
  */
 void MyParser::parser() {
+
     vector<string>::iterator it;
     CommandExpression *temp;
     // loop over all the commands
@@ -65,4 +66,5 @@ MyParser::~MyParser() {
     if (myTable != nullptr) {
         delete myTable;
     }
+    commandArray.clear();
 }

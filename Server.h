@@ -54,6 +54,7 @@ class Server {
     mutex mtxForMyTable;
 
 public:
+    pthread_t waitForClient;
     Server();
     bool continueThread = true;
     int getClientSocket();

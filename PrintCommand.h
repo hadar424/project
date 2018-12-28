@@ -9,8 +9,7 @@
 
 class PrintCommand : public Command {
     SymbolTable *myTable = nullptr;
-    string printVar;
-    MakeItDouble myMakeItDouble;
+    string printVar = "";
 public:
     PrintCommand();
     int doCommand(vector<string>);

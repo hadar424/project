@@ -32,6 +32,7 @@ void *threadFunc(void *arg) {
  * Function Operation: constructor, initialize array of vars from server
  */
 Server::Server() {
+    myTable = {};
     clientSocket = -1;
     stringToParse = "";
     bReceivedDataFromServer = false;
@@ -97,7 +98,6 @@ void Server::createServer(double port) {
     }
 
     // create the thread
-    pthread_t waitForClient;
     pthread_create(&waitForClient, nullptr, threadFunc, this);
 
     close(listenSocket);
@@ -235,4 +235,6 @@ Server::~Server() {
     if (clientSocket != -1) {
         close(clientSocket);
     }
+    myTable.clear();
+    pthread_join(waitForClient, NULL);
 }

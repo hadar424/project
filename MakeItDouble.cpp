@@ -31,6 +31,8 @@ bool MakeItDouble::isOperator(char c) {
  * Function Operation: if operator, return true. otherwise, return false.
  */
 double MakeItDouble::calculateValue(string myString, SymbolTable *map) {
+    Expression *pTmp = nullptr;
+    Expression *pLeftExp = nullptr;
     var = myString;
     value = 0;
     myTable = map;
@@ -44,7 +46,7 @@ double MakeItDouble::calculateValue(string myString, SymbolTable *map) {
             string left = copy.substr(lastOperator + 1, i - lastOperator - 1);
             int length = left.length();
             // check if the string before the operator is var from table
-            Expression *pTmp = myTable->getValue(left);
+            pTmp = myTable->getValue(left);
             if (pTmp) {
                 string temp = to_string(pTmp->calculate());
                 copy.erase(lastOperator + 1, left.length());
@@ -59,12 +61,10 @@ double MakeItDouble::calculateValue(string myString, SymbolTable *map) {
         // if last char on string
         if (i == copy.length() - 1) {
             string left = copy.substr(lastOperator + 1);
-            Expression *pLeftExp = myTable->getValue(left);
+            pLeftExp = myTable->getValue(left);
             if (pLeftExp) {
                 string temp = to_string(pLeftExp->calculate());
-                if (pLeftExp) {
-                    delete pLeftExp;
-                }
+                delete pLeftExp;
                 copy.erase(lastOperator + 1);
                 copy = copy.substr(0, lastOperator + 1) + temp;
             }
@@ -72,7 +72,7 @@ double MakeItDouble::calculateValue(string myString, SymbolTable *map) {
     }
     // try to calculate the string after replace vars in their values
     try {
-        Expression *pTmp = exp.evaluatePostfix(var);
+        pTmp = exp.evaluatePostfix(var);
         if (pTmp) {
             value = pTmp->calculate();
             delete pTmp;
@@ -83,5 +83,6 @@ double MakeItDouble::calculateValue(string myString, SymbolTable *map) {
     catch (exception &e1) {
         throw invalid_argument("invalid expression string");
     }
+    return value;
 }
 

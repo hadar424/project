@@ -27,6 +27,7 @@ void PrintCommand::setSymbolTable(SymbolTable *map) {
  * Function Operation: print the parameters
  */
 int PrintCommand::doCommand(vector<string> array) {
+    MakeItDouble myMakeItDouble;
     int counter = 0;
     double value;
     Expression *pTemp = nullptr;
@@ -41,16 +42,14 @@ int PrintCommand::doCommand(vector<string> array) {
             pTemp = exp.evaluatePostfix(temp);
             if (pTemp) {
                 value = pTemp->calculate();
-                if (pTemp) {
-                    delete pTemp;
-                }
-                pTemp = nullptr;
+                delete pTemp;
             }
             printVar += to_string(value) + " ";
             counter++;
         } catch (exception &e) {
             // check if the parameter is var (on table)
-            pTemp = myTable->getValue(*it);
+            string temp = *it;
+            pTemp = myTable->getValue(temp);
             if (pTemp != nullptr) {
                 value = pTemp->calculate();
                 printVar += to_string(value) + " ";
@@ -58,7 +57,6 @@ int PrintCommand::doCommand(vector<string> array) {
                 if (pTemp) {
                     delete pTemp;
                 }
-                pTemp = nullptr;
             } else {
                 try {
                     // check if mix of var and numbers

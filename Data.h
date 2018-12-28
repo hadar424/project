@@ -30,7 +30,7 @@ class Data {
     CommandExpression *sleep = nullptr;
     CommandExpression *assign = nullptr;
     SymbolTable *myTable = nullptr;
-    unordered_map<string,CommandExpression*> commandMap;
+    unordered_map<string, CommandExpression *> commandMap = {};
 public:
     Data(SymbolTable*);
     unordered_map<string,CommandExpression*> getMap();

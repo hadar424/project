@@ -10,9 +10,10 @@ Expression* SymbolTable::getValue(string s) {
     Expression *exp = nullptr;
     // check if the var exists (defined)
     if((valueMap.find(s)) != valueMap.end()) {
-        e = myServer->getValueFromMap(valueMap.find(s)->second.path);
+        Expression *e;
         // check if exist in server map
-        if (myServer->getValueFromMap(valueMap.find(s)->second.path) != nullptr) {
+        if ((e = myServer->getValueFromMap(valueMap.find(s)->second.path))
+            != nullptr) {
             exp = e;
         } else {
             exp = new Number(valueMap.find(s)->second.value);
@@ -54,19 +55,22 @@ string SymbolTable::getPath(string var) {
  * Function Operation: set value and path in map
  */
 void SymbolTable::setValue(string s, double num, string path) {
+    Expression *exist = nullptr;
     // if new
-    if (getValue(s) == nullptr) {
-        struct myParams *params = new myParams();
+    if ((exist = getValue(s)) == nullptr) {
+        struct myParams params;
         // set value and map
-        params->value = num;
-        params->path = path;
+        params.value = num;
+        params.path = path;
         // insert to value map
-        valueMap.insert(make_pair(s, *params));
+        valueMap.insert(make_pair(s, params));
     } else {
         // if already exist, update
         updateValueAndPath(s, num, path);
     }
-
+    if (exist != nullptr) {
+        delete exist;
+    }
 }
 
 /*
@@ -87,5 +91,5 @@ void SymbolTable::updateValueAndPath(string s, double num, string path) {
  * Function Operation: destructor
  */
 SymbolTable::~SymbolTable() {
-    delete e;
+    valueMap.clear();
 }

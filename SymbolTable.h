@@ -16,7 +16,6 @@ struct myParams {
 class SymbolTable {
     unordered_map<string, struct myParams> valueMap;
     Server *myServer;
-    Expression *e;
 public:
     Expression* getValue(string);
     void setValue(string, double, string);
